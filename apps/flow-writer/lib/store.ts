@@ -72,16 +72,34 @@ const flowNodeSlice: StoreSlice<INodeSlice> = (set, get) => ({
 });
 
 type ContentShape = {
-  [key: string]: {
-    raw: string;
-  };
+  raw: string;
 };
 
-interface INodeContentSlice {
-  nodeContent: ContentShape;
+interface IContentActionsSlice {
+  setContent: (id, content: ContentShape) => void;
+  getContent: (id) => ContentShape;
 }
 
-const nodeContentSlice: StoreSlice<INodeContentSlice> = (set, get) => ({
+interface IContentSlice {
+  nodeContent: { [key: string]: ContentShape };
+}
+
+const updateContentSlice: StoreSlice<IContentActionsSlice, IContentSlice> = (
+  set,
+  get,
+) => ({
+  getContent: (id) => get().nodeContent[id] || { raw: '' },
+  setContent: (id, content) =>
+    set((prev) => ({
+      ...prev,
+      nodeContent: {
+        ...prev.nodeContent,
+        [id]: content,
+      },
+    })),
+});
+
+const nodeContentSlice: StoreSlice<IContentSlice> = (set, get) => ({
   nodeContent: {},
 });
 
@@ -89,6 +107,7 @@ const createRootSlice = (set: SetState<any>, get: GetState<any>) => ({
   ...flowNodeActionsSlice(set, get),
   ...flowNodeSlice(set, get),
   ...nodeContentSlice(set, get),
+  ...updateContentSlice(set, get),
 });
 
 export const useStore = create(createRootSlice);
