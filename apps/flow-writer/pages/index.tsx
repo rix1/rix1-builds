@@ -1,4 +1,8 @@
 import FlowRoot from '../components/FlowRoot';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 type HomePageProps = {};
 
