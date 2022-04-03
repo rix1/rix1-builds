@@ -11,6 +11,7 @@ type EditorProps = {
 
 const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
   const [preview, setPreview] = useState(false);
+
   useHotkeys(
     'cmd+shift+p',
     (event) => {
@@ -32,8 +33,8 @@ const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
 
   return (
     <>
-      <div className="absolute right-2 top-2 flex">
-        <span className="mr-2">Preview</span>
+      <div className="absolute right-2 top-2 flex items-center">
+        <span className="mr-2 text-xs text-slate-500">Preview</span>
         <Switch
           checked={preview}
           onChange={setPreview}
@@ -49,12 +50,12 @@ const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
         </Switch>
       </div>
       {preview ? (
-        <div className="prose h-full w-full resize-none bg-transparent px-6 py-4">
+        <div className="prose h-full w-full resize-none overflow-y-scroll bg-transparent px-6 pb-4 pt-12">
           <ReactMarkdown children={defaultValue} remarkPlugins={[remarkGfm]} />
         </div>
       ) : (
         <textarea
-          className="h-full w-full resize-none bg-transparent px-6 py-4 font-mono"
+          className="mt-6 h-[calc(100%-48px)] w-full resize-none bg-transparent px-6 pt-12 font-mono outline-none"
           defaultValue={defaultValue}
           ref={editorRef}
           onChange={onChange}

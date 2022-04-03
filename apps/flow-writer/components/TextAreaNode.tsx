@@ -7,6 +7,7 @@ import debounce from '../lib/debounce';
 import { useStore } from '../lib/store';
 import DescriptionItem from './DescriptionItem';
 import Editor from './Editor';
+import GradientBackdrop from './GradientBackdrop';
 import NodeTitle from './NodeTitle';
 import SaveIndicator from './SaveIndicator';
 
@@ -41,7 +42,7 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
         });
       }
     }, 300),
-    [],
+    [nodeContent],
   );
 
   useEffect(() => {
@@ -61,15 +62,16 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
   const { updated_at, created_at } = nodeContent;
 
   return (
-    <>
+    <div className="relative">
+      <GradientBackdrop active={selected} />
       <Handle type="target" position={Position.Top} />
       <div
         className={clsx(
-          'w-80 rounded-md bg-white text-left shadow-md ring-1 ring-slate-200',
-          selected && 'ring-slate-500',
+          'w-80 rounded-md bg-white text-left shadow-xl',
+          selected && 'ring-1 ring-white',
         )}
       >
-        <div className="overflow-hidden">
+        <div className="overflow-y-scroll">
           <div className="px-4 py-5 sm:px-6">
             <NodeTitle nodeId={id} />
 
@@ -92,7 +94,7 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
         <div className="text-right">
           <button
             ref={ref}
-            className="w-full rounded-br-md rounded-bl-md bg-slate-700 py-2 text-slate-50 focus:bg-slate-500"
+            className="w-full rounded-br-md rounded-bl-md bg-gradient-to-br from-yellow-400 to-red-400 py-2 text-slate-50 focus:bg-slate-500"
             onClick={openEditor}
           >
             Edit
@@ -100,7 +102,7 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
         </div>
         {isOpen && (
           <Portal className="relative h-full w-full bg-red-300">
-            <div className="nodrag fixed top-0 right-0 bottom-0 w-1/2 bg-slate-100 shadow-xl ring-1 ring-slate-200 ">
+            <div className="nodrag fixed top-0 right-0 bottom-0 w-1/2 bg-slate-100 shadow-xl ring-1 ring-slate-200">
               <SaveIndicator shouldHide={isWriting} lastSavedAt={updated_at} />
               <Editor
                 ref={editorRef}
@@ -115,7 +117,7 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
         )}
       </div>
       <Handle type="source" position={Position.Bottom} id="a" />
-    </>
+    </div>
   );
 }
 

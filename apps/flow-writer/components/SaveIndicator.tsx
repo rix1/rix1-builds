@@ -12,15 +12,16 @@ const SaveIndicator = ({ shouldHide, lastSavedAt }: SaveIndicatorProps) => {
     return null;
   }
   return (
-    <span
+    <div
       className={clsx(
         'absolute bottom-1 left-1 flex text-xs text-slate-400 transition duration-300 ease-in-out',
         shouldHide ? 'opacity-0' : 'opacity-100',
+        'w-full bg-slate-100 py-1',
       )}
     >
       <CheckIcon className="mr-1 h-4 w-4" /> Saved{' '}
       {dayjs(lastSavedAt).fromNow()}
-    </span>
+    </div>
   );
 };
 

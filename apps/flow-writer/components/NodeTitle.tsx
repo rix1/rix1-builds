@@ -32,8 +32,9 @@ const NodeTitle = ({ nodeId }: NodeTitleProps) => {
     <form onSubmit={handleFormSubmit} className="flex">
       <h3
         className={clsx(
-          'border-b text-lg font-medium leading-6 text-gray-900',
+          'max-w-[200px] border-b text-lg font-medium leading-6 text-gray-900',
           edit ? 'border-slate-600' : 'border-transparent',
+          'overflow-hidden text-ellipsis whitespace-nowrap',
         )}
       >
         {edit ? (
