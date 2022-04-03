@@ -24,6 +24,8 @@ const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
 
   useEffect(() => {
     if (!preview) {
+      const end = editorRef.current.value.length;
+      editorRef.current.setSelectionRange(end, end);
       editorRef.current.focus();
     }
   }, [preview]);

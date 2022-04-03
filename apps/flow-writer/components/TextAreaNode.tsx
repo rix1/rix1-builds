@@ -1,29 +1,29 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { Handle, Position } from 'react-flow-renderer';
-import { CheckIcon, PaperClipIcon } from '@heroicons/react/outline';
-
-import usePortal from 'react-useportal';
-import debounce from '../lib/debuounce';
-import { useStore } from '../lib/store';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import SaveIndicator from './SaveIndicator';
-import Editor from './Editor';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Handle, Position } from 'react-flow-renderer';
+import usePortal from 'react-useportal';
+import debounce from '../lib/debounce';
+import { useStore } from '../lib/store';
 import DescriptionItem from './DescriptionItem';
+import Editor from './Editor';
 import NodeTitle from './NodeTitle';
+import SaveIndicator from './SaveIndicator';
 
 type TextAreaNodeProps = {
   data: {
     label: string;
   };
   id: string;
+  xPos: number;
+  yPos: number;
+  selected: boolean;
 };
 
-function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
-  const content = useStore((state) => state.getContent(id));
+function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
+  const nodeContent = useStore((state) => state.getContent(id));
   const setContent = useStore((store) => store.setContent);
-  const [savedAt, setSavedAt] = useState(null);
+
   const [isWriting, setIsWriting] = useState(false);
   const editorRef = useRef<HTMLTextAreaElement>();
 
@@ -34,9 +34,11 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
   const debouncedOnChange = useCallback(
     debounce((event) => {
       setIsWriting(false);
-      setSavedAt(new Date().getTime());
       if (editorRef.current?.value) {
-        setContent(id, { ...content, raw: editorRef.current.value });
+        setContent(id, {
+          ...nodeContent,
+          raw: editorRef.current.value,
+        });
       }
     }, 300),
     [],
@@ -56,7 +58,7 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
     openPortal();
   }, []);
 
-  const { xPos, yPos, type, selected } = rest;
+  const { updated_at, created_at } = nodeContent;
 
   return (
     <>
@@ -70,12 +72,16 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
         <div className="overflow-hidden">
           <div className="px-4 py-5 sm:px-6">
             <NodeTitle nodeId={id} />
+
             <p className="mt-1 text-sm text-gray-500">
-              {savedAt ? dayjs(savedAt).fromNow() : 'Not saved yet'}
+              {updated_at ? dayjs(updated_at).fromNow() : 'Not saved yet'}
             </p>
           </div>
           <div className="border-t border-gray-200">
             <dl>
+              <DescriptionItem label="Created" white>
+                {dayjs(created_at).format('ddd D of MMM YYYY')}
+              </DescriptionItem>
               <DescriptionItem label="Node ID">{id}</DescriptionItem>
               <DescriptionItem label="Position" white>
                 x: {Math.round(xPos)} y: {Math.round(yPos)}
@@ -95,10 +101,10 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
         {isOpen && (
           <Portal className="relative h-full w-full bg-red-300">
             <div className="nodrag fixed top-0 right-0 bottom-0 w-1/2 bg-slate-100 shadow-xl ring-1 ring-slate-200 ">
-              <SaveIndicator shouldHide={isWriting} lastSavedAt={savedAt} />
+              <SaveIndicator shouldHide={isWriting} lastSavedAt={updated_at} />
               <Editor
                 ref={editorRef}
-                defaultValue={content.raw}
+                defaultValue={nodeContent.raw}
                 onChange={(event) => {
                   handleContentChange(event);
                   debouncedOnChange(event);
