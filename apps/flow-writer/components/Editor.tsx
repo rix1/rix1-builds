@@ -1,6 +1,6 @@
 import { Switch } from '@headlessui/react';
-import useHotkeys from '@reecelucas/react-use-hotkeys';
 import { forwardRef, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -9,25 +9,23 @@ type EditorProps = {
   defaultValue: string;
 };
 
-const markdown = `A paragraph with *emphasis* and **strong importance**.
-
-
-Sometimes!!
-
-
-Hahah
-`;
-
 const Editor = ({ onChange, defaultValue }: EditorProps, ref) => {
-  const [preview, setPreview] = useState(true);
-
-  useHotkeys('Meta+Shift+p', () => {
-    setPreview((prev) => !prev);
-  });
+  const [preview, setPreview] = useState(false);
+  useHotkeys(
+    'cmd+shift+p',
+    (event) => {
+      event.preventDefault();
+      setPreview((prev) => !prev);
+    },
+    {
+      enableOnTags: ['TEXTAREA'],
+    },
+  );
 
   return (
     <>
-      <div className="absolute right-2 top-2">
+      <div className="absolute right-2 top-2 flex">
+        <span className="mr-2">Preview</span>
         <Switch
           checked={preview}
           onChange={setPreview}
@@ -35,7 +33,6 @@ const Editor = ({ onChange, defaultValue }: EditorProps, ref) => {
             preview ? 'bg-green-400' : 'bg-gray-200'
           } relative inline-flex h-6 w-11 items-center rounded-full`}
         >
-          <span className="sr-only">Enable notifications</span>
           <span
             className={`${
               preview ? 'translate-x-6' : 'translate-x-1'
@@ -44,12 +41,12 @@ const Editor = ({ onChange, defaultValue }: EditorProps, ref) => {
         </Switch>
       </div>
       {preview ? (
-        <div className="h-full w-full resize-none bg-transparent px-6 py-4 text-left text-xl">
+        <div className="prose h-full w-full resize-none bg-transparent px-6 py-4">
           <ReactMarkdown children={defaultValue} remarkPlugins={[remarkGfm]} />
         </div>
       ) : (
         <textarea
-          className="h-full w-full resize-none bg-transparent px-6 py-4 text-xl"
+          className="h-full w-full resize-none bg-transparent px-6 py-4 font-mono"
           defaultValue={defaultValue}
           ref={ref}
           onChange={onChange}

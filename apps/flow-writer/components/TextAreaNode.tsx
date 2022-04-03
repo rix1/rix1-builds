@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 import SaveIndicator from './SaveIndicator';
 import Editor from './Editor';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 type TextAreaNodeProps = {
   data: {
@@ -32,9 +33,9 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
     debounce((event) => {
       setIsWriting(false);
       setSavedAt(new Date().getTime());
-      // if (contentRef.current?.value) {
-      setContent(id, { raw: contentRef.current.value });
-      // }
+      if (contentRef.current?.value) {
+        setContent(id, { raw: contentRef.current.value });
+      }
     }, 300),
     [],
   );
@@ -88,11 +89,13 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
                   Content length
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  {content.raw.length} characters
+                  TODO
+                  {/* {content?.raw?.length} characters */}
                 </dd>
               </div>
               <div className="border-t bg-white px-4 py-5 italic sm:px-6">
-                <p>{content?.raw.slice(0, 50)}...</p>
+                TODO
+                {/* <p>{content?.raw.slice(0, 50)}...</p> */}
               </div>
             </dl>
           </div>

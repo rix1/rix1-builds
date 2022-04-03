@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ReactFlow, {
   addEdge,
   Background,
@@ -49,6 +49,11 @@ const FlowRoot = ({}: FlowRootProps) => {
     (connection) => setEdges((eds) => addEdge(connection, eds)),
     [setEdges],
   );
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <ReactFlow
@@ -60,7 +65,7 @@ const FlowRoot = ({}: FlowRootProps) => {
       onConnect={onConnect}
       fitView
     >
-      <Background />
+      {mounted && <Background />}
     </ReactFlow>
   );
 };
