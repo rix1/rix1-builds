@@ -1,5 +1,5 @@
 import { Switch } from '@headlessui/react';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -9,7 +9,7 @@ type EditorProps = {
   defaultValue: string;
 };
 
-const Editor = ({ onChange, defaultValue }: EditorProps, ref) => {
+const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
   const [preview, setPreview] = useState(false);
   useHotkeys(
     'cmd+shift+p',
@@ -21,6 +21,12 @@ const Editor = ({ onChange, defaultValue }: EditorProps, ref) => {
       enableOnTags: ['TEXTAREA'],
     },
   );
+
+  useEffect(() => {
+    if (!preview) {
+      editorRef.current.focus();
+    }
+  }, [preview]);
 
   return (
     <>
@@ -48,7 +54,7 @@ const Editor = ({ onChange, defaultValue }: EditorProps, ref) => {
         <textarea
           className="h-full w-full resize-none bg-transparent px-6 py-4 font-mono"
           defaultValue={defaultValue}
-          ref={ref}
+          ref={editorRef}
           onChange={onChange}
         />
       )}

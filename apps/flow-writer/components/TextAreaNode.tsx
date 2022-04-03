@@ -11,6 +11,7 @@ import SaveIndicator from './SaveIndicator';
 import Editor from './Editor';
 import { useHotkeys } from 'react-hotkeys-hook';
 import DescriptionItem from './DescriptionItem';
+import NodeTitle from './NodeTitle';
 
 type TextAreaNodeProps = {
   data: {
@@ -24,7 +25,7 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
   const setContent = useStore((store) => store.setContent);
   const [savedAt, setSavedAt] = useState(null);
   const [isWriting, setIsWriting] = useState(false);
-  const contentRef = useRef<HTMLTextAreaElement>();
+  const editorRef = useRef<HTMLTextAreaElement>();
 
   const { ref, openPortal, closePortal, isOpen, Portal } = usePortal({
     bindTo: document && document.getElementById('editor-root'),
@@ -34,12 +35,18 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
     debounce((event) => {
       setIsWriting(false);
       setSavedAt(new Date().getTime());
-      if (contentRef.current?.value) {
-        setContent(id, { raw: contentRef.current.value });
+      if (editorRef.current?.value) {
+        setContent(id, { ...content, raw: editorRef.current.value });
       }
     }, 300),
     [],
   );
+
+  useEffect(() => {
+    if (isOpen) {
+      editorRef.current.focus();
+    }
+  }, [isOpen]);
 
   const handleContentChange = useCallback((event) => {
     setIsWriting(true);
@@ -56,16 +63,14 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
       <Handle type="target" position={Position.Top} />
       <div
         className={clsx(
-          'rounded-md bg-white text-left shadow-md ring-1 ring-slate-200',
+          'w-80 rounded-md bg-white text-left shadow-md ring-1 ring-slate-200',
           selected && 'ring-slate-500',
         )}
       >
         <div className="overflow-hidden">
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">
-              {content.title || 'No title'}
-            </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            <NodeTitle nodeId={id} />
+            <p className="mt-1 text-sm text-gray-500">
               {savedAt ? dayjs(savedAt).fromNow() : 'Not saved yet'}
             </p>
           </div>
@@ -92,7 +97,7 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
             <div className="nodrag fixed top-0 right-0 bottom-0 w-1/2 bg-slate-100 shadow-xl ring-1 ring-slate-200 ">
               <SaveIndicator shouldHide={isWriting} lastSavedAt={savedAt} />
               <Editor
-                ref={contentRef}
+                ref={editorRef}
                 defaultValue={content.raw}
                 onChange={(event) => {
                   handleContentChange(event);
