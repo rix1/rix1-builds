@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import SaveIndicator from './SaveIndicator';
 import Editor from './Editor';
 import { useHotkeys } from 'react-hotkeys-hook';
+import DescriptionItem from './DescriptionItem';
 
 type TextAreaNodeProps = {
   data: {
@@ -62,46 +63,27 @@ function TextAreaNode({ data, id, ...rest }: TextAreaNodeProps) {
         <div className="overflow-hidden">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
-              Node {id}
+              {content.title || 'No title'}
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">{}</p>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              {savedAt ? dayjs(savedAt).fromNow() : 'Not saved yet'}
+            </p>
           </div>
           <div className="border-t border-gray-200">
             <dl>
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Position</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  <code>
-                    x: {Math.round(xPos)} y: {Math.round(yPos)}
-                  </code>
-                </dd>
-              </div>
-              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
-                  Last updated
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  {savedAt ? dayjs(savedAt).fromNow() : 'Not saved yet'}
-                </dd>
-              </div>
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
-                  Content length
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  TODO
-                  {/* {content?.raw?.length} characters */}
-                </dd>
-              </div>
-              <div className="border-t bg-white px-4 py-5 italic sm:px-6">
-                TODO
-                {/* <p>{content?.raw.slice(0, 50)}...</p> */}
-              </div>
+              <DescriptionItem label="Node ID">{id}</DescriptionItem>
+              <DescriptionItem label="Position" white>
+                x: {Math.round(xPos)} y: {Math.round(yPos)}
+              </DescriptionItem>
             </dl>
           </div>
         </div>
         <div className="text-right">
-          <button ref={ref} className="mt-4 mr-4 mb-4" onClick={openEditor}>
+          <button
+            ref={ref}
+            className="w-full rounded-br-md rounded-bl-md bg-slate-700 py-2 text-slate-50 focus:bg-slate-500"
+            onClick={openEditor}
+          >
             Edit
           </button>
         </div>
