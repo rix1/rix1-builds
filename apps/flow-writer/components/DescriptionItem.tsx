@@ -9,7 +9,7 @@ type DescriptionItemProps = {
 const DescriptionItem = ({ children, label, white }: DescriptionItemProps) => (
   <div
     className={clsx(
-      'max-w-xs overflow-hidden px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6',
+      'overflow-hidden px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6',
       white ? 'bg-white' : 'bg-gray-50',
     )}
   >

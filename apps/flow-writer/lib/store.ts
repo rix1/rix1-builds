@@ -38,7 +38,7 @@ export const initialNodes = [
   },
 ];
 
-type FlowNode = {
+export type FlowNode = {
   id: string;
   type: NodeType;
   data: {
@@ -49,7 +49,27 @@ type FlowNode = {
 
 type ContentShape = {
   raw: string;
+  created_at: string;
+  updated_at: string | null;
+  title: string;
+  id: string;
 };
+
+const emptyContentNode = {
+  raw: '',
+  created_at: '',
+  updated_at: null,
+  title: '',
+  id: '',
+};
+
+function createContentNode(id) {
+  return {
+    ...emptyContentNode,
+    id: id,
+    created_at: new Date().toISOString(),
+  };
+}
 
 interface IContentActionsSlice {
   setContent: (id, content: ContentShape) => void;
@@ -64,7 +84,7 @@ const updateContentSlice: StoreSlice<IContentActionsSlice, IContentSlice> = (
   set,
   get,
 ) => ({
-  getContent: (id) => get().nodeContent[id] || { raw: '' },
+  getContent: (id) => get().nodeContent[id] || createContentNode(id),
   setContent: (id, content) =>
     set((prev) => ({
       ...prev,
