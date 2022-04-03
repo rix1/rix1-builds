@@ -4,7 +4,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 type SaveIndicatorProps = {
   shouldHide: boolean;
-  lastSavedAt: Dayjs | void;
+  lastSavedAt: string | void;
 };
 
 const SaveIndicator = ({ shouldHide, lastSavedAt }: SaveIndicatorProps) => {

@@ -21,20 +21,20 @@ export const initialNodes = [
     id: '1',
     type: NodeType.Inuput,
     data: { label: 'Start' },
-    position: { x: 250, y: 25 },
+    position: { x: 0, y: 25 },
   },
   {
     id: '2',
     type: NodeType.TextArea,
     // you can also pass a React component as a label
     data: { label: 'rikard' },
-    position: { x: 100, y: 125 },
+    position: { x: 0, y: 125 },
   },
   {
     id: '3',
     type: NodeType.Output,
     data: { label: 'End' },
-    position: { x: 450, y: 450 },
+    position: { x: 0, y: 550 },
   },
 ];
 
@@ -90,7 +90,7 @@ const updateContentSlice: StoreSlice<IContentActionsSlice, IContentSlice> = (
       ...prev,
       nodeContent: {
         ...prev.nodeContent,
-        [id]: content,
+        [id]: { ...content, updated_at: new Date().toISOString() },
       },
     })),
 });
