@@ -1,59 +1,12 @@
 import create, { GetState, SetState } from 'zustand';
-
-export enum NodeType {
-  Inuput = 'input',
-  Output = 'output',
-  TextArea = 'textArea',
-}
+import { persist } from 'zustand/middleware';
+import { generateUUID } from './generateUUID';
+import { ContentShape } from './types';
 
 export type StoreSlice<T extends object, E extends object = T> = (
   set: SetState<E extends T ? E : E & T>,
   get: GetState<E extends T ? E : E & T>,
 ) => T;
-
-export const initialEdges = [
-  // { id: 'e1-2', source: '1', target: '2' },
-  // { id: 'e2-3', source: '2', target: '3' },
-];
-
-export const initialNodes = [
-  {
-    id: '1',
-    type: NodeType.Inuput,
-    data: { label: 'Start' },
-    position: { x: 0, y: 25 },
-  },
-  {
-    id: '2',
-    type: NodeType.TextArea,
-    // you can also pass a React component as a label
-    data: { label: 'rikard' },
-    position: { x: 0, y: 125 },
-  },
-  {
-    id: '3',
-    type: NodeType.Output,
-    data: { label: 'End' },
-    position: { x: 0, y: 550 },
-  },
-];
-
-export type FlowNode = {
-  id: string;
-  type: NodeType;
-  data: {
-    label: string;
-  };
-  position: { x: number; y: number };
-};
-
-type ContentShape = {
-  raw: string;
-  created_at: string;
-  updated_at: string | null;
-  title: string;
-  id: string;
-};
 
 const emptyContentNode = {
   raw: '',
@@ -72,8 +25,10 @@ function createContentNode(id) {
 }
 
 interface IContentActionsSlice {
-  setContent: (id, content: ContentShape) => void;
-  getContent: (id) => ContentShape;
+  setContent: (id: string, content: ContentShape) => void;
+  getContent: (id: string) => ContentShape;
+  addContent: () => ContentShape;
+  deleteContent: (id: string) => void;
 }
 
 interface IContentSlice {
@@ -93,6 +48,19 @@ const updateContentSlice: StoreSlice<IContentActionsSlice, IContentSlice> = (
         [id]: { ...content, updated_at: new Date().toISOString() },
       },
     })),
+  addContent: () => {
+    const newContent = createContentNode(generateUUID());
+    set((prev) => ({
+      ...prev,
+      nodeContent: { ...prev.nodeContent, [newContent.id]: newContent },
+    }));
+    return newContent;
+  },
+  deleteContent: (id) => {
+    const content = get().nodeContent;
+    delete content[id];
+    set((prev) => ({ ...prev, nodeContent: content }));
+  },
 });
 
 const nodeContentSlice: StoreSlice<IContentSlice> = (set, get) => ({
@@ -104,4 +72,18 @@ const createRootSlice = (set: SetState<any>, get: GetState<any>) => ({
   ...updateContentSlice(set, get),
 });
 
-export const useStore = create(createRootSlice);
+export const useStore = create(
+  persist(createRootSlice, {
+    name: 'fw-local-v1',
+    onRehydrateStorage: (state) => {
+      // optional
+      return (state, error) => {
+        if (error) {
+          console.log('an error happened during hydration', error);
+        } else {
+          console.log('hydration finished', state);
+        }
+      };
+    },
+  }),
+);
