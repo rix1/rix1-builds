@@ -1,5 +1,5 @@
 import { Switch } from '@headlessui/react';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -31,6 +31,11 @@ const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
     }
   }, [preview]);
 
+  const handleSelect = useCallback(() => {
+    const { selectionStart, selectionEnd, value } = editorRef.current;
+    console.log('you selected', value.substring(selectionStart, selectionEnd));
+  }, []);
+
   return (
     <>
       <div className="absolute right-2 top-2 flex items-center">
@@ -59,6 +64,7 @@ const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
           defaultValue={defaultValue}
           ref={editorRef}
           onChange={onChange}
+          onSelect={handleSelect}
         />
       )}
     </>
