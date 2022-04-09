@@ -2,8 +2,9 @@ import { DocumentTextIcon } from '@heroicons/react/outline';
 import { useReactFlow } from 'react-flow-renderer';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useMouse } from 'rooks';
-import { generateUUID } from '../lib/generateUUID';
-import { NodeType } from '../lib/store';
+import { createNodesFromContent } from '../lib/createNodesFromContent';
+import { useStore } from '../lib/store';
+import { NodeType } from '../lib/types';
 import HotkeyTooltip from './HotkeyTooltip';
 import Kbd from './Kbd';
 
@@ -11,19 +12,15 @@ type CustomControlsProps = {};
 
 const CustomControls = ({}: CustomControlsProps) => {
   const { x: mouseX, y: mouseY } = useMouse();
+  const createNode = useStore((store) => store.addContent);
 
   const { addNodes, project } = useReactFlow();
 
   const addNewNode = () => {
-    addNodes({
-      id: generateUUID(),
-      type: NodeType.TextArea,
-      data: {},
-      position: project({
-        x: mouseX,
-        y: mouseY - 100,
-      }),
-    });
+    const newNode = createNode();
+    addNodes(
+      createNodesFromContent({ [newNode.id]: newNode }, NodeType.TextArea),
+    );
   };
 
   useHotkeys('c', addNewNode, [mouseX, mouseY]);

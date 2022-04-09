@@ -6,7 +6,9 @@ import ReactFlow, {
   useEdgesState,
   useNodesState,
 } from 'react-flow-renderer';
-import { initialEdges, initialNodes } from '../lib/store';
+import { createNodesFromContent } from '../lib/createNodesFromContent';
+import { useStore } from '../lib/store';
+import { NodeType } from '../lib/types';
 import CustomControls from './CustomControls';
 import TextAreaNode from './TextAreaNode';
 
@@ -17,8 +19,22 @@ const nodeTypes = {
 type FlowRootProps = {};
 
 const FlowRoot = ({}: FlowRootProps) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const content = useStore((store) => store.nodeContent);
+  const deleteContent = useStore((store) => store.deleteContent);
+  const [nodes, setNodes, onNodesChange] = useNodesState(
+    createNodesFromContent(content, NodeType.TextArea),
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  const handleChange = useCallback((changes) => {
+    const deleteChanges = changes.filter((change) => change.type === 'remove');
+
+    deleteChanges.forEach((toBeDeleted) => {
+      deleteContent(toBeDeleted.id);
+    });
+
+    onNodesChange(changes);
+  }, []);
 
   const onConnect = useCallback(
     (connection) => setEdges((eds) => addEdge(connection, eds)),
@@ -34,7 +50,7 @@ const FlowRoot = ({}: FlowRootProps) => {
     <ReactFlow
       nodes={nodes}
       edges={edges}
-      onNodesChange={onNodesChange}
+      onNodesChange={handleChange}
       onEdgesChange={onEdgesChange}
       nodeTypes={nodeTypes}
       onConnect={onConnect}
