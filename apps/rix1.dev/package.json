@@ -12,8 +12,11 @@
     "test": "pnpm prettier && pnpm lint && pnpm check-types"
   },
   "dependencies": {
+    "@geist-ui/icons": "^1.0.2",
     "autoprefixer": "^10.4.4",
+    "contentlayer": "^0.1.2",
     "next": "12.1.6",
+    "next-contentlayer": "^0.1.2",
     "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.12",
     "react": "18.1.0",
