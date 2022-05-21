@@ -2,8 +2,8 @@ node_modules
 .next
 out
 dist/
-next.config.js
+# next.config.js
 postcss.config.js
-tailwind.config.js
+# tailwind.config.js
 .eslintrc.js
 .vscode/
