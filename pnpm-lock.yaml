@@ -105,19 +105,27 @@ importers:
       '@types/node': ^17.0.12
       '@types/react': 18.0.9
       '@types/react-dom': ^17.0.11
+      autoprefixer: ^10.4.4
       config: workspace:*
       eslint: 7.32.0
       eslint-config-next: ^12.0.8
       next: 12.1.6
+      next-transpile-modules: 9.0.0
+      postcss: ^8.4.12
       react: 18.1.0
       react-dom: 18.1.0
+      tailwindcss: ^3.0.23
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
     dependencies:
+      autoprefixer: 10.4.4_postcss@8.4.12
       next: 12.1.6_react-dom@18.1.0+react@18.1.0
+      next-transpile-modules: 9.0.0
+      postcss: 8.4.12
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
+      tailwindcss: 3.0.23_autoprefixer@10.4.4
       ui: link:../../packages/ui
     devDependencies:
       '@types/node': 17.0.21
@@ -128,16 +136,6 @@ importers:
       eslint-config-next: 12.1.0_7ff966ce28227d73a0982d151df40cfd
       tsconfig: link:../../packages/tsconfig
       typescript: 4.6.2
-
-  apps/site:
-    specifiers:
-      next: 12.0.8
-      react: 17.0.2
-      react-dom: 17.0.2
-    dependencies:
-      next: 12.0.8_react-dom@17.0.2+react@17.0.2
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
 
   packages/config:
     specifiers:
@@ -1537,7 +1535,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.20.2
-      caniuse-lite: 1.0.30001319
+      caniuse-lite: 1.0.30001341
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1592,7 +1590,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001319
+      caniuse-lite: 1.0.30001341
       electron-to-chromium: 1.4.88
       escalade: 3.1.1
       node-releases: 2.0.2
@@ -1998,7 +1996,6 @@ packages:
     dependencies:
       graceful-fs: 4.2.9
       tapable: 2.2.1
-    dev: true
 
   /enquirer/2.3.6:
     resolution: {integrity: sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==}
@@ -2887,7 +2884,6 @@ packages:
 
   /graceful-fs/4.2.9:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
-    dev: true
 
   /gray-matter/4.0.3:
     resolution: {integrity: sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q==}
@@ -3947,7 +3943,6 @@ packages:
     dependencies:
       enhanced-resolve: 5.9.2
       escalade: 3.1.1
-    dev: true
 
   /next/12.0.8_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-g5c1Kuh1F8tSXJn2rVvzYBzqe9EXaR6+rY3/KrQ7y0D9FueRLfHI35wM0DRadDcPSc3+vncspfhYH3jnYE/KjA==}
@@ -4989,7 +4984,6 @@ packages:
   /tapable/2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
-    dev: true
 
   /text-table/0.2.0:
     resolution: {integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=}
