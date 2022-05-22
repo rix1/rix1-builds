@@ -107,6 +107,7 @@ importers:
       autoprefixer: ^10.4.4
       config: workspace:*
       contentlayer: ^0.1.2
+      dayjs: ^1.11.0
       eslint: 7.32.0
       eslint-config-next: ^12.0.8
       next: 12.1.6
@@ -123,6 +124,7 @@ importers:
       '@geist-ui/icons': 1.0.2_react@18.1.0
       autoprefixer: 10.4.4_postcss@8.4.12
       contentlayer: 0.1.2
+      dayjs: 1.11.0
       next: 12.1.6_react-dom@18.1.0+react@18.1.0
       next-contentlayer: 0.1.2_d30c2367b03c877b70a67c330200ac54
       next-transpile-modules: 9.0.0
