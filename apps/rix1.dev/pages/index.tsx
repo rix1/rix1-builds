@@ -5,6 +5,7 @@ import Twitter from '@geist-ui/icons/twitter';
 import Link from 'components/Link';
 import ProjectSection from 'components/ProjectSection';
 import type { NextPage } from 'next';
+import Image from 'next/image';
 
 const Home: NextPage = () => {
   return (
@@ -13,47 +14,58 @@ const Home: NextPage = () => {
         background: `linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 300px),fixed 0 0 /20px 20px radial-gradient(#d1d1d1 1px,transparent 0),fixed 10px 10px /20px 20px radial-gradient(#d1d1d1 1px,transparent 0)`,
       }}
     >
-      <div className="font-athelas mx-auto max-w-7xl px-4 py-4 font-semibold sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-4 font-athelas font-semibold sm:px-6 lg:px-8">
         <section className="mx-auto max-w-3xl text-center">
-          <img
+          <Image
+            width="96px"
+            height="96px"
             className="inline-block h-24 w-24 rounded-full shadow-lg"
             src="https://s3.eu-north-1.amazonaws.com/rix1.dev/first-thursday-450x450.jpg"
             alt=""
+            unoptimized
           />
           <h1 className="my-5 text-center text-5xl font-bold">
             Hello, world! 👋
           </h1>
           <blockquote className="text-2xl leading-normal">
             <p className="">
-              On the internet, I'm usually referred to as{' '}
-              <Link href="https://twitter.com/rix1">@rix1</Link>. I'm a{' '}
+              On the internet, I&apos;m usually referred to as{' '}
+              <Link href="https://twitter.com/rix1">@rix1</Link>. I&apos;m a{' '}
               <Link href="https://github.com/rix1">product developer</Link> at{' '}
               <Link href="https://twitter.com/@otovosolar">Otovo</Link>. I used
               to be a brother and mother to Sam, an old belgian shepard full of
               wisdom. I occationally{' '}
-              <Link href="/words">
+              <Link href="/posts">
                 <a>write</a>
               </Link>
               , but not as often as I aspire to.
             </p>
           </blockquote>
           <div className="mt-8 flex justify-center space-x-5">
-            <a href="https://twitter.com/rix1" target="_blank">
+            <a href="https://twitter.com/rix1" target="_blank" rel="noreferrer">
               <Twitter />
             </a>
-            <a href="https://github.com/rix1" target="_blank">
+            <a href="https://github.com/rix1" target="_blank" rel="noreferrer">
               <Github />
             </a>
-            <a href="https://instagram.com/rix1" target="_blank">
+            <a
+              href="https://instagram.com/rix1"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Instagram />
             </a>
-            <a href="https://linkedin.com/in/riix1" target="_blank">
+            <a
+              href="https://linkedin.com/in/riix1"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Linkedin />
             </a>
-            <a href="https://keybase.io/rix1" target="_blank">
+            <a href="https://keybase.io/rix1" target="_blank" rel="noreferrer">
               <svg
-                width="24px"
-                height="24px"
+                width="22px"
+                height="22px"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
