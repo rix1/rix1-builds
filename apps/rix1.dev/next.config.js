@@ -2,8 +2,8 @@
 const withTM = require('next-transpile-modules')(['ui']);
 const withContentlayer = require('next-contentlayer').withContentlayer;
 
-module.exports = withTM(
-  withContentlayer({
+module.exports = withContentlayer(
+  withTM({
     reactStrictMode: true,
   }),
 );

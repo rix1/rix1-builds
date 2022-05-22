@@ -3,17 +3,14 @@ import Instagram from '@geist-ui/icons/instagram';
 import Linkedin from '@geist-ui/icons/linkedin';
 import Twitter from '@geist-ui/icons/twitter';
 import Link from 'components/Link';
+import PagePattern from 'components/PagePattern';
 import ProjectSection from 'components/ProjectSection';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 
 const Home: NextPage = () => {
   return (
-    <div
-      style={{
-        background: `linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 300px),fixed 0 0 /20px 20px radial-gradient(#d1d1d1 1px,transparent 0),fixed 10px 10px /20px 20px radial-gradient(#d1d1d1 1px,transparent 0)`,
-      }}
-    >
+    <PagePattern>
       <div className="mx-auto max-w-7xl px-4 py-4 font-athelas font-semibold sm:px-6 lg:px-8">
         <section className="mx-auto max-w-3xl text-center">
           <Image
@@ -79,7 +76,7 @@ const Home: NextPage = () => {
           <ProjectSection />
         </section>
       </div>
-    </div>
+    </PagePattern>
   );
 };
 
