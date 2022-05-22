@@ -31,11 +31,8 @@ const Home: NextPage = () => {
               <Link href="https://github.com/rix1">product developer</Link> at{' '}
               <Link href="https://twitter.com/@otovosolar">Otovo</Link>. I used
               to be a brother and mother to Sam, an old belgian shepard full of
-              wisdom. I occationally{' '}
-              <Link href="/posts">
-                <a>write</a>
-              </Link>
-              , but not as often as I aspire to.
+              wisdom. I occationally <Link href="/posts">write</Link>, but not
+              as often as I aspire to.
             </p>
           </blockquote>
           <div className="mt-8 flex justify-center space-x-5">
