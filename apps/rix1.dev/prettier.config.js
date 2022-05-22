@@ -1,3 +1,3 @@
 module.exports = {
-  ...require('config/tailwind.prettier.config'),
+  ...require('config/prettier.tailwind.config'),
 };

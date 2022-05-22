@@ -1,0 +1,139 @@
+---
+title: Say hello to rix1-builds
+topic: Tech
+description: As this is the first post on a new tech stack, I thought I'd share how it's built.
+date: 2022-05-22
+---
+
+Tired of copy-pasting content and components (and setup) between different
+repos, I decided to restructure how my hobby projects were organized.
+
+I've been setting up a Turborepo and started migrating
+[rix1/relativity](https://github.com/rix1/relativity) (this site) over.
+
+This is also the place I'm building
+[FlowWriter](https://twitter.com/rix1/status/1510736583154147330), although
+that's not live at the time of writing (2022-05-22 Sunday at 23:51).
+
+In this short post, I just thought I'd share (and document) how I've set up
+Prettier and Tailwind in this project. I went through a couple of iterations
+before I felt happy with my setup, so hopefully others have to go through the
+hoops as I did.
+
+## Problem statement
+
+In `./packages/config/` I've defined all eslint, prettier and tailwind config.
+When setting up a new submodule, I install the following packages:
+
+- eslint
+- typescript
+- tailwind (if the module is using that)
+
+So far, it seems I don't have to install Prettier.
+
+Since Tailwind has a Prettier plugin I decided to create a separate
+`prettier.tailwind.config.js` file that deals with requring this plugin. For the
+plugin to work, we need to reference the Tailwind config:
+
+```js
+// File: packages/config/prettier.tailwind.config.js
+module.exports = {
+  printWidth: 80,
+  singleQuote: true,
+  trailingComma: 'all',
+  bracketSpacing: true,
+  tailwindConfig: 'tailwind.config.js',
+  plugins: [require('prettier-plugin-tailwindcss')],
+};
+```
+
+I ran into some issues with realive file paths when you require, import or
+extend these configurations. So I found that it was best to define the
+configuration files in the submodule. These files often just require the proper
+configuration file. This worked better across IDE and CLI instead of relying on
+relative paths (e.g. `../../config/prettier.config.js`).
+
+See for example how `.eslintrc.js` is defined in a given submodule:
+
+```js
+module.exports = require('config/eslint-preset');
+```
+
+Btw, all of this require that you have the configuration package listed as a
+dependency in `package.json`. This is fairly simple with Turborepo:
+
+```js
+// package.json
+"devDependencies": {
+  "config": "workspace:*",
+}
+```
+
+## Rules
+
+1. Prefer shared configuration. Extend, import or reference other files as
+   presets as much as possible.
+2. Institutionalize scripts. Keep the same scripts across apps.
+3. Test and ensure that IDE and command line scripts use the same configuration.
+   This means to throw a `--verbose` or `--loglevel debug` flag on your CLI
+   commands, as well as checking the output from your editor integration.
+
+## Scripts I enjoy having around
+
+Each submodule's `package.json` I'm defining the following scripts
+
+```json
+"lint": "next lint",
+"check-types": "tsc --noemit",
+"prettier": "prettier --check . --config ./prettier.config.js --ignore-path ../../.prettierignore",
+"test": "pnpm prettier && pnpm lint && pnpm check-types"
+```
+
+Yes, I know test doesn't actually run any tests... But I like having one command
+that I can run on pre-push or on CI to ensure at least _something_ is working.
+
+Notice the `--config ./prettier.config.js` flag. It took me some time to realize
+that Prettier CLI prefers default options (CLI arguments) over configuration
+files. This caused inconsistent formatting between my IDE (vscode) and the `npm script`.
+
+With the `--config` flag, I ensure that the same configuration is used across my
+IDE and CLI.
+
+## Reference
+
+Here's the current file structure:
+
+```js
+.
+├── package.json
+├── .prettierignore
+├── apps
+│   ├── flow-writer
+│   │   ├── postcss.config.js
+│   │   ├── tailwind.config.js // uses global config as preset
+│   │   └── tsconfig.json // extends global config with "extends": "tsconfig/nextjs.json",
+│   └── rix1.dev
+│       ├── postcss.config.js
+│       ├── prettier.config.js // imports global config with require('config/tailwind.prettier.config')
+│       ├── tailwind.config.js // uses global config as preset
+│       └── tsconfig.json // extends global config with "extends": "tsconfig/nextjs.json",
+├── packages
+│   ├── config
+│   │   ├── eslint-preset.js
+│   │   ├── package.json
+│   │   ├── postcss.config.js
+│   │   ├── prettier.config.js
+│   │   └── prettier.tailwind.config.js //
+│   │   ├── tailwind.config.js
+│   ├── tsconfig
+│   │   ├── base.json
+│   │   ├── nextjs.json // extends base
+│   │   ├── package.json
+│   │   └── react-library.json // extends base
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+└── turbo.json
+
+6 directories, 24 files
+
+```

@@ -1,6 +1,5 @@
-import { ArrowLeft } from '@geist-ui/icons';
 import Backlink from 'components/Backlink';
-import Link from 'components/Link';
+import PagePattern from 'components/PagePattern';
 import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Head from 'next/head';
@@ -8,10 +7,9 @@ import Image from 'next/image';
 import NextLink from 'next/link';
 
 export async function getStaticProps() {
-  const posts = allPosts.sort((a, b) => {
-    // return compareDesc(new Date(a.date), new Date(b.date));
-    return 1;
-  });
+  const posts = allPosts.sort((a, b) =>
+    dayjs(a.date).isBefore(dayjs(b.date)) ? 1 : -1,
+  );
   return { props: { posts } };
 }
 
@@ -57,29 +55,33 @@ function PostCard(post) {
 
 export default function Home({ posts }) {
   return (
-    <div className="bg-white px-4 pt-16 pb-20 font-athelas sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
-      <Head>
-        <title>Thoughts & experiments</title>
-      </Head>
-      <div className="relative mx-auto max-w-lg divide-y-2 divide-gray-200 lg:max-w-7xl">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Thoughts & experiments
-          </h1>
-          <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-            Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat
-            massa dictumst amet. Sapien tortor lacus arcu.
-          </p>
+    <PagePattern>
+      <div className="px-4 pt-16 pb-20 font-athelas sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
+        <Head>
+          <title>Thoughts & experiments</title>
+        </Head>
+        <div className="relative mx-auto max-w-lg divide-y-2 divide-gray-200 lg:max-w-7xl">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              Thoughts & experiments
+            </h1>
+            <p className="mt-3 text-xl text-gray-500 sm:mt-4">
+              I write things on all sorts of mediums, some of it get published,
+              but most of it doesn&apos;t. My hopes is that this space will see
+              more frequent updates, now that I have a more streamlined approach
+              to authoring content.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
+            {posts.map((post, idx) => (
+              <PostCard key={idx} {...post} />
+            ))}
+          </div>
         </div>
-        <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
-          {posts.map((post, idx) => (
-            <PostCard key={idx} {...post} />
-          ))}
+        <div className="mx-auto mt-8 max-w-lg lg:max-w-7xl">
+          <Backlink href="/">Go back home</Backlink>
         </div>
       </div>
-      <div className="mx-auto mt-8 max-w-lg lg:max-w-7xl">
-        <Backlink href="/">Go back home</Backlink>
-      </div>
-    </div>
+    </PagePattern>
   );
 }

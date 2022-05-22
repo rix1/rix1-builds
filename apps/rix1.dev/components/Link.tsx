@@ -7,7 +7,7 @@ type LinkProps = {
 
 const Link = ({ children, href }: LinkProps) => {
   const classNames =
-    'bg-gradient-to-r from-[#EA5634] to-[#db2777] bg-clip-text text-transparent hover:from-[#db2777] hover:to-purple-500';
+    'bg-gradient-to-r from-[#EA5634] to-[#db2777] bg-clip-text text-transparent hover:from-[#db2777] hover:to-[#553FA6]/90';
 
   const isAbsolute = href.startsWith('http');
   if (isAbsolute) {

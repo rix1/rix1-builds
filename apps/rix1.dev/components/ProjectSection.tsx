@@ -78,7 +78,7 @@ const ProjectSection = ({}: ProjectSectionProps) => {
                     height="16"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#EA5634"
+                    stroke="#db2777"
                     strokeWidth={2}
                     strokeLinecap="round"
                     strokeLinejoin="round"
