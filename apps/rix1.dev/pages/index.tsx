@@ -18,6 +18,10 @@ const Home: NextPage = () => {
           property="og:title"
           content="rix1.dev: Product developer from Norway"
         />
+        <meta
+          property="og:description"
+          content="Dev, design, product and hooman. Currently having fun chasing the sun together with @OtovoSolar"
+        />
         <meta property="og:image:height" content="600" />
         <meta property="og:image:width" content="1200" />
         <meta
