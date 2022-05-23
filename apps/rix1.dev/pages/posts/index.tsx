@@ -58,7 +58,7 @@ export default function Home({ posts }) {
     <PagePattern>
       <div className="px-4 pt-16 pb-20 font-athelas sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
         <Head>
-          <title>Thoughts & experiments</title>
+          <title>rix1.dev: Thoughts & experiments</title>
         </Head>
         <div className="relative mx-auto max-w-lg divide-y-2 divide-gray-200 lg:max-w-7xl">
           <div>
