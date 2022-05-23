@@ -46,14 +46,16 @@ const Home: NextPage = () => {
       </Head>
       <div className="mx-auto max-w-7xl px-4 py-4 font-athelas font-semibold sm:px-6 lg:px-8">
         <section className="mx-auto max-w-3xl text-center">
-          <Image
-            width="96px"
-            height="96px"
-            className="inline-block h-24 w-24 rounded-full shadow-lg"
-            src="https://s3.eu-north-1.amazonaws.com/rix1.dev/first-thursday-450x450.jpg"
-            alt=""
-            unoptimized
-          />
+          <div className="inline-block h-24 w-24 rounded-full shadow-lg">
+            <Image
+              width="96px"
+              height="96px"
+              className="h-24 w-24 rounded-full"
+              src="https://s3.eu-north-1.amazonaws.com/rix1.dev/first-thursday-450x450.jpg"
+              alt=""
+              unoptimized
+            />
+          </div>
           <h1 className="my-5 text-center text-5xl font-bold">
             Hello, world! 👋
           </h1>
