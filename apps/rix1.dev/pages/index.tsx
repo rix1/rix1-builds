@@ -64,8 +64,11 @@ const Home: NextPage = () => {
               I&apos;m a{' '}
               <Link href="https://github.com/rix1">product developer</Link> at{' '}
               <Link href="https://twitter.com/@otovosolar">Otovo</Link>, living
-              in Oslo, Norway. I used to be a brother and mother to Sam, an old
-              belgian shepard full of wisdom. I occationally{' '}
+              in Oslo, Norway. I used to be a brother and mother to{' '}
+              <Link href="https://lh3.googleusercontent.com/pw/AM-JKLX0h8SioeSYDVLLX7S8bHISvHHm-hYancToyZbyvGGYyKpXt_ItTzNa7znM_MJR6Xq3Xn7oCMPKk5HHuAfiRaLk1ssV3q-q3hBtM_OxuwR8VC4WKlCcq6Klg9fmNoeFgvHsust7p5TF_RsmYSqZsb895A=w1536-h2049-no?authuser=0">
+                Sam
+              </Link>
+              , an old belgian shepard full of wisdom. I occationally{' '}
               <Link href="/posts">write</Link>, but not as often as I aspire to.
             </p>
           </blockquote>
