@@ -65,11 +65,12 @@ export default function Home({ posts }) {
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               Thoughts & experiments
             </h1>
-            <p className="mt-3 text-xl text-gray-500 sm:mt-4">
+            <p className="mt-3 max-w-3xl text-xl text-gray-500 sm:mt-4">
               I write things on all sorts of mediums, some of it get published,
-              but most of it doesn&apos;t. My hopes is that this space will see
-              more frequent updates, now that I have a more streamlined approach
-              to authoring content.
+              but most of it doesn&apos;t.{' '}
+              <span className="whitespace-nowrap">My hope</span> is that this
+              space will see more frequent updates. Until then, here&apos;s what
+              I got so far:
             </p>
           </div>
           <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
