@@ -2,9 +2,9 @@ import Github from '@geist-ui/icons/github';
 import Instagram from '@geist-ui/icons/instagram';
 import Linkedin from '@geist-ui/icons/linkedin';
 import Twitter from '@geist-ui/icons/twitter';
+import Link from 'components/Link';
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import PagePattern from '../components/PagePattern';
 import ProjectSection from '../components/ProjectSection';
 
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
             </a>
           </div>
         </section>
-        <hr className="my-10 mx-auto w-1/3" />
+        <hr className="my-8 mx-auto w-1/3" />
         <section className="mx-auto">
           <ProjectSection />
         </section>
