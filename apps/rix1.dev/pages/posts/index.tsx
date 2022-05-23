@@ -1,10 +1,10 @@
-import Backlink from 'components/Backlink';
-import PagePattern from 'components/PagePattern';
 import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Head from 'next/head';
 import Image from 'next/image';
 import NextLink from 'next/link';
+import Backlink from '../../components/Backlink';
+import PagePattern from '../../components/PagePattern';
 
 export async function getStaticProps() {
   const posts = allPosts.sort((a, b) =>
