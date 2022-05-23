@@ -4,6 +4,7 @@ import Linkedin from '@geist-ui/icons/linkedin';
 import Twitter from '@geist-ui/icons/twitter';
 import Link from 'components/Link';
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 import PagePattern from '../components/PagePattern';
 import ProjectSection from '../components/ProjectSection';
@@ -11,6 +12,38 @@ import ProjectSection from '../components/ProjectSection';
 const Home: NextPage = () => {
   return (
     <PagePattern>
+      <Head>
+        <title>rix1.dev: Product developer from Norway</title>
+        <meta
+          property="og:title"
+          content="rix1.dev: Product developer from Norway"
+        />
+        <meta property="og:image:height" content="600" />
+        <meta property="og:image:width" content="1200" />
+        <meta
+          property="og:image:alt"
+          content="On the internet, I'm usually referred to as @rix1. I'm a product developer at Otovo, living in Oslo, Norway."
+        />
+        <meta
+          property="og:image"
+          content="https://s3.eu-north-1.amazonaws.com/rix1.dev/social-image.png"
+        />
+        <meta
+          name="twitter:title"
+          content="rix1.dev: Product developer from Norway"
+        />
+        <meta
+          name="twitter:description"
+          content="Dev, design, product and hooman. Currently having fun chasing the sun together with @OtovoSolar"
+        />
+        <meta
+          name="twitter:image:src"
+          content="https://s3.eu-north-1.amazonaws.com/rix1.dev/social-image.png"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@rix1" />
+      </Head>
       <div className="mx-auto max-w-7xl px-4 py-4 font-athelas font-semibold sm:px-6 lg:px-8">
         <section className="mx-auto max-w-3xl text-center">
           <Image
@@ -27,12 +60,13 @@ const Home: NextPage = () => {
           <blockquote className="text-2xl leading-normal">
             <p className="">
               On the internet, I&apos;m usually referred to as{' '}
-              <Link href="https://twitter.com/rix1">@rix1</Link>. I&apos;m a{' '}
+              <Link href="https://twitter.com/rix1">@rix1</Link>. <br />{' '}
+              I&apos;m a{' '}
               <Link href="https://github.com/rix1">product developer</Link> at{' '}
-              <Link href="https://twitter.com/@otovosolar">Otovo</Link>. I used
-              to be a brother and mother to Sam, an old belgian shepard full of
-              wisdom. I occationally <Link href="/posts">write</Link>, but not
-              as often as I aspire to.
+              <Link href="https://twitter.com/@otovosolar">Otovo</Link>, living
+              in Oslo, Norway. I used to be a brother and mother to Sam, an old
+              belgian shepard full of wisdom. I occationally{' '}
+              <Link href="/posts">write</Link>, but not as often as I aspire to.
             </p>
           </blockquote>
           <div className="mt-8 flex justify-center space-x-5">
