@@ -2,11 +2,11 @@ import Github from '@geist-ui/icons/github';
 import Instagram from '@geist-ui/icons/instagram';
 import Linkedin from '@geist-ui/icons/linkedin';
 import Twitter from '@geist-ui/icons/twitter';
-import Link from 'components/Link';
-import PagePattern from 'components/PagePattern';
-import ProjectSection from 'components/ProjectSection';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
+import PagePattern from '../components/PagePattern';
+import ProjectSection from '../components/ProjectSection';
 
 const Home: NextPage = () => {
   return (

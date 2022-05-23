@@ -1,10 +1,10 @@
-import PagePattern from 'components/PagePattern';
 import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Head from 'next/head';
 import Link from 'next/link';
 import ArrowLeft from '@geist-ui/icons/arrowLeft';
-import Backlink from 'components/Backlink';
+import Backlink from '../../components/Backlink';
+import PagePattern from '../../components/PagePattern';
 
 export async function getStaticPaths() {
   const paths = allPosts.map((post) => post.url);
