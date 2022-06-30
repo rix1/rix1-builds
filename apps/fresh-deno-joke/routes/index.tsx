@@ -30,6 +30,10 @@ export default function Home() {
           /rix1
         </a>
       </p>
+      <p>
+        Everything on this page is static HTML, apart from the island (JS) app
+        that's below here. Click it to see some interactivity:
+      </p>
       <Counter start={3} />
     </Layout>
   );
