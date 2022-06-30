@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from "preact";
+import { tw } from "@twind";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import Joke from "../islands/Joke.tsx";
 
@@ -27,10 +28,15 @@ export default function Page({ data }: PageProps<User | null>) {
   }
 
   return (
-    <div>
-      <img src={data.avatar_url} width={64} height={64} />
+    <div class={tw`p-4 mx-auto max-w-screen-md`}>
+      <img
+        src={data.avatar_url}
+        width={64}
+        height={64}
+        className={tw`rounded-full`}
+      />
       <h1>{data.name}</h1>
-      <p>{data.login}</p>
+      <p className={tw`mt-4 font-semibold`}>A random joke (try refreshing)</p>
       <Joke />
     </div>
   );
