@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 import { Dayjs } from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type CalendarCellProps = {
   day: Dayjs;
@@ -9,6 +9,7 @@ type CalendarCellProps = {
   className: string;
   selectedState: 'start' | 'between' | 'end' | null;
   onClick: (selectedDate: Dayjs) => void;
+  editable: boolean;
 };
 
 const CalendarCell = ({
@@ -17,13 +18,18 @@ const CalendarCell = ({
   className,
   selectedState,
   onClick,
+  editable = true,
 }: CalendarCellProps) => {
   return (
     <button
       type="button"
-      onClick={() => onClick(day)}
+      onClick={() => {
+        editable && onClick(day);
+      }}
       className={clsx(
-        'isolate py-2 hover:bg-gray-100 focus:z-10 relative',
+        'isolate py-2 focus:z-10 relative',
+        editable && 'hover:bg-gray-100',
+        !editable && 'cursor-default',
         day.month() === selectedMonth ? 'bg-white' : 'bg-gray-50',
         (false || day.isToday) && 'font-semibold',
         day.isToday() && 'text-white',
@@ -69,11 +75,26 @@ function getSelectedState(day: Dayjs, start: Dayjs | null, end: Dayjs | null) {
 type CalendarGridProps = {
   daysToRender: Dayjs[];
   selectedMonth: number;
+  onSelected?: (start: Dayjs, end: Dayjs) => void;
+  preSelectedStart?: Dayjs | null;
+  preSelectedEnd?: Dayjs | null;
+  editable?: boolean;
 };
 
-const CalendarGrid = ({ daysToRender, selectedMonth }: CalendarGridProps) => {
-  const [selectionStart, setSelectionStart] = useState<Dayjs | null>(null);
-  const [selectionEnd, setSelectionEnd] = useState<Dayjs | null>(null);
+const CalendarGrid = ({
+  daysToRender,
+  selectedMonth,
+  onSelected,
+  preSelectedStart = null,
+  preSelectedEnd = null,
+  editable = true,
+}: CalendarGridProps) => {
+  const [selectionStart, setSelectionStart] = useState<Dayjs | null>(
+    preSelectedStart,
+  );
+  const [selectionEnd, setSelectionEnd] = useState<Dayjs | null>(
+    preSelectedEnd,
+  );
 
   const handleClick = (selectedDate: Dayjs) => {
     if (!selectionStart) {
@@ -92,12 +113,21 @@ const CalendarGrid = ({ daysToRender, selectedMonth }: CalendarGridProps) => {
       return;
     }
     setSelectionEnd(selectedDate);
+    if (onSelected) {
+      onSelected(selectionStart, selectedDate);
+    }
   };
 
   return (
-    <div className="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200">
+    <div
+      className={clsx(
+        'isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200',
+        !editable && 'opacity-50',
+      )}
+    >
       {daysToRender.map((day, dayIdx) => (
         <CalendarCell
+          editable={editable}
           selectedState={getSelectedState(day, selectionStart, selectionEnd)}
           day={day}
           onClick={handleClick}
@@ -115,21 +145,34 @@ const CalendarGrid = ({ daysToRender, selectedMonth }: CalendarGridProps) => {
   );
 };
 
+type CalendarHeaderProps = {
+  daysToRender: Dayjs[];
+};
+const CalendarHeader = ({ daysToRender }: CalendarHeaderProps) => {
+  return (
+    <div className="mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500">
+      {daysToRender.slice(0, 7).map((day) => (
+        <div key={day.format('DD')}>{day.format('dd').toUpperCase()}</div>
+      ))}
+    </div>
+  );
+};
+
 type HandleMonthChange = (event: React.MouseEvent<HTMLButtonElement>) => void;
 
-type CalendarHeaderProps = {
+type CalendarActionsProps = {
   children: React.ReactNode;
   daysToRender: Dayjs[];
   onNextMonth: HandleMonthChange;
   onPrevMonth: HandleMonthChange;
 };
 
-const CalendarHeader = ({
+const CalendarActions = ({
   children,
   daysToRender,
   onNextMonth,
   onPrevMonth,
-}: CalendarHeaderProps) => {
+}: CalendarActionsProps) => {
   return (
     <>
       <div className="flex items-center text-gray-900">
@@ -151,11 +194,6 @@ const CalendarHeader = ({
           <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
-      <div className="mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500">
-        {daysToRender.slice(0, 7).map((day) => (
-          <div key={day.format('DD')}>{day.format('dd').toUpperCase()}</div>
-        ))}
-      </div>
     </>
   );
 };
@@ -163,6 +201,7 @@ const CalendarHeader = ({
 const Calendar = {
   CalendarGrid,
   CalendarHeader,
+  CalendarActions,
 };
 
 export default Calendar;

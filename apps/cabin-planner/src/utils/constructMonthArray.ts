@@ -1,18 +1,8 @@
 import dayjs, { Dayjs } from 'dayjs';
+import ensure from './ensure';
 
 function constructDate(year: number, month: number, day: number) {
   return dayjs().set('year', year).set('month', month).set('date', day);
-}
-
-function ensure<T>(
-  argument: T | undefined | null,
-  message: string = 'This value was promised to be there.',
-): T {
-  if (argument === undefined || argument === null) {
-    throw new TypeError(message);
-  }
-
-  return argument;
 }
 
 function createDatePadding(
