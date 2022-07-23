@@ -49,6 +49,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    Booking       Booking[]
 }
 
 model VerificationToken {
@@ -60,8 +61,20 @@ model VerificationToken {
 }
 
 model Property {
-    id      String  @id @default(cuid())
+    id      String    @id @default(cuid())
     name    String
     beds    Int
     address String?
+    Booking Booking[]
+}
+
+model Booking {
+    id           String    @id @default(cuid())
+    userId       String
+    user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    bedsRequired Int
+    propertyId   String?
+    property     Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+    startDate    DateTime?
+    endDate      DateTime?
 }
