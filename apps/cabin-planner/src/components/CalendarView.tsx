@@ -59,8 +59,9 @@ export default function CalendarView() {
         Planlagte hytteturer
       </h2>
       <div className="lg:grid lg:grid-cols-12 lg:gap-x-12">
-        <div className="mt-10  lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
-          <h3 className="text-base font-semibold mb-8">Filter</h3>
+        <div className="mt-10 lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-4 xl:col-start-9">
+          <h3 className="text-base font-semibold">Filter</h3>
+          <hr className="my-5" />
           <div className="text-center">
             <Calendar.CalendarActions
               onNextMonth={handleNext}
