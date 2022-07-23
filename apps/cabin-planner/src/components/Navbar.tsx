@@ -13,7 +13,7 @@ const Navbar = ({ cta = defaultCTA, activeRoute }: NavbarProps) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow-sm lg:static lg:overflow-y-visible mb-6">
       <div className="relative flex justify-start lg:gap-8">
-        <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
+        <div className="flex">
           <div className="flex-shrink-0 flex items-center py-4">
             <a href="/">
               <span className="text-4xl">🏡</span>
@@ -23,7 +23,7 @@ const Navbar = ({ cta = defaultCTA, activeRoute }: NavbarProps) => {
         <Link href="/">
           <a
             className={clsx(
-              'text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium',
+              'text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium ml-4 md:ml-0',
               activeRoute === '/' && 'border-indigo-500 border-b-2',
             )}
           >
