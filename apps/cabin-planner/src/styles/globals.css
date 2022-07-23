@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+titleCase:first-letter {
+  text-transform: uppercase;
+}
