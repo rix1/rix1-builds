@@ -8,19 +8,11 @@ import {
 import { Fragment, useState } from 'react';
 
 import clsx from 'clsx';
-import dayjs from 'dayjs';
-import isBetween from 'dayjs/plugin/isBetween';
-import isToday from 'dayjs/plugin/isToday';
+import dayjs, { Dayjs } from 'dayjs';
 import constructMonthArray from '../utils/constructMonthArray';
 import titleCase from '../utils/titleCase';
 import Calendar from './Calendar';
-require('dayjs/locale/nb');
-
-// const weekday = require('dayjs/plugin/weekday');
-// dayjs.extend(weekday);
-dayjs.extend(isBetween);
-dayjs.extend(isToday);
-dayjs.locale('nb');
+import Link from 'next/link';
 
 const meetings = [
   {
@@ -58,12 +50,17 @@ const meetings = [
 
 export default function CalendarView() {
   const [currentDate, setCurrentDate] = useState(dayjs());
+  const [selectedDates, setselectedDates] = useState<Dayjs[]>([]);
 
   const handleNext = () => {
     setCurrentDate((prev) => prev.add(1, 'month'));
   };
   const handlePrev = () => {
     setCurrentDate((prev) => prev.subtract(1, 'month'));
+  };
+
+  const handleDateSelection = (start: Dayjs, end: Dayjs) => {
+    setselectedDates([start, end]);
   };
 
   const days = constructMonthArray(currentDate.year(), currentDate.month());
@@ -75,23 +72,38 @@ export default function CalendarView() {
       </h2>
       <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
-          <Calendar.CalendarHeader
+          <Calendar.CalendarActions
             daysToRender={days}
             onNextMonth={handleNext}
             onPrevMonth={handlePrev}
           >
             {titleCase(currentDate.format('MMMM YYYY'))}
-          </Calendar.CalendarHeader>
+          </Calendar.CalendarActions>
+          <Calendar.CalendarHeader daysToRender={days} />
           <Calendar.CalendarGrid
+            onSelected={handleDateSelection}
             selectedMonth={currentDate.month()}
             daysToRender={days}
           />
-          <button
-            type="button"
-            className="focus:outline-none mt-8 w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          <Link
+            href={
+              selectedDates.length === 2
+                ? `/book?from=${selectedDates[0]?.format(
+                    'YYYY-MM-DD',
+                  )}&to=${selectedDates[1]?.format('YYYY-MM-DD')}`
+                : '#'
+            }
           >
-            Book en hytte
-          </button>
+            <a
+              className={clsx(
+                'focus:outline-none mt-8 w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 block',
+                selectedDates.length !== 2 &&
+                  'cursor-not-allowed bg-indigo-600/30',
+              )}
+            >
+              Book en hytte
+            </a>
+          </Link>
         </div>
         <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8">
           {meetings.map((meeting) => (

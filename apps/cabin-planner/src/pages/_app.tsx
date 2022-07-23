@@ -1,10 +1,18 @@
 // src/pages/_app.tsx
 import { withTRPC } from '@trpc/next';
-import type { AppRouter } from '../server/router';
+import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+import isToday from 'dayjs/plugin/isToday';
+import { SessionProvider } from 'next-auth/react';
 import type { AppType } from 'next/dist/shared/lib/utils';
 import superjson from 'superjson';
-import { SessionProvider } from 'next-auth/react';
+import type { AppRouter } from '../server/router';
 import '../styles/globals.css';
+require('dayjs/locale/nb');
+
+dayjs.extend(isBetween);
+dayjs.extend(isToday);
+dayjs.locale('nb');
 
 const MyApp: AppType = ({
   Component,
