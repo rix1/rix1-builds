@@ -8,14 +8,14 @@ const Book: NextPage = () => {
   console.log(query);
 
   return (
-    <div className="bg-slate-100 pt-8">
+    <div className="bg-slate-100 pt-8 h-screen">
       <Head>
         <title>Book | Cabin planner</title>
         <meta name="description" content="Add a new booking" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <BookingForm startDate={query.from} endDate={query.to} />
+        <BookingForm />
       </div>
     </div>
   );

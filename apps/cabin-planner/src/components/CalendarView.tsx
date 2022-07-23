@@ -13,6 +13,7 @@ import constructMonthArray from '../utils/constructMonthArray';
 import titleCase from '../utils/titleCase';
 import Calendar from './Calendar';
 import Link from 'next/link';
+import useCalendar from '../hooks/useCalendar';
 
 const meetings = [
   {
@@ -49,21 +50,8 @@ const meetings = [
 ];
 
 export default function CalendarView() {
-  const [currentDate, setCurrentDate] = useState(dayjs());
-  const [selectedDates, setselectedDates] = useState<Dayjs[]>([]);
-
-  const handleNext = () => {
-    setCurrentDate((prev) => prev.add(1, 'month'));
-  };
-  const handlePrev = () => {
-    setCurrentDate((prev) => prev.subtract(1, 'month'));
-  };
-
-  const handleDateSelection = (start: Dayjs, end: Dayjs) => {
-    setselectedDates([start, end]);
-  };
-
-  const days = constructMonthArray(currentDate.year(), currentDate.month());
+  const [currentDate, days, eventHandlers, selectedDates] = useCalendar();
+  const { handleNext, handlePrev, handleDateSelection } = eventHandlers;
 
   return (
     <div>
@@ -73,7 +61,6 @@ export default function CalendarView() {
       <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
           <Calendar.CalendarActions
-            daysToRender={days}
             onNextMonth={handleNext}
             onPrevMonth={handlePrev}
           >
