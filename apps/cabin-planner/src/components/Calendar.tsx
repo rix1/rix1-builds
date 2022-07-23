@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 import { Dayjs } from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type CalendarCellProps = {
   day: Dayjs;
@@ -55,6 +55,21 @@ const CalendarCell = ({
       >
         {day.format('DD')}
       </time>
+      {selectedState === 'start' && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4 absolute -top-0 left-0 text-white fill-indigo-900"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      )}
     </button>
   );
 };
@@ -147,10 +162,16 @@ const CalendarGrid = ({
 
 type CalendarHeaderProps = {
   daysToRender: Dayjs[];
+  className?: string;
 };
-const CalendarHeader = ({ daysToRender }: CalendarHeaderProps) => {
+const CalendarHeader = ({ daysToRender, className }: CalendarHeaderProps) => {
   return (
-    <div className="mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500">
+    <div
+      className={clsx(
+        'grid grid-cols-7 text-xs leading-6 text-gray-500',
+        className,
+      )}
+    >
       {daysToRender.slice(0, 7).map((day) => (
         <div key={day.format('DD')}>{day.format('dd').toUpperCase()}</div>
       ))}
@@ -161,21 +182,21 @@ const CalendarHeader = ({ daysToRender }: CalendarHeaderProps) => {
 type HandleMonthChange = (event: React.MouseEvent<HTMLButtonElement>) => void;
 
 type CalendarActionsProps = {
-  children: React.ReactNode;
-  daysToRender: Dayjs[];
+  children?: React.ReactNode;
   onNextMonth: HandleMonthChange;
   onPrevMonth: HandleMonthChange;
+  className?: string;
 };
 
 const CalendarActions = ({
   children,
-  daysToRender,
   onNextMonth,
   onPrevMonth,
+  className,
 }: CalendarActionsProps) => {
   return (
     <>
-      <div className="flex items-center text-gray-900">
+      <div className={clsx('flex items-center text-gray-900', className)}>
         <button
           type="button"
           onClick={onPrevMonth}
