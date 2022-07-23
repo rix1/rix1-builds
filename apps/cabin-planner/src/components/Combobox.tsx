@@ -3,24 +3,25 @@ import { Combobox as HeadlessCombobox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 
-const people = [
-  { id: 1, name: 'Sjøbua' },
-  { id: 2, name: 'Kroksjøen' },
-  { id: 3, name: 'Lillehammer' },
-  { id: 4, name: 'U47' },
-  { id: 5, name: 'Lillehagveien 84 (nede)' },
-  { id: 6, name: 'Theresesgate' },
-];
+type Option = {
+  id: number;
+  name: string;
+};
 
-function Combobox() {
-  const [selected, setSelected] = useState(people[0]);
+type ComboboxProps = {
+  options: Option[];
+  selected: Option;
+  onChange: (option: Option) => void;
+};
+
+function Combobox({ options, selected, onChange }: ComboboxProps) {
   const [query, setQuery] = useState('');
 
   const filteredPeople =
     query === ''
-      ? people
-      : people.filter((person) =>
-          person.name
+      ? options
+      : options.filter((option) =>
+          option.name
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, '')),
@@ -28,12 +29,12 @@ function Combobox() {
 
   return (
     <div className="w-72">
-      <HeadlessCombobox value={selected} onChange={setSelected}>
+      <HeadlessCombobox value={selected} onChange={onChange}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default">
             <HeadlessCombobox.Input
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 ring-1 focus:ring-2 rounded-md ring-gray-300"
-              displayValue={(person) => person.name}
+              displayValue={(option) => option.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <HeadlessCombobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

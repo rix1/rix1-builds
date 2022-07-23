@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
 import Calendar from './Calendar';
 import Combobox from './Combobox';
 import NumberInput from './NumberInput';
 
+const places = [
+  { id: 1, name: 'Sjøbua' },
+  { id: 2, name: 'Kroksjøen' },
+  { id: 3, name: 'Lillehammer' },
+  { id: 4, name: 'U47' },
+  { id: 5, name: 'Lillehagveien 84 (nede)' },
+  { id: 6, name: 'Theresesgate' },
+];
+
 const BookingForm = () => {
   const [currentDate, days, eventHandlers, selectedDates] = useCalendar();
   const { handleNext, handlePrev, handleDateSelection } = eventHandlers;
+  const [selectedLocation, setSelectedLocation] = useState(places[0]);
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -58,7 +68,11 @@ const BookingForm = () => {
                         Velg sted
                       </label>
                       <div className="mt-1">
-                        <Combobox />
+                        <Combobox
+                          onChange={setSelectedLocation}
+                          options={places}
+                          selected={selectedLocation}
+                        />
                       </div>
 
                       <div className="mt-6">
@@ -74,13 +88,13 @@ const BookingForm = () => {
                             name="about"
                             rows={3}
                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full md:w-2/3 sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="Jeg skal til X for å (...) og jeg får besøk av..."
+                            placeholder={`Jeg skal til ${selectedLocation?.name} for å (...) og jeg får besøk av...`}
                             defaultValue={''}
                           />
                         </div>
                         <p className="mt-2 text-sm text-gray-500 w-full md:w-2/3">
-                          Kort beskrivelse av hytteturen. Gjør det lettere for
-                          andre å planlegge om de kan komme innom eller ei.
+                          Gjør det lettere for andre å planlegge om de kan komme
+                          innom eller ei.
                         </p>
                       </div>
                       <div className="mt-6">
@@ -88,11 +102,14 @@ const BookingForm = () => {
                           htmlFor="count"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Antall sengeplasser
+                          Sengeplasser
                         </label>
                         <div className="mt-1">
                           <NumberInput />
                         </div>
+                        <p className="mt-2 text-sm text-gray-500 w-full md:w-1/3">
+                          Hvor mange sengeplasser kommer du til å trenge?
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -103,7 +120,7 @@ const BookingForm = () => {
                     type="submit"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    Book hytte
+                    Book opphold
                   </button>
                 </div>
               </div>
