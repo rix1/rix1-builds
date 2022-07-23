@@ -58,41 +58,25 @@ export default function CalendarView() {
       <h2 className="text-lg font-semibold text-gray-900">
         Planlagte hytteturer
       </h2>
-      <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
-        <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
-          <Calendar.CalendarActions
-            onNextMonth={handleNext}
-            onPrevMonth={handlePrev}
-          >
-            {titleCase(currentDate.format('MMMM YYYY'))}
-          </Calendar.CalendarActions>
-          <Calendar.CalendarHeader daysToRender={days} />
+      <div className="lg:grid lg:grid-cols-12 lg:gap-x-12">
+        <div className="mt-10  lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
+          <h3 className="text-base font-semibold mb-8">Filter</h3>
+          <div className="text-center">
+            <Calendar.CalendarActions
+              onNextMonth={handleNext}
+              onPrevMonth={handlePrev}
+            >
+              {titleCase(currentDate.format('MMMM YYYY'))}
+            </Calendar.CalendarActions>
+            <Calendar.CalendarHeader daysToRender={days} />
+          </div>
           <Calendar.CalendarGrid
             onSelected={handleDateSelection}
             selectedMonth={currentDate.month()}
             daysToRender={days}
           />
-          <Link
-            href={
-              selectedDates.length === 2
-                ? `/book?from=${selectedDates[0]?.format(
-                    'YYYY-MM-DD',
-                  )}&to=${selectedDates[1]?.format('YYYY-MM-DD')}`
-                : '#'
-            }
-          >
-            <a
-              className={clsx(
-                'focus:outline-none mt-8 w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 block',
-                selectedDates.length !== 2 &&
-                  'cursor-not-allowed bg-indigo-600/30',
-              )}
-            >
-              Book en hytte
-            </a>
-          </Link>
         </div>
-        <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8">
+        <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8 bg-white rounded-md shadow px-4 py-4 sm:px-6 sm:py-0 ">
           {meetings.map((meeting) => (
             <li
               key={meeting.id}

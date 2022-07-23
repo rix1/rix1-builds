@@ -34,7 +34,7 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
           <div className="relative w-full cursor-default">
             <HeadlessCombobox.Input
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 ring-1 focus:ring-2 rounded-md ring-gray-300"
-              displayValue={(option) => option.name}
+              displayValue={(option: Option) => option.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <HeadlessCombobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

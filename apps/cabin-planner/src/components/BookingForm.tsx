@@ -3,6 +3,7 @@ import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
 import Calendar from './Calendar';
 import Combobox from './Combobox';
+import Navbar from './Navbar';
 import NumberInput from './NumberInput';
 
 const places = [
