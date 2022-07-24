@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite" // NOTE: sqlite does not work with NextAuth.js
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
@@ -69,12 +69,16 @@ model Property {
 }
 
 model Booking {
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime? @updatedAt
     id           String    @id @default(cuid())
     userId       String
     user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     bedsRequired Int
-    propertyId   String?
-    property     Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
-    startDate    DateTime?
+    description  String
+    propertyId   String
+    property     Property  @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+    startDate    DateTime
     endDate      DateTime?
+    arrivalTime  DateTime
 }
