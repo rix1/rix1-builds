@@ -2,6 +2,7 @@ import { Property, User } from '@prisma/client';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import useCalendar from '../hooks/useCalendar';
+import { validateBooking_client } from '../server/forms/booking';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
 import wait from '../utils/wait';
@@ -15,21 +16,39 @@ const BookingForm = () => {
   const { status: propertyStatus, data: properties } = trpc.useQuery([
     'property.getAll',
   ]);
+
+  const mutation = trpc.useMutation('booking.create');
   const { status: userStatus, data: users } = trpc.useQuery(['user.getAll']);
 
   const [currentDate, days, eventHandlers, selectedDates] = useCalendar();
   const { handleNext, handlePrev, handleDateSelection } = eventHandlers;
 
-  const [selectedLocation, setSelectedLocation] = useState<
+  const [selectedUser, setSelectedUser] = useState<User | undefined>(undefined);
+  const [selectedProperty, setSelectedProperty] = useState<
     Property | undefined
   >(undefined);
 
-  const [selectedUser, setSelectedUser] = useState<User | undefined>(undefined);
-
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    // @ts-ignore
+    const about: string = event.currentTarget.about.value;
+    // @ts-ignore
+    const bedCount: string = event.currentTarget.bedCount.value;
+    // @ts-ignore
+    const arrivalTime: string = event.currentTarget.arrivalTime.value;
 
-    toast.promise(wait(2000), {
+    const data = {
+      selectedDates: selectedDates.map((date) => date.toISOString()),
+      selectedUser,
+      selectedProperty,
+      about,
+      bedCount,
+      arrivalTime,
+    };
+
+    const cleaned = validateBooking_client(data);
+
+    toast.promise(mutation.mutateAsync(cleaned), {
       loading: 'Booker opphold...',
       success: 'Oppholdet er booket!',
       error: 'En feil har oppstått',
@@ -37,10 +56,10 @@ const BookingForm = () => {
   };
 
   useEffect(() => {
-    if (Array.isArray(properties) && !selectedLocation) {
-      setSelectedLocation(properties[0]);
+    if (Array.isArray(properties) && !selectedProperty) {
+      setSelectedProperty(properties[0]);
     }
-  }, [properties, selectedLocation]);
+  }, [properties, selectedProperty]);
 
   return (
     <>
@@ -86,7 +105,7 @@ const BookingForm = () => {
                         >
                           Hvem er du?
                         </label>
-                        <div className="mt-1 relative">
+                        <div className="mt-1 relative z-10">
                           <Combobox
                             id="selectUser"
                             onChange={setSelectedUser}
@@ -109,9 +128,9 @@ const BookingForm = () => {
                         <div className="mt-1 relative">
                           <Combobox
                             id="selectProperty"
-                            onChange={setSelectedLocation}
+                            onChange={setSelectedProperty}
                             options={properties}
-                            selected={selectedLocation}
+                            selected={selectedProperty}
                           />
                           {['idle', 'loading'].includes(propertyStatus) && (
                             <Spinner className="absolute text-indigo-700 top-2 ml-2" />
@@ -119,7 +138,7 @@ const BookingForm = () => {
                         </div>
                         <HelpText>
                           Sengeplasser tilgjengelig:{' '}
-                          {selectedLocation?.beds || '0'}
+                          {selectedProperty?.beds || '0'}
                         </HelpText>
                       </div>
 
@@ -136,7 +155,7 @@ const BookingForm = () => {
                             name="about"
                             rows={3}
                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full md:w-2/3 sm:text-sm border border-gray-300 rounded-md"
-                            placeholder={`Jeg skal til ${selectedLocation?.name} for å (...) og jeg får besøk av...`}
+                            placeholder={`Jeg skal til ${selectedProperty?.name} for å (...) og jeg får besøk av...`}
                             defaultValue={''}
                             required
                           />
@@ -156,7 +175,7 @@ const BookingForm = () => {
                         <div className="mt-1">
                           <NumberInput
                             id="bedCount"
-                            max={selectedLocation?.beds}
+                            max={selectedProperty?.beds}
                             helpText={
                               <HelpText className="md:w-1/3">
                                 Hvor mange senger trenger du/dere?
