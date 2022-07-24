@@ -5,15 +5,12 @@ import {
   DotsHorizontalIcon,
   LocationMarkerIcon,
 } from '@heroicons/react/solid';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 
 import clsx from 'clsx';
-import dayjs, { Dayjs } from 'dayjs';
-import constructMonthArray from '../utils/constructMonthArray';
+import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
 import Calendar from './Calendar';
-import Link from 'next/link';
-import useCalendar from '../hooks/useCalendar';
 
 const meetings = [
   {
