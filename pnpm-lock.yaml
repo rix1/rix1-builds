@@ -36,6 +36,7 @@ importers:
       prisma: ^4.1.0
       react: 18.2.0
       react-dom: 18.2.0
+      react-hot-toast: ^2.3.0
       react-query: ^3.39.2
       superjson: ^1.9.1
       tailwindcss: ^3.1.6
@@ -57,6 +58,7 @@ importers:
       next-auth: 4.10.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-hot-toast: 2.3.0_biqbaboplfbrettd7655fr4n2y
       react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
       superjson: 1.9.1
       zod: 3.17.9
@@ -3555,6 +3557,12 @@ packages:
       merge2: 1.4.1
       slash: 3.0.0
 
+  /goober/2.1.10:
+    resolution: {integrity: sha512-7PpuQMH10jaTWm33sQgBQvz45pHR8N4l3Cu3WMGEWmHShAcTuuP7I+5/DwKo39fwti5A80WAjvqgz6SSlgWmGA==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dev: false
+
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
 
@@ -5264,6 +5272,20 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       zustand: 3.7.2_react@17.0.2
+    dev: false
+
+  /react-hot-toast/2.3.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-/RxV+bfjld7tSJR1SCLzMAXgFuNW7fCpK6+vbYqfmbGSWcqTMz2rizrvfWKvtcPH5HK0NqxmBaC5SrAy1F42zA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.10
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /react-hotkeys-hook/3.4.6_sfoxds7t5ydpegc3knd667wn6m:

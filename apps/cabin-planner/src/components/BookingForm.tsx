@@ -1,8 +1,10 @@
 import { Property, User } from '@prisma/client';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
+import wait from '../utils/wait';
 import Calendar from './Calendar';
 import Combobox from './Combobox';
 import HelpText from './HelpText';
@@ -24,10 +26,15 @@ const BookingForm = () => {
 
   const [selectedUser, setSelectedUser] = useState<User | undefined>(undefined);
 
-  function handleSubmit(event: React.FormEvent) {
+  const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log('form submitted', event.currentTarget);
-  }
+
+    toast.promise(wait(2000), {
+      loading: 'Booker opphold...',
+      success: 'Oppholdet er booket!',
+      error: 'En feil har oppstått',
+    });
+  };
 
   useEffect(() => {
     if (Array.isArray(properties) && !selectedLocation) {
@@ -50,7 +57,7 @@ const BookingForm = () => {
           </div>
 
           <div className="mt-5 md:mt-0 md:col-span-3">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
               <div className="shadow sm:rounded-md sm:overflow-hidden">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <div className="grid grid-cols-3 gap-8">
@@ -131,6 +138,7 @@ const BookingForm = () => {
                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full md:w-2/3 sm:text-sm border border-gray-300 rounded-md"
                             placeholder={`Jeg skal til ${selectedLocation?.name} for å (...) og jeg får besøk av...`}
                             defaultValue={''}
+                            required
                           />
                         </div>
                         <HelpText className="md:w-2/3">
@@ -140,13 +148,14 @@ const BookingForm = () => {
                       </div>
                       <div>
                         <label
-                          htmlFor="count"
+                          htmlFor="bedCount"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Sengeplasser
                         </label>
                         <div className="mt-1">
                           <NumberInput
+                            id="bedCount"
                             max={selectedLocation?.beds}
                             helpText={
                               <HelpText className="md:w-1/3">
@@ -167,6 +176,7 @@ const BookingForm = () => {
                           <input
                             id="arrivalTime"
                             name="arrivalTime"
+                            required
                             type="time"
                             min="08:00"
                             max="23:59"

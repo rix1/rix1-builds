@@ -5,9 +5,10 @@ import HelpText from './HelpText';
 type NumberInputProps = {
   max?: number;
   helpText?: React.ReactNode;
+  id: string;
 };
 
-const NumberInput = ({ max = 25, helpText }: NumberInputProps) => {
+const NumberInput = ({ max = 25, helpText, id }: NumberInputProps) => {
   const [count, setCount] = useState(0);
   const [warning, setWarning] = useState('');
 
@@ -35,9 +36,9 @@ const NumberInput = ({ max = 25, helpText }: NumberInputProps) => {
   return (
     <div className="w-full">
       <input
+        id={id}
+        name={id}
         onChange={handleChange}
-        id="count"
-        name="count"
         type="number"
         max={max}
         className="align-text-bottom shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 w-1/3 sm:text-sm border border-gray-300 rounded-md inline-flex mr-3"
