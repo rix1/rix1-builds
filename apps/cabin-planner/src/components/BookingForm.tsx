@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
+import { Property } from '@prisma/client';
+import clsx from 'clsx';
+import React, { useEffect, useState } from 'react';
 import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
+import { trpc } from '../utils/trpc';
 import Calendar from './Calendar';
 import Combobox from './Combobox';
-import Navbar from './Navbar';
+import HelpText from './HelpText';
 import NumberInput from './NumberInput';
 
-const places = [
-  { id: 1, name: 'Sjøbua' },
-  { id: 2, name: 'Kroksjøen' },
-  { id: 3, name: 'Lillehammer' },
-  { id: 4, name: 'U47' },
-  { id: 5, name: 'Lillehagveien 84 (nede)' },
-  { id: 6, name: 'Theresesgate' },
-];
-
 const BookingForm = () => {
+  const { status, data: properties } = trpc.useQuery(['property.getAll']);
   const [currentDate, days, eventHandlers, selectedDates] = useCalendar();
   const { handleNext, handlePrev, handleDateSelection } = eventHandlers;
-  const [selectedLocation, setSelectedLocation] = useState(places[0]);
+  const [selectedLocation, setSelectedLocation] = useState<
+    Property | undefined
+  >(undefined);
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     console.log('form submitted', event.currentTarget);
   }
+
+  useEffect(() => {
+    if (Array.isArray(properties) && !selectedLocation) {
+      setSelectedLocation(properties[0]);
+    }
+  }, [properties, selectedLocation]);
 
   return (
     <>
@@ -68,13 +71,39 @@ const BookingForm = () => {
                       >
                         Velg sted
                       </label>
-                      <div className="mt-1">
+                      <div className="mt-1 relative">
                         <Combobox
                           onChange={setSelectedLocation}
-                          options={places}
+                          options={properties}
                           selected={selectedLocation}
                         />
+                        {['idle', 'loading'].includes(status) && (
+                          <svg
+                            className="animate-spin absolute h-5 w-5 text-indigo-700 top-2 ml-2"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                        )}
                       </div>
+                      <HelpText>
+                        Sengeplasser tilgjengelig:{' '}
+                        {selectedLocation?.beds || '0'}
+                      </HelpText>
 
                       <div className="mt-6">
                         <label
@@ -93,10 +122,10 @@ const BookingForm = () => {
                             defaultValue={''}
                           />
                         </div>
-                        <p className="mt-2 text-sm text-gray-500 w-full md:w-2/3">
+                        <HelpText className="md:w-2/3">
                           Gjør det lettere for andre å planlegge om de kan komme
                           innom eller ei.
-                        </p>
+                        </HelpText>
                       </div>
                       <div className="mt-6">
                         <label
@@ -106,11 +135,15 @@ const BookingForm = () => {
                           Sengeplasser
                         </label>
                         <div className="mt-1">
-                          <NumberInput />
+                          <NumberInput
+                            max={selectedLocation?.beds}
+                            helpText={
+                              <HelpText className="md:w-1/3">
+                                Hvor mange senger trenger du?
+                              </HelpText>
+                            }
+                          />
                         </div>
-                        <p className="mt-2 text-sm text-gray-500 w-full md:w-1/3">
-                          Hvor mange sengeplasser kommer du til å trenge?
-                        </p>
                       </div>
                     </div>
                   </div>
