@@ -1,31 +1,35 @@
-import { Fragment, useState } from 'react';
 import { Combobox as HeadlessCombobox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
+import { Fragment, useState } from 'react';
 
-type Option = {
-  id: number;
-  name: string;
-};
+interface ComboboxProps<T> {
+  options: T[] | undefined;
+  selected: T | undefined;
+  onChange: (option: T) => void;
+  id: string;
+}
 
-type ComboboxProps = {
-  options: Option[] | undefined;
-  selected: Option;
-  onChange: (option: Option) => void;
-};
-
-function Combobox({ options, selected, onChange }: ComboboxProps) {
+function Combobox<
+  T extends {
+    id: string;
+    name: string | null;
+  },
+>({ id, options, selected, onChange }: ComboboxProps<T>) {
   const [query, setQuery] = useState('');
 
-  const filteredPeople =
-    query === ''
+  const filteredItems =
+    query === '' || !options
       ? options
-      : options?.filter((option) =>
-          option.name
+      : options.filter((item) => {
+          if (!item.name) {
+            return false;
+          }
+          return item.name
             .toLowerCase()
             .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, '')),
-        );
+            .includes(query.toLowerCase().replace(/\s+/g, ''));
+        });
 
   return (
     <div className="w-72">
@@ -33,10 +37,11 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
         <div className="relative mt-1">
           <div className="relative w-full cursor-default">
             <HeadlessCombobox.Input
+              id={id}
               className={clsx(
                 'w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 ring-1 focus:ring-2 rounded-md ring-gray-300',
               )}
-              displayValue={(option: Option) => option?.name}
+              displayValue={(option: typeof Option) => option?.name}
               onChange={(event) => setQuery(event.target.value)}
             />
 
@@ -55,14 +60,14 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
             afterLeave={() => setQuery('')}
           >
             <HeadlessCombobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {filteredPeople?.length === 0 && query !== '' ? (
+              {filteredItems?.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                   Nothing found.
                 </div>
               ) : (
-                filteredPeople?.map((person) => (
+                filteredItems?.map((item) => (
                   <HeadlessCombobox.Option
-                    key={person.id}
+                    key={item.id}
                     className={({ active }) =>
                       clsx(
                         'relative cursor-default select-none py-2 pl-10 pr-4',
@@ -71,7 +76,7 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
                           : 'text-gray-900',
                       )
                     }
-                    value={person}
+                    value={item}
                   >
                     {({ selected, active }) => (
                       <>
@@ -80,7 +85,7 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {person.name}
+                          {item.name}
                         </span>
                         {selected ? (
                           <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
