@@ -9,7 +9,7 @@ type Option = {
 };
 
 type ComboboxProps = {
-  options: Option[];
+  options: Option[] | undefined;
   selected: Option;
   onChange: (option: Option) => void;
 };
@@ -20,7 +20,7 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
   const filteredPeople =
     query === ''
       ? options
-      : options.filter((option) =>
+      : options?.filter((option) =>
           option.name
             .toLowerCase()
             .replace(/\s+/g, '')
@@ -33,10 +33,13 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
         <div className="relative mt-1">
           <div className="relative w-full cursor-default">
             <HeadlessCombobox.Input
-              className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 ring-1 focus:ring-2 rounded-md ring-gray-300"
-              displayValue={(option: Option) => option.name}
+              className={clsx(
+                'w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 ring-1 focus:ring-2 rounded-md ring-gray-300',
+              )}
+              displayValue={(option: Option) => option?.name}
               onChange={(event) => setQuery(event.target.value)}
             />
+
             <HeadlessCombobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <SelectorIcon
                 className="h-5 w-5 text-gray-400"
@@ -52,12 +55,12 @@ function Combobox({ options, selected, onChange }: ComboboxProps) {
             afterLeave={() => setQuery('')}
           >
             <HeadlessCombobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {filteredPeople.length === 0 && query !== '' ? (
+              {filteredPeople?.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                   Nothing found.
                 </div>
               ) : (
-                filteredPeople.map((person) => (
+                filteredPeople?.map((person) => (
                   <HeadlessCombobox.Option
                     key={person.id}
                     className={({ active }) =>

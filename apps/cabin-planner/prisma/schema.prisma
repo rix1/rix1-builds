@@ -74,7 +74,7 @@ model Booking {
     user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     bedsRequired Int
     propertyId   String?
-    property     Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+    property     Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
     startDate    DateTime?
     endDate      DateTime?
 }
