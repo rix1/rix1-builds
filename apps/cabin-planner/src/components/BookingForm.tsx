@@ -1,5 +1,4 @@
 import { Property } from '@prisma/client';
-import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
@@ -139,11 +138,34 @@ const BookingForm = () => {
                             max={selectedLocation?.beds}
                             helpText={
                               <HelpText className="md:w-1/3">
-                                Hvor mange senger trenger du?
+                                Hvor mange senger trenger du/dere?
                               </HelpText>
                             }
                           />
                         </div>
+                      </div>
+                      <div className="mt-6">
+                        <label
+                          htmlFor="arrivalTime"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Ankomsttidspunkt
+                        </label>
+                        <div className="mt-1">
+                          <input
+                            id="arrivalTime"
+                            name="arrivalTime"
+                            type="time"
+                            min="08:00"
+                            max="23:59"
+                            step={60 * 60}
+                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full md:w-1/3 sm:text-sm border border-gray-300 rounded-md"
+                            defaultValue="17:00"
+                          />
+                        </div>
+                        <HelpText className="md:w-1/3">
+                          Aka. Kommer du til middag?
+                        </HelpText>
                       </div>
                     </div>
                   </div>
