@@ -5,6 +5,7 @@ import isBetween from 'dayjs/plugin/isBetween';
 import isToday from 'dayjs/plugin/isToday';
 import { SessionProvider } from 'next-auth/react';
 import type { AppType } from 'next/dist/shared/lib/utils';
+import { Toaster } from 'react-hot-toast';
 import superjson from 'superjson';
 import type { AppRouter } from '../server/router';
 import '../styles/globals.css';
@@ -20,6 +21,9 @@ const MyApp: AppType = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <div>
+        <Toaster position="bottom-right" />
+      </div>
       <Component {...pageProps} />
     </SessionProvider>
   );
