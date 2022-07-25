@@ -20,6 +20,24 @@ export const bookingRouter = createRouter()
   })
   .query('getAll', {
     async resolve({ ctx }) {
-      return await ctx.prisma.booking.findMany();
+      return await ctx.prisma.booking.findMany({
+        include: {
+          user: {
+            select: {
+              name: true,
+              id: true,
+              image: true,
+            },
+          },
+          property: {
+            select: {
+              name: true,
+              beds: true,
+              address: true,
+              preposisjon: true,
+            },
+          },
+        },
+      });
     },
   });

@@ -3,6 +3,7 @@ import { withTRPC } from '@trpc/next';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import isToday from 'dayjs/plugin/isToday';
+import duration from 'dayjs/plugin/duration';
 import { SessionProvider } from 'next-auth/react';
 import type { AppType } from 'next/dist/shared/lib/utils';
 import { Toaster } from 'react-hot-toast';
@@ -11,6 +12,7 @@ import type { AppRouter } from '../server/router';
 import '../styles/globals.css';
 require('dayjs/locale/nb');
 
+dayjs.extend(duration);
 dayjs.extend(isBetween);
 dayjs.extend(isToday);
 dayjs.locale('nb');
