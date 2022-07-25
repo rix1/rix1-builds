@@ -61,11 +61,12 @@ model VerificationToken {
 }
 
 model Property {
-    id      String    @id @default(cuid())
-    name    String
-    beds    Int
-    address String?
-    Booking Booking[]
+    id          String    @id @default(cuid())
+    name        String
+    beds        Int
+    address     String?
+    Booking     Booking[]
+    preposisjon String    @default("i")
 }
 
 model Booking {
