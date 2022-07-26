@@ -37,7 +37,11 @@ The "T3 Stack" is a web development stack made by Theo focused on simplicity, mo
 
 Nothing. Everything should be self contained in the rix1-builds repo.
 
-### Setting up Dev
+### Setting up your dev environment
+
+> **Estimated time required: 5 minutes**
+
+#### 1. Set up the codebase
 
 Here's a brief intro about what a developer must do in order to start developing
 the project further:
@@ -46,13 +50,66 @@ the project further:
 git clone https://github.com/rix1/rix1-builds.git
 cd rix1-builds/apps/cabin-planner/
 pnpm install
+cp dev-template.env .env
 ```
 
-<!-- And state what happens step-by-step. If there is any virtual environment, local server or database feeder needed, explain here. -->
+This will clone the repository and install the dependencies and set up a template for your environment variables.
+
+#### 1. Set up PostgreSQL
+
+Prerequisite: Make sure you have Postgres installed.
+
+On Mac:
+
+```sh
+brew install postgresql
+brew services start postgresql
+```
+
+Optionally, create a separate user for the database (good practice):
+
+```sh
+createuser -E -l -P -s cabin-planner
+```
+
+The -s flag (user is superuser) is needed for Prisma to recreate create new (shadow) databases. From their docs:
+
+> The user must be a super user or have CREATEDB privilege. ([source](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database#shadow-database-user-permissions))
+
+> **Note**
+> The password you set here, need to be updated in your `.env` file.
+
+Next, create the database:
+
+```sh
+createdb -E UTF-8 -T template0 -O cabin-planner cabin-planner
+```
+
+Now, everything should be ready to roll:
+
+```sh
+pnpm run prisma migrate dev
+```
+
+This will push the schema to your local Postgres database.
+
+Last thing to do, open Prisma studio and add some data:
+
+```sh
+pnpm run prisma studio
+```
+
+...or start the web server:
+
+```sh
+pnpm run dev
+```
 
 ### Building
 
-If your project needs some additional steps for the developer to build the
+TODO
+
+<!-- If your project needs some additional steps for the developer to build the
 project after some code changes, state them here. for example:
 
 ```shell
@@ -62,9 +119,11 @@ make install
 ```
 
 Here again you should state what actually happens when the code above gets
-executed.
+executed. -->
 
 ### Deploying / Publishing
+
+TODO
 
 <!-- give instructions on how to build and release a new version
 In case there's some step you have to take that publishes this project to a
@@ -75,8 +134,6 @@ packagemanager deploy your-project -s server.com -u username -p password
 ```
 
 And again you'd need to tell what the previous code actually does. -->
-
-TODO
 
 ## Versioning
 
@@ -113,7 +170,7 @@ Using `tRPC` to run call backend functions in `src/server/`.
 
 ## Database
 
-Currently `SQLite` with Prisma as ORM.
+We're using PostgreSQL with Prisma as ORM.
 
 ## Licensing
 
