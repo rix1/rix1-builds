@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import isToday from 'dayjs/plugin/isToday';
 import duration from 'dayjs/plugin/duration';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
 import { SessionProvider } from 'next-auth/react';
 import type { AppType } from 'next/dist/shared/lib/utils';
 import { Toaster } from 'react-hot-toast';
@@ -13,6 +14,7 @@ import '../styles/globals.css';
 require('dayjs/locale/nb');
 
 dayjs.extend(duration);
+dayjs.extend(weekOfYear);
 dayjs.extend(isBetween);
 dayjs.extend(isToday);
 dayjs.locale('nb');
