@@ -21,6 +21,11 @@ export const bookingRouter = createRouter()
   .query('getAll', {
     async resolve({ ctx }) {
       return await ctx.prisma.booking.findMany({
+        orderBy: [
+          {
+            startDate: 'asc',
+          },
+        ],
         include: {
           user: {
             select: {

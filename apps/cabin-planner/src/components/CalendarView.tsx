@@ -37,7 +37,7 @@ export default function CalendarView() {
             daysToRender={days}
           />
         </div>
-        <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8 bg-white rounded-md shadow px-4 py-4 sm:px-6 sm:py-0 ">
+        <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8 bg-white rounded-md shadow py-4 sm:py-0 ">
           {status === 'loading' && (
             <div className="flex items-center justify-center h-full">
               <Spinner />
