@@ -1,10 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
 
+import { PlusIcon } from '@heroicons/react/solid';
 import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
 import BookingSummary from './BookingSummary';
 import Calendar from './Calendar';
+import EmptyState from './EmptyState';
 import Spinner from './Spinner';
 
 export default function CalendarView() {
@@ -46,6 +48,30 @@ export default function CalendarView() {
           {data?.map((booking) => (
             <BookingSummary key={booking.id} booking={booking} />
           ))}
+          {status === 'success' && !data.length && (
+            <div className="flex items-center justify-center -mt-6 h-full">
+              <EmptyState>
+                <h3 className="mt-2 text-sm font-medium text-gray-900">
+                  Ingen opphold booket
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Kom i gang ved å booke et nytt opphold
+                </p>
+                <div className="mt-6">
+                  <button
+                    type="button"
+                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    <PlusIcon
+                      className="-ml-1 mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                    Ny booking
+                  </button>
+                </div>
+              </EmptyState>
+            </div>
+          )}
         </ol>
       </div>
     </div>
