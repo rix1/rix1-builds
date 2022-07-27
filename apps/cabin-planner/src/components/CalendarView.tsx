@@ -10,7 +10,7 @@ import Spinner from './Spinner';
 export default function CalendarView() {
   const { status, data } = trpc.useQuery(['booking.getAll']);
 
-  const [currentDate, days, eventHandlers, selectedDates] = useCalendar();
+  const [currentDate, days, eventHandlers] = useCalendar();
   const { handleNext, handlePrev, handleDateSelection } = eventHandlers;
 
   return (

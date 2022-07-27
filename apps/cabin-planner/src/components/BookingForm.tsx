@@ -5,7 +5,6 @@ import useCalendar from '../hooks/useCalendar';
 import { validateBooking_client } from '../server/forms/booking';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
-import wait from '../utils/wait';
 import Calendar from './Calendar';
 import Combobox from './Combobox';
 import HelpText from './HelpText';
