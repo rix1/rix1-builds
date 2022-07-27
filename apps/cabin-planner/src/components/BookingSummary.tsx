@@ -71,15 +71,15 @@ const BookingSummary = ({ booking }: BookingSummaryProps) => {
                 />
               </dt>
               <dd>
-                Fra
+                Fra{' '}
                 <time dateTime={startDate.format('YYYY-MM-DD')}>
                   {startDate.format('dddd D.')}
-                </time>
-                til
+                </time>{' '}
+                til{' '}
                 <time dateTime={endDate.format('YYYY-MM-DD')}>
                   {endDate.format('dddd D. MMMM')}
                 </time>
-                <small className="leading-none text-gray-400 ml-1 block xl:ml-0">
+                <small className="leading-none text-gray-400 block">
                   Uke {startDate.week()}
                 </small>
               </dd>
@@ -94,10 +94,8 @@ const BookingSummary = ({ booking }: BookingSummaryProps) => {
               </dt>
               <dd className="text-ellipsis truncate">
                 {booking.property.name}
-                <small className="leading-none text-gray-400 ml-1 block xl:ml-0">
-                  <span className="xl:hidden">&middot;</span>
+                <small className="leading-none text-gray-400 block">
                   <a
-                    className="ml-1 xl:ml-0"
                     href={`http://maps.google.com/?q=${booking.property.address}`}
                   >
                     {booking.property.address}
