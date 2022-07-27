@@ -90,7 +90,7 @@ function getSelectedState(day: Dayjs, start: Dayjs | null, end: Dayjs | null) {
 type CalendarGridProps = {
   daysToRender: Dayjs[];
   selectedMonth: number;
-  onSelected?: (start: Dayjs, end: Dayjs) => void;
+  onSelected?: (start: Dayjs | null, end: Dayjs | null) => void;
   preSelectedStart?: Dayjs | null;
   preSelectedEnd?: Dayjs | null;
   editable?: boolean;
@@ -120,11 +120,17 @@ const CalendarGrid = ({
       // clear all
       setSelectionStart(null);
       setSelectionEnd(null);
+      if (onSelected) {
+        onSelected(null, null);
+      }
       return;
     }
     if (selectedDate.isBefore(selectionStart, 'date')) {
       setSelectionStart(selectedDate);
       setSelectionEnd(null);
+      if (onSelected) {
+        onSelected(selectedDate, null);
+      }
       return;
     }
     setSelectionEnd(selectedDate);

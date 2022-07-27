@@ -2,19 +2,33 @@ import dayjs from 'dayjs';
 import { z } from 'zod';
 
 export const bookingSchema_client = z.object({
-  selectedDates: z.array(z.string()).min(2).max(2),
-  selectedUser: z.object({
-    id: z.string(),
-    name: z.string().nullish(),
-    email: z.string(),
-  }),
+  selectedDates: z
+    .array(z.string())
+    .min(2, {
+      message:
+        'Velg fra/til datoer for oppholdet. Klikk på kalenderen for å velge.',
+    })
+    .max(2),
+  selectedUser: z.object(
+    {
+      id: z.string(),
+      name: z.string().nullish(),
+      email: z.string(),
+    },
+    {
+      required_error: 'Vennligst fortell oss hvem som booker oppholdet.',
+    },
+  ),
   selectedProperty: z.object({
     id: z.string(),
     name: z.string(),
     beds: z.number(),
   }),
   about: z.string(),
-  bedCount: z.string(),
+  bedCount: z.number().min(1, {
+    message:
+      'Prøver du å booke et opphold uten sengeplass? Dette er for øyeblikket ikke støttet.',
+  }),
   arrivalTime: z.string(),
 });
 

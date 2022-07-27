@@ -13,8 +13,15 @@ function useCalendar() {
     setCurrentDate((prev) => prev.subtract(1, 'month'));
   };
 
-  const handleDateSelection = (start: Dayjs, end: Dayjs) => {
-    setselectedDates([start, end]);
+  const handleDateSelection = (start: Dayjs | null, end: Dayjs | null) => {
+    const newDates = [];
+    if (start) {
+      newDates.push(start);
+    }
+    if (end) {
+      newDates.push(end);
+    }
+    setselectedDates(newDates);
   };
 
   const days = constructMonthArray(currentDate.year(), currentDate.month());

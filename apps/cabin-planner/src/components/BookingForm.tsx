@@ -1,6 +1,8 @@
 import { Property, User } from '@prisma/client';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { ZodError } from 'zod';
 import useCalendar from '../hooks/useCalendar';
 import { validateBooking_client } from '../server/forms/booking';
 import titleCase from '../utils/titleCase';
@@ -12,6 +14,7 @@ import NumberInput from './NumberInput';
 import Spinner from './Spinner';
 
 const BookingForm = () => {
+  const router = useRouter();
   const { status: propertyStatus, data: properties } = trpc.useQuery([
     'property.getAll',
   ]);
@@ -41,17 +44,29 @@ const BookingForm = () => {
       selectedUser,
       selectedProperty,
       about,
-      bedCount,
+      bedCount: Number(bedCount),
       arrivalTime,
     };
+    try {
+      const cleaned = validateBooking_client(data);
 
-    const cleaned = validateBooking_client(data);
-
-    toast.promise(mutation.mutateAsync(cleaned), {
-      loading: 'Booker opphold...',
-      success: 'Oppholdet er booket!',
-      error: 'En feil har oppstått',
-    });
+      toast
+        .promise(mutation.mutateAsync(cleaned), {
+          loading: 'Booker opphold...',
+          success: 'Oppholdet er booket! Sender deg tilbake til oversikten...',
+          error: 'En feil har oppstått',
+        })
+        .then(() => {
+          setTimeout(() => router.push('/'), 1500);
+        });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const errors = JSON.parse(error.message);
+        errors.forEach((err: ZodError) => {
+          toast.error(err.message);
+        });
+      }
+    }
   };
 
   useEffect(() => {
