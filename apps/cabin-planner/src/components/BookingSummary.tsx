@@ -33,7 +33,7 @@ const BookingSummary = ({ booking }: BookingSummaryProps) => {
     >
       <div className="text-center">
         <img
-          src={booking.user.image}
+          src={booking.user.image || undefined}
           alt=""
           className="h-14 w-14 flex-none rounded-full"
         />
