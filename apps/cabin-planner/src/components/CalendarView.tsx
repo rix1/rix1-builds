@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 
 import { PlusIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 import useCalendar from '../hooks/useCalendar';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
@@ -58,16 +59,15 @@ export default function CalendarView() {
                   Kom i gang ved å booke et nytt opphold
                 </p>
                 <div className="mt-6">
-                  <button
-                    type="button"
-                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    <PlusIcon
-                      className="-ml-1 mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                    Ny booking
-                  </button>
+                  <Link href="/book">
+                    <a className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      <PlusIcon
+                        className="-ml-1 mr-2 h-5 w-5"
+                        aria-hidden="true"
+                      />
+                      Ny booking
+                    </a>
+                  </Link>
                 </div>
               </EmptyState>
             </div>
