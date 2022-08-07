@@ -55,10 +55,14 @@ const CalendarCell = ({
       >
         {day.format('DD')}
       </time>
-      {selectedState === 'start' && (
+      {['start', 'end'].includes(selectedState || '') && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 absolute -top-0 left-0 text-white fill-indigo-900"
+          className={clsx(
+            'h-4 w-4 absolute -top-0 text-white fill-indigo-900',
+            selectedState === 'start' && 'left-0',
+            selectedState === 'end' && 'right-0',
+          )}
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={2}
@@ -116,8 +120,12 @@ const CalendarGrid = ({
       setSelectionStart(selectedDate);
       return;
     }
-    if (selectedDate.isSame(selectionStart, 'date')) {
-      // clear all
+    if (
+      selectedDate.isSame(selectionStart, 'date') ||
+      selectedDate.isSame(selectionEnd, 'date')
+    ) {
+      // If user clicks the same date as a preselected start or end date we want
+      // to clear all
       setSelectionStart(null);
       setSelectionEnd(null);
       if (onSelected) {
@@ -127,12 +135,12 @@ const CalendarGrid = ({
     }
     if (selectedDate.isBefore(selectionStart, 'date')) {
       setSelectionStart(selectedDate);
-      setSelectionEnd(null);
       if (onSelected) {
-        onSelected(selectedDate, null);
+        onSelected(selectedDate, selectionEnd);
       }
       return;
     }
+
     setSelectionEnd(selectedDate);
     if (onSelected) {
       onSelected(selectionStart, selectedDate);
