@@ -2,37 +2,61 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
 import constructMonthArray from '../utils/constructMonthArray';
 
-function useCalendar() {
+function useCalendar(preSelectedStart = null, preSelectedEnd = null) {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [selectedDates, setselectedDates] = useState<Dayjs[]>([]);
+  const [selectionStart, setSelectionStart] = useState<Dayjs | null>(
+    preSelectedStart,
+  );
 
-  const handleNext = () => {
+  const [selectionEnd, setSelectionEnd] = useState<Dayjs | null>(
+    preSelectedEnd,
+  );
+
+  const handleNextMonthClick = () => {
     setCurrentDate((prev) => prev.add(1, 'month'));
   };
-  const handlePrev = () => {
+  const handlePreviousMonthClick = () => {
     setCurrentDate((prev) => prev.subtract(1, 'month'));
   };
+  const handleDateClick = (selectedDate: Dayjs) => {
+    if (!selectionStart) {
+      setSelectionStart(selectedDate);
+      return;
+    }
+    if (
+      selectedDate.isSame(selectionStart, 'date') ||
+      selectedDate.isSame(selectionEnd, 'date')
+    ) {
+      // If user clicks the same date as a preselected start or end date we want
+      // to clear all
+      setSelectionStart(null);
+      setSelectionEnd(null);
+      return;
+    }
+    if (selectedDate.isBefore(selectionStart, 'date')) {
+      setSelectionStart(selectedDate);
+      return;
+    }
 
-  const handleDateSelection = (start: Dayjs | null, end: Dayjs | null) => {
-    const newDates = [];
-    if (start) {
-      newDates.push(start);
-    }
-    if (end) {
-      newDates.push(end);
-    }
-    setselectedDates(newDates);
+    setSelectionEnd(selectedDate);
   };
 
   const days = constructMonthArray(currentDate.year(), currentDate.month());
 
-  const eventHandlers = {
-    handleNext,
-    handlePrev,
-    handleDateSelection,
+  const calendarState = {
+    currentDate,
+    days,
+    selectionStart,
+    selectionEnd,
   };
 
-  return [currentDate, days, eventHandlers, selectedDates] as const;
+  const calendarEvents = {
+    handleNextMonthClick,
+    handlePreviousMonthClick,
+    handleDateClick,
+  };
+
+  return [calendarState, calendarEvents] as const;
 }
 
 export default useCalendar;
