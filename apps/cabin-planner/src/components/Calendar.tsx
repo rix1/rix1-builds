@@ -1,15 +1,13 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 import { Dayjs } from 'dayjs';
-import { useState } from 'react';
 
 type CalendarCellProps = {
   day: Dayjs;
   selectedMonth: number;
   className: string;
   selectedState: 'start' | 'between' | 'end' | null;
-  onClick: (selectedDate: Dayjs) => void;
-  editable: boolean;
+  onClick?: (selectedDate: Dayjs) => void;
 };
 
 const CalendarCell = ({
@@ -18,18 +16,17 @@ const CalendarCell = ({
   className,
   selectedState,
   onClick,
-  editable = true,
 }: CalendarCellProps) => {
   return (
     <button
       type="button"
       onClick={() => {
-        editable && onClick(day);
+        onClick && onClick(day);
       }}
       className={clsx(
         'isolate py-2 focus:z-10 relative',
-        editable && 'hover:bg-gray-100',
-        !editable && 'cursor-default',
+        onClick && 'hover:bg-gray-100',
+        !onClick && 'cursor-default',
         day.month() === selectedMonth ? 'bg-white' : 'bg-gray-50',
         (false || day.isToday) && 'font-semibold',
         day.isToday() && 'text-white',
@@ -94,72 +91,30 @@ function getSelectedState(day: Dayjs, start: Dayjs | null, end: Dayjs | null) {
 type CalendarGridProps = {
   daysToRender: Dayjs[];
   selectedMonth: number;
-  onSelected?: (start: Dayjs | null, end: Dayjs | null) => void;
-  preSelectedStart?: Dayjs | null;
-  preSelectedEnd?: Dayjs | null;
-  editable?: boolean;
+  onClick?: (clickedDate: Dayjs) => void;
+  selectionStart: Dayjs | null;
+  selectionEnd: Dayjs | null;
 };
 
 const CalendarGrid = ({
   daysToRender,
   selectedMonth,
-  onSelected,
-  preSelectedStart = null,
-  preSelectedEnd = null,
-  editable = true,
+  onClick,
+  selectionStart,
+  selectionEnd,
 }: CalendarGridProps) => {
-  const [selectionStart, setSelectionStart] = useState<Dayjs | null>(
-    preSelectedStart,
-  );
-  const [selectionEnd, setSelectionEnd] = useState<Dayjs | null>(
-    preSelectedEnd,
-  );
-
-  const handleClick = (selectedDate: Dayjs) => {
-    if (!selectionStart) {
-      setSelectionStart(selectedDate);
-      return;
-    }
-    if (
-      selectedDate.isSame(selectionStart, 'date') ||
-      selectedDate.isSame(selectionEnd, 'date')
-    ) {
-      // If user clicks the same date as a preselected start or end date we want
-      // to clear all
-      setSelectionStart(null);
-      setSelectionEnd(null);
-      if (onSelected) {
-        onSelected(null, null);
-      }
-      return;
-    }
-    if (selectedDate.isBefore(selectionStart, 'date')) {
-      setSelectionStart(selectedDate);
-      if (onSelected) {
-        onSelected(selectedDate, selectionEnd);
-      }
-      return;
-    }
-
-    setSelectionEnd(selectedDate);
-    if (onSelected) {
-      onSelected(selectionStart, selectedDate);
-    }
-  };
-
   return (
     <div
       className={clsx(
         'isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200',
-        !editable && 'opacity-50',
+        !onClick && 'opacity-50',
       )}
     >
       {daysToRender.map((day, dayIdx) => (
         <CalendarCell
-          editable={editable}
           selectedState={getSelectedState(day, selectionStart, selectionEnd)}
           day={day}
-          onClick={handleClick}
+          onClick={onClick}
           selectedMonth={selectedMonth}
           key={day.toISOString()}
           className={clsx(

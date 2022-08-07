@@ -13,8 +13,8 @@ import Spinner from './Spinner';
 export default function CalendarView() {
   const { status, data } = trpc.useQuery(['booking.getAll']);
 
-  const [currentDate, days, eventHandlers] = useCalendar();
-  const { handleNext, handlePrev, handleDateSelection } = eventHandlers;
+  const [calendarState, calendarEvents] = useCalendar();
+  const { currentDate, days } = calendarState;
 
   return (
     <div>
@@ -27,15 +27,17 @@ export default function CalendarView() {
           <hr className="my-5" />
           <div className="text-center">
             <Calendar.CalendarActions
-              onNextMonth={handleNext}
-              onPrevMonth={handlePrev}
+              onNextMonth={calendarEvents.handleNextMonthClick}
+              onPrevMonth={calendarEvents.handlePreviousMonthClick}
             >
               {titleCase(currentDate.format('MMMM YYYY'))}
             </Calendar.CalendarActions>
             <Calendar.CalendarHeader daysToRender={days} />
           </div>
           <Calendar.CalendarGrid
-            onSelected={handleDateSelection}
+            onClick={calendarEvents.handleDateClick}
+            selectionStart={calendarState.selectionStart}
+            selectionEnd={calendarState.selectionEnd}
             selectedMonth={currentDate.month()}
             daysToRender={days}
           />
