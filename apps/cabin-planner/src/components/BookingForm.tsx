@@ -1,13 +1,12 @@
 import { Property, User } from '@prisma/client';
+import { Calendar, useCalendar } from 'rix-ui';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { ZodError } from 'zod';
-import useCalendar from '../hooks/useCalendar';
 import { validateBooking_client } from '../server/forms/booking';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
-import Calendar from './Calendar';
 import Combobox from './Combobox';
 import HelpText from './HelpText';
 import NumberInput from './NumberInput';

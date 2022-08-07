@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
-import constructMonthArray from '../utils/constructMonthArray';
+import constructMonthArray from './dateFunctions';
 
 function useCalendar(preSelectedStart = null, preSelectedEnd = null) {
   const [currentDate, setCurrentDate] = useState(dayjs());

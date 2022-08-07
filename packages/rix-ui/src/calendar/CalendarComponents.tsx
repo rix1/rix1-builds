@@ -1,6 +1,11 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
+import React from 'react';
 import clsx from 'clsx';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+import isToday from 'dayjs/plugin/isToday';
+
+dayjs.extend(isToday);
+dayjs.extend(isBetween);
 
 type CalendarCellProps = {
   day: Dayjs;
@@ -28,11 +33,11 @@ const CalendarCell = ({
         onClick && 'hover:bg-gray-100',
         !onClick && 'cursor-default',
         day.month() === selectedMonth ? 'bg-white' : 'bg-gray-50',
-        (false || day.isToday) && 'font-semibold',
+        (false || day.isToday()) && 'font-semibold',
         day.isToday() && 'text-white',
         !false &&
           day.month() === selectedMonth &&
-          !day.isToday &&
+          !day.isToday() &&
           'text-gray-900',
         !false && day.month() !== selectedMonth && 'text-gray-400',
         className,
@@ -52,7 +57,7 @@ const CalendarCell = ({
       >
         {day.format('DD')}
       </time>
-      {['start', 'end'].includes(selectedState || '') && (
+      {(selectedState === 'start' || selectedState === 'end') && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={clsx(
@@ -172,7 +177,19 @@ const CalendarActions = ({
           className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
         >
           <span className="sr-only">Forrige måned</span>
-          <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+          {/* Chevron left (from Heroicons) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
         <div className="flex-auto font-semibold">{children}</div>
         <button
@@ -181,7 +198,19 @@ const CalendarActions = ({
           className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
         >
           <span className="sr-only">Neste måned</span>
-          <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+          {/* Chevron right (from Heroicons) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
       </div>
     </>
