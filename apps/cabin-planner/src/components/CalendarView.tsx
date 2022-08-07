@@ -1,12 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
 
 import { PlusIcon } from '@heroicons/react/solid';
+
 import Link from 'next/link';
-import useCalendar from '../hooks/useCalendar';
+import { Calendar, useCalendar } from 'rix-ui';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
 import BookingSummary from './BookingSummary';
-import Calendar from './Calendar';
 import EmptyState from './EmptyState';
 import Spinner from './Spinner';
 
