@@ -5,7 +5,6 @@ type SpinnerProps = {
 };
 
 const Spinner = ({ className }: SpinnerProps) => {
-  console.log('Spinner says hi');
   return (
     <svg
       className={clsx('animate-spin h-5 w-5', className)}
