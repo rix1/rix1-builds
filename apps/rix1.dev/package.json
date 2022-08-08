@@ -14,10 +14,10 @@
   "dependencies": {
     "@geist-ui/icons": "^1.0.2",
     "autoprefixer": "^10.4.4",
-    "contentlayer": "^0.1.2",
+    "contentlayer": "^0.2.7",
     "dayjs": "^1.11.0",
     "next": "12.1.6",
-    "next-contentlayer": "^0.1.2",
+    "next-contentlayer": "^0.2.7",
     "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.12",
     "react": "18.1.0",
