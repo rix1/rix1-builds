@@ -1,8 +1,6 @@
 import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
-// import { useMDXComponent } from 'next-contentlayer/hooks';
 import Head from 'next/head';
-// import { CalendarDemo } from 'rix-ui';
 import Backlink from '../../components/Backlink';
 import PagePattern from '../../components/PagePattern';
 
@@ -24,8 +22,6 @@ export async function getStaticProps({ params }) {
 }
 
 const PostLayout = ({ post }) => {
-  // const MDXContent = useMDXComponent(post.body.code);
-
   return (
     <PagePattern>
       <Head>
@@ -53,9 +49,10 @@ const PostLayout = ({ post }) => {
           </div>
           <div className="relative">
             <div className="relative md:bg-white md:p-6">
-              <div className="prose prose-lg prose-indigo text-gray-600">
-                {/* <MDXContent components={{ CalendarDemo }} /> */}
-              </div>
+              <div
+                className="prose prose-lg prose-indigo text-gray-500"
+                dangerouslySetInnerHTML={{ __html: post.body.html }}
+              />
               <div className="mt-5 inline-flex">
                 <Backlink href="/posts">Read more thoughts</Backlink>
               </div>
