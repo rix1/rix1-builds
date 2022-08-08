@@ -27,7 +27,7 @@
     "rix-ui": "workspace:*",
     "clsx": "^1.1.1",
     "dayjs": "^1.11.0",
-    "next": "12.2.1",
+    "next": "12.2.3",
     "next-auth": "^4.10.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
