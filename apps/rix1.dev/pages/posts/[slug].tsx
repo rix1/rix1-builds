@@ -1,12 +1,10 @@
 import { allPosts } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import dayjs from 'dayjs';
+// import { useMDXComponent } from 'next-contentlayer/hooks';
 import Head from 'next/head';
-import Link from 'next/link';
-import ArrowLeft from '@geist-ui/icons/arrowLeft';
+// import { CalendarDemo } from 'rix-ui';
 import Backlink from '../../components/Backlink';
 import PagePattern from '../../components/PagePattern';
-import { CalendarDemo } from 'rix-ui';
 
 export async function getStaticPaths() {
   const paths = allPosts.map((post) => post.url);
@@ -26,7 +24,7 @@ export async function getStaticProps({ params }) {
 }
 
 const PostLayout = ({ post }) => {
-  const MDXContent = useMDXComponent(post.body.code);
+  // const MDXContent = useMDXComponent(post.body.code);
 
   return (
     <PagePattern>
@@ -56,7 +54,7 @@ const PostLayout = ({ post }) => {
           <div className="relative">
             <div className="relative md:bg-white md:p-6">
               <div className="prose prose-lg prose-indigo text-gray-600">
-                <MDXContent components={{ CalendarDemo }} />
+                {/* <MDXContent components={{ CalendarDemo }} /> */}
               </div>
               <div className="mt-5 inline-flex">
                 <Backlink href="/posts">Read more thoughts</Backlink>
