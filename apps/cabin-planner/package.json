@@ -24,9 +24,10 @@
     "@trpc/next": "^9.26.2",
     "@trpc/react": "^9.26.2",
     "@trpc/server": "^9.26.2",
+    "rix-ui": "workspace:*",
     "clsx": "^1.1.1",
     "dayjs": "^1.11.0",
-    "next": "12.2.1",
+    "next": "12.2.3",
     "next-auth": "^4.10.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -43,9 +44,14 @@
     "config": "workspace:*",
     "eslint": "8.18.0",
     "eslint-config-next": "12.2.1",
+    "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.14",
     "prisma": "^4.1.0",
     "tailwindcss": "^3.1.6",
+    "ts-node": "^10.9.1",
     "typescript": "4.7.4"
+  },
+  "prisma": {
+    "seed": "ts-node  --compiler-options {\"module\":\"CommonJS\"} ./src/server/db/seed.ts"
   }
 }

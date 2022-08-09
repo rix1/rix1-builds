@@ -1,15 +1,18 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
+import React from 'react';
 import clsx from 'clsx';
-import { Dayjs } from 'dayjs';
-import { useState } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+import isToday from 'dayjs/plugin/isToday';
+
+dayjs.extend(isToday);
+dayjs.extend(isBetween);
 
 type CalendarCellProps = {
   day: Dayjs;
   selectedMonth: number;
   className: string;
   selectedState: 'start' | 'between' | 'end' | null;
-  onClick: (selectedDate: Dayjs) => void;
-  editable: boolean;
+  onClick?: (selectedDate: Dayjs) => void;
 };
 
 const CalendarCell = ({
@@ -18,24 +21,23 @@ const CalendarCell = ({
   className,
   selectedState,
   onClick,
-  editable = true,
 }: CalendarCellProps) => {
   return (
     <button
       type="button"
       onClick={() => {
-        editable && onClick(day);
+        onClick && onClick(day);
       }}
       className={clsx(
         'isolate py-2 focus:z-10 relative',
-        editable && 'hover:bg-gray-100',
-        !editable && 'cursor-default',
+        onClick && 'hover:bg-gray-100',
+        !onClick && 'cursor-default',
         day.month() === selectedMonth ? 'bg-white' : 'bg-gray-50',
-        (false || day.isToday) && 'font-semibold',
+        (false || day.isToday()) && 'font-semibold',
         day.isToday() && 'text-white',
         !false &&
           day.month() === selectedMonth &&
-          !day.isToday &&
+          !day.isToday() &&
           'text-gray-900',
         !false && day.month() !== selectedMonth && 'text-gray-400',
         className,
@@ -55,10 +57,14 @@ const CalendarCell = ({
       >
         {day.format('DD')}
       </time>
-      {selectedState === 'start' && (
+      {(selectedState === 'start' || selectedState === 'end') && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 absolute -top-0 left-0 text-white fill-indigo-900"
+          className={clsx(
+            'h-4 w-4 absolute -top-0 text-white fill-indigo-900',
+            selectedState === 'start' && 'left-0',
+            selectedState === 'end' && 'right-0',
+          )}
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={2}
@@ -90,68 +96,30 @@ function getSelectedState(day: Dayjs, start: Dayjs | null, end: Dayjs | null) {
 type CalendarGridProps = {
   daysToRender: Dayjs[];
   selectedMonth: number;
-  onSelected?: (start: Dayjs | null, end: Dayjs | null) => void;
-  preSelectedStart?: Dayjs | null;
-  preSelectedEnd?: Dayjs | null;
-  editable?: boolean;
+  onClick?: (clickedDate: Dayjs) => void;
+  selectionStart: Dayjs | null;
+  selectionEnd: Dayjs | null;
 };
 
 const CalendarGrid = ({
   daysToRender,
   selectedMonth,
-  onSelected,
-  preSelectedStart = null,
-  preSelectedEnd = null,
-  editable = true,
+  onClick,
+  selectionStart,
+  selectionEnd,
 }: CalendarGridProps) => {
-  const [selectionStart, setSelectionStart] = useState<Dayjs | null>(
-    preSelectedStart,
-  );
-  const [selectionEnd, setSelectionEnd] = useState<Dayjs | null>(
-    preSelectedEnd,
-  );
-
-  const handleClick = (selectedDate: Dayjs) => {
-    if (!selectionStart) {
-      setSelectionStart(selectedDate);
-      return;
-    }
-    if (selectedDate.isSame(selectionStart, 'date')) {
-      // clear all
-      setSelectionStart(null);
-      setSelectionEnd(null);
-      if (onSelected) {
-        onSelected(null, null);
-      }
-      return;
-    }
-    if (selectedDate.isBefore(selectionStart, 'date')) {
-      setSelectionStart(selectedDate);
-      setSelectionEnd(null);
-      if (onSelected) {
-        onSelected(selectedDate, null);
-      }
-      return;
-    }
-    setSelectionEnd(selectedDate);
-    if (onSelected) {
-      onSelected(selectionStart, selectedDate);
-    }
-  };
-
   return (
     <div
       className={clsx(
         'isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200',
-        !editable && 'opacity-50',
+        !onClick && 'opacity-50',
       )}
     >
       {daysToRender.map((day, dayIdx) => (
         <CalendarCell
-          editable={editable}
           selectedState={getSelectedState(day, selectionStart, selectionEnd)}
           day={day}
-          onClick={handleClick}
+          onClick={onClick}
           selectedMonth={selectedMonth}
           key={day.toISOString()}
           className={clsx(
@@ -209,7 +177,19 @@ const CalendarActions = ({
           className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
         >
           <span className="sr-only">Forrige måned</span>
-          <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+          {/* Chevron left (from Heroicons) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
         <div className="flex-auto font-semibold">{children}</div>
         <button
@@ -218,7 +198,19 @@ const CalendarActions = ({
           className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
         >
           <span className="sr-only">Neste måned</span>
-          <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+          {/* Chevron right (from Heroicons) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
       </div>
     </>

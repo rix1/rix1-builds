@@ -1,4 +1,7 @@
+import transpile from 'next-transpile-modules';
 import { env } from './src/server/env.mjs';
+
+const withTM = transpile(['rix-ui']);
 
 /**
  * Don't be scared of the generics here.
@@ -9,7 +12,7 @@ import { env } from './src/server/env.mjs';
  * @constraint {{import('next').NextConfig}}
  */
 function defineNextConfig(config) {
-  return config;
+  return withTM(config);
 }
 
 export default defineNextConfig({

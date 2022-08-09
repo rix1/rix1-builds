@@ -1,0 +1,23 @@
+{
+  "name": "rix-ui",
+  "version": "1.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "author": {
+    "name": "Rikard Eide",
+    "email": "rikardeide@gmail.com",
+    "url": "https://rix1.dev"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.0.16",
+    "@types/react-dom": "^18.0.6",
+    "config": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "clsx": "^1.1.1",
+    "dayjs": "^1.11.0"
+  }
+}

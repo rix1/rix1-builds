@@ -2,13 +2,12 @@ import dayjs from 'dayjs';
 import { z } from 'zod';
 
 export const bookingSchema_client = z.object({
-  selectedDates: z
-    .array(z.string())
-    .min(2, {
-      message:
-        'Velg fra/til datoer for oppholdet. Klikk på kalenderen for å velge.',
-    })
-    .max(2),
+  selectionStart: z.string().min(2, {
+    message: 'Velg til-dato for oppholdet. Klikk på kalenderen for å velge.',
+  }),
+  selectionEnd: z.string().min(2, {
+    message: 'Velg fra-dato for oppholdet. Klikk på kalenderen for å velge.',
+  }),
   selectedUser: z.object(
     {
       id: z.string(),
@@ -34,16 +33,15 @@ export const bookingSchema_client = z.object({
 
 export function validateBooking_client(data: any) {
   const validForm = bookingSchema_client.parse(data);
-  const startDate = dayjs(validForm.selectedDates[0]);
   const [hours, minutes] = validForm.arrivalTime.split(':');
   return {
-    startDate: startDate.toISOString(),
-    endDate: dayjs(validForm.selectedDates[1]).toISOString(),
+    startDate: validForm.selectionStart,
+    endDate: validForm.selectionEnd,
     userId: validForm.selectedUser.id,
     propertyId: validForm.selectedProperty.id,
     description: validForm.about,
     bedCount: Number(validForm.bedCount),
-    arrivalTime: startDate
+    arrivalTime: dayjs(validForm.selectionStart)
       .set('hour', Number(hours))
       .set('minutes', Number(minutes))
       .toISOString(),
