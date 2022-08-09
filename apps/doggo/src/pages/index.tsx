@@ -154,14 +154,13 @@ const Home: NextPage = () => {
                       )}
                       type="checkbox"
                       onChange={() => {
-                        if (
-                          doesEventExist(`${item.activity}-${item.timeslot}`)
-                        ) {
+                        const eventId = `${item.activity}-${item.timeslot}`;
+                        if (doesEventExist(eventId)) {
                           setEventIds((prev) =>
-                            prev.filter((id) => id !== item.id),
+                            prev.filter((id) => id !== eventId),
                           );
                           const events = allEvents;
-                          delete events[item.id];
+                          delete events[eventId];
                           setAllEvents(events);
                         } else {
                           const newEvent = createEvent(
