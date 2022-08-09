@@ -1,8 +1,6 @@
 import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Head from 'next/head';
-import Link from 'next/link';
-import ArrowLeft from '@geist-ui/icons/arrowLeft';
 import Backlink from '../../components/Backlink';
 import PagePattern from '../../components/PagePattern';
 
@@ -55,7 +53,6 @@ const PostLayout = ({ post }) => {
                 className="prose prose-lg prose-indigo text-gray-500"
                 dangerouslySetInnerHTML={{ __html: post.body.html }}
               />
-
               <div className="mt-5 inline-flex">
                 <Backlink href="/posts">Read more thoughts</Backlink>
               </div>

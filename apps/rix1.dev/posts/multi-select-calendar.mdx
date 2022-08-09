@@ -1,0 +1,90 @@
+---
+title: Multi-select caldenar
+topic: Build
+description: Building my multi-select calendar was surprisingly fun. Take a look at how it's made.
+date: 2022-08-08
+---
+
+I made a fully functioning multi-select/date range calendar component, and it
+looks like this. Try using it and select a few dates.
+
+<CalendarDemo />
+
+You can select multiple days and it should be somewhat accessible.
+
+---
+
+### Motivation
+
+I'm building a simple service for my (rather large) family to coordinate different
+things (dinner, cabin trips etc). I needed a calendar to select date ranges
+to make it easy to answer the following:
+
+1. When are you arriving?
+2. When are you leaving?
+
+It's sorta works like Airbnb's calendar picker, except that it doesn't update
+the range on `:hover`, only on click. Here's how it's used in the the family
+planner:
+
+![Cabin-planner UI demo](https://s3.eu-north-1.amazonaws.com/rix1.dev/screenshots/2022-08-08+calendar+demo.png)
+
+I also plan to use the component to filter data in a list view at a later stage.
+
+### Technical details
+
+All the date stuff relies heavily on [Dayjs](https://day.js.org/), and styling
+is done with [TailwindCSS](https://tailwindcss.com/).
+
+The package (not published to NPM btw) essentially has two exports:
+
+- `useCalendar()`: Hook that handles all the logic. If you want to style this
+  your own way, you can use this hook without importing the `Calendar`
+  components.
+- `Calendar`: Consist of three "compound components":
+  - `<Calendar.CalendarActions />`: Showing the calendar title and the buttons
+    for navigating between months.
+  - `<Calendar.CalendarHeader />`: The top list of days (Monday-Sunday)
+  - `<Calendar.CalendarGrid />`: Showing the currently selected months, and it's
+    days.
+
+Here's a minimal code example of how it's used:
+
+```js
+const CalendarDemo = () => {
+  const [calendarState, calendarEvents] = useCalendar();
+  const { currentDate, days } = calendarState;
+
+  return (
+    <div className="">
+      <div className="text-center">
+        <Calendar.CalendarActions
+          className="mb-4"
+          onNextMonth={calendarEvents.handleNextMonthClick}
+          onPrevMonth={calendarEvents.handlePreviousMonthClick}
+        >
+          {currentDate.format('MMMM YYYY')}
+        </Calendar.CalendarActions>
+        <Calendar.CalendarHeader daysToRender={days} />
+      </div>
+      <Calendar.CalendarGrid
+        onClick={calendarEvents.handleDateClick}
+        selectionStart={calendarState.selectionStart}
+        selectionEnd={calendarState.selectionEnd}
+        selectedMonth={currentDate.month()}
+        daysToRender={days}
+      />
+    </div>
+}
+```
+
+I'll probably go more in-depth about it's API and how it's built in the future,
+but for now I just wanted to show this off to the world 🌍.
+
+If you want to take a look at the source code, [you'll find that on
+Github](https://github.com/rix1/rix1-builds/tree/main/packages/rix-ui/calendar).
+
+### Feedback
+
+If you have any feedback, please
+reach out to [@rix1 on Twitter](https://twitter.com/rix1).

@@ -1,13 +1,12 @@
 import { Property, User } from '@prisma/client';
+import { Calendar, useCalendar } from 'rix-ui';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { ZodError } from 'zod';
-import useCalendar from '../hooks/useCalendar';
 import { validateBooking_client } from '../server/forms/booking';
 import titleCase from '../utils/titleCase';
 import { trpc } from '../utils/trpc';
-import Calendar from './Calendar';
 import Combobox from './Combobox';
 import HelpText from './HelpText';
 import NumberInput from './NumberInput';
@@ -22,8 +21,7 @@ const BookingForm = () => {
   const mutation = trpc.useMutation('booking.create');
   const { status: userStatus, data: users } = trpc.useQuery(['user.getAll']);
 
-  const [currentDate, days, eventHandlers, selectedDates] = useCalendar();
-  const { handleNext, handlePrev, handleDateSelection } = eventHandlers;
+  const [cState, cEvents] = useCalendar();
 
   const [selectedUser, setSelectedUser] = useState<User | undefined>(undefined);
   const [selectedProperty, setSelectedProperty] = useState<
@@ -40,7 +38,8 @@ const BookingForm = () => {
     const arrivalTime: string = event.currentTarget.arrivalTime.value;
 
     const data = {
-      selectedDates: selectedDates.map((date) => date.toISOString()),
+      selectionStart: cState.selectionStart?.toISOString(),
+      selectionEnd: cState.selectionEnd?.toISOString(),
       selectedUser,
       selectedProperty,
       about,
@@ -96,19 +95,21 @@ const BookingForm = () => {
                   <div className="grid grid-cols-3 gap-8">
                     <div className="text-center col-span-3 md:col-span-1">
                       <Calendar.CalendarActions
-                        onNextMonth={handleNext}
-                        onPrevMonth={handlePrev}
+                        onNextMonth={cEvents.handleNextMonthClick}
+                        onPrevMonth={cEvents.handlePreviousMonthClick}
                       >
-                        {titleCase(currentDate.format('MMMM YYYY'))}
+                        {titleCase(cState.currentDate.format('MMMM YYYY'))}
                       </Calendar.CalendarActions>
                       <Calendar.CalendarHeader
                         className="mt-5"
-                        daysToRender={days}
+                        daysToRender={cState.days}
                       />
                       <Calendar.CalendarGrid
-                        onSelected={handleDateSelection}
-                        selectedMonth={currentDate.month()}
-                        daysToRender={days}
+                        onClick={cEvents.handleDateClick}
+                        selectedMonth={cState.currentDate.month()}
+                        daysToRender={cState.days}
+                        selectionStart={cState.selectionStart}
+                        selectionEnd={cState.selectionEnd}
                       />
                     </div>
                     <div className="col-span-3 md:col-span-2 space-y-6">
