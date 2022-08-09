@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "prisma": "prisma",
+    "eslint": "eslint . --cache",
+    "ts": "tsc",
+    "prettier": "prettier --check . --ignore-path ../../.prettierignore",
+    "test": "pnpm prettier && pnpm eslint && pnpm ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
@@ -29,6 +34,7 @@
     "zod": "^3.17.3"
   },
   "devDependencies": {
+    "config": "workspace:*",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
