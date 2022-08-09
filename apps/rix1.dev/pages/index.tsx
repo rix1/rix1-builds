@@ -10,6 +10,8 @@ import PagePattern from '../components/PagePattern';
 import ProjectSection from '../components/ProjectSection';
 
 const Home: NextPage = () => {
+  console.log('hello');
+
   return (
     <PagePattern>
       <Head>
