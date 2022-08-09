@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <title>rix1.dev: Product developer from Norway</title>
         <meta
           property="og:title"
-          content="rix1.dev: Product developer from Norway"
+          content="rix1.dev: Product developer from Norway 🇳🇴"
         />
         <meta
           property="og:description"
