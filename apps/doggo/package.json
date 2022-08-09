@@ -28,6 +28,7 @@
     "@trpc/server": "^9.27.0",
     "clsx": "^1.1.1",
     "dayjs": "^1.11.0",
+    "nanoid": "^4.0.0",
     "next": "12.2.3",
     "next-auth": "^4.10.3",
     "react": "18.2.0",
@@ -37,11 +38,11 @@
     "zod": "^3.17.3"
   },
   "devDependencies": {
-    "config": "workspace:*",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "autoprefixer": "^10.4.8",
+    "config": "workspace:*",
     "eslint": "8.18.0",
     "eslint-config-next": "12.2.3",
     "postcss": "^8.4.16",
