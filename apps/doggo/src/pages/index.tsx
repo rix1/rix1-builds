@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import dayjs from "dayjs";
+import { nanoid } from "nanoid";
 import Head from "next/head";
 import { useState } from "react";
-// import { trpc } from "../utils/trpc";
+import Navbar from "../components/Navbar";
 
 function titleCase(word: string) {
   return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
@@ -10,65 +11,97 @@ function titleCase(word: string) {
 
 type EventTypes = "walk" | "poop" | "food";
 
-function createChecklist(type: "morning" | "lunch" | "dinner") {
+type User = {
+  id: String;
+  name: String;
+  email: String;
+  image: String;
+};
+
+type TimeSlot = "morning" | "lunch" | "dinner";
+type Activity = "walk" | "poop" | "food";
+type ChecklistItem = {
+  id: string;
+  timeslot: TimeSlot;
+  activity: Activity;
+  label: string;
+};
+
+function createChecklist(
+  timeslot: "morning" | "lunch" | "dinner"
+): ChecklistItem[] {
   return [
     {
-      id: `${type}-walk`,
+      id: nanoid(),
+      activity: "walk",
+      timeslot: timeslot,
       label: "Walk",
     },
     {
-      id: `${type}-poop`,
-      label: "Poop",
+      id: nanoid(),
+      activity: "food",
+      timeslot: timeslot,
+      label: "Food",
     },
     {
-      id: `${type}-food`,
-      label: "Food",
+      id: nanoid(),
+      activity: "poop",
+      timeslot: timeslot,
+      label: "Poop",
     },
   ];
 }
 
+type Event = {
+  id: string;
+  createdAt: string;
+  createdBy: string;
+  activity: Activity;
+  timeslot: TimeSlot;
+};
+
 function createEvent(
-  type: string,
-  userId: string,
-  location: [lat: string, lng: string]
-) {
+  activity: Activity,
+  timeslot: TimeSlot,
+  userId: string
+): Event {
   return {
-    id: type,
-    createdAt: dayjs(),
+    id: nanoid(),
+    createdAt: dayjs().toISOString(),
     createdBy: userId,
-    eventType: type.split("-")[1],
-    timeslot: type.split("-")[0],
-    location: location,
+    activity: activity,
+    timeslot: timeslot,
   };
 }
 
-// const eventIds = []
-// const allEvents = {
-//   [id]: {}
-// }
+const userIds = ["rikard", "siri"];
 
 const users = {
-  rikard: {
-    id: "rikard",
+  cl639np4l0022kddy0m22vs6s: {
+    id: "cl639np4l0022kddy0m22vs6s",
     name: "Rikard",
     email: "rikardeide@gmail.com",
-    emailVerified: null,
     image:
       "https://s3.eu-north-1.amazonaws.com/rix1.dev/first-thursday-450x450.jpg",
   },
-  siri: {
-    id: "siri",
+  cl639np4r0030kddyoe0r6sfi: {
+    id: "cl639np4r0030kddyoe0r6sfi",
     name: "Siri",
     email: "s.holtnaes@gmail.com",
-    emailVerified: null,
     image: "https://avatars.githubusercontent.com/u/6916462?v=4",
   },
 };
 
+const eventState = {
+  byId: {},
+  allIds: [],
+};
+
 const Home: NextPage = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
-  const [allEvents, setAllEvents] = useState({});
+  const [allEvents, setAllEvents] = useState<{ [key: string]: Event }>({});
   const [eventIds, setEventIds] = useState<string[]>([]);
+  const [currentUserId, setCurrentUserId] = useState<string>("siri");
 
   const timeslots = [
     {
@@ -96,11 +129,7 @@ const Home: NextPage = () => {
   }
 
   function addEvent(itemId: string) {
-    const newEvent = createEvent(
-      itemId,
-      Math.round(Math.random() * 1) === 1 ? "siri" : "rikard",
-      ["lofot", "gata"]
-    );
+    const newEvent = createEvent(itemId, currentUserId, ["lofot", "gata"]);
     setEventIds((prev) => [...prev, newEvent.id]);
     setAllEvents((prev) => ({
       ...prev,
@@ -123,15 +152,25 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navbar
+        selectedUserId={currentUserId}
+        users={users}
+        userIds={userIds}
+        onClick={(userId) => setCurrentUserId(userId)}
+      />
+
       <main className="container mx-auto flex flex-col min-h-screen p-4">
-        <h1 className="text-3xl font-bold border-l-4 pl-4 border-green-400">
-          Mon, 8th August, 2022
+        <h1 className="text-3xl font-bold border-l-4 pl-4 border-green-400 mt-4">
+          {dayjs().format("ddd, D[th] MMMM, YYYY")}
         </h1>
-        <div className="space-y-10 pt-8">
+        <div className="space-y-10 sm:space-y-0 space-x-0 sm:space-x-10 pt-8 flex flex-col sm:flex-row">
           {timeslots.map((timeslot) => (
             <section className="" key={timeslot.id}>
-              <h2 className="text-xl font-bold border-b pb-2">
-                {timeslot.label} <span>({timeslot.timeFrame})</span>
+              <h2 className="text-xl font-bold inline-block">
+                {timeslot.label}{" "}
+                <span className="ml-1 font-normal text-base text-gray-400">
+                  ({timeslot.timeFrame})
+                </span>
               </h2>
               <ul className="mt-3">
                 {timeslot.checklist.map((item) => (
@@ -157,12 +196,12 @@ const Home: NextPage = () => {
             </section>
           ))}
 
-          <section className="">
-            <h2 className="text-xl font-bold border-b pb-2">Events</h2>
-          </section>
+          {/* <section className="">
+            <h2 className="text-xl font-bold">Events</h2>
+          </section> */}
 
-          <section className="">
-            <h2 className="text-xl font-bold border-b pb-2">DogLog</h2>
+          <section className="flex-1">
+            <h2 className="text-xl font-bold">DogLog</h2>
             <ul className="pt-4 flex flex-col">
               {eventIds.map((eventId) => {
                 const event = allEvents[eventId];
@@ -178,7 +217,7 @@ const Home: NextPage = () => {
                         {titleCase(event.timeslot)} {event.eventType}
                       </span>
                       <div className="tabular-nums ml-auto justify-self-center text-gray-500">
-                        {event.createdAt.format("hh:mm:ss")}
+                        {dayjs(event.createdAt).format("hh:mm:ss")}
                       </div>
                     </div>
                   </li>
