@@ -1,13 +1,15 @@
 import dayjs from 'dayjs';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 import Navbar from '../components/Navbar';
 import {
   Activity,
   ChecklistItem,
   Event,
   TimeSlot,
+  TimeSlotType,
   Users,
 } from '../utils/eventTypes';
 
@@ -46,10 +48,32 @@ const Home: NextPage = () => {
   const [allEvents, setAllEvents] = useState<{ [key: string]: Event }>({});
   const [eventIds, setEventIds] = useState<string[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string>(userIds[0]);
+  const [timeslots, setTimeslots] = useState<TimeSlot[]>([]);
+
+  useEffect(() => {
+    setTimeslots([
+      {
+        id: nanoid(),
+        label: 'Morning',
+        timeFrame: '07-12',
+        checklist: createChecklist('morning'),
+      },
+      {
+        id: nanoid(),
+        label: 'Lunch',
+        timeFrame: '12-17',
+        checklist: createChecklist('lunch'),
+      },
+      {
+        id: nanoid(),
+        label: 'Dinner',
+        timeFrame: '17-23',
+        checklist: createChecklist('dinner'),
+      },
+    ]);
+  }, []);
 
   function doesEventExist(eventId: string) {
-    console.log(eventIds, eventId);
-
     return eventIds.includes(eventId);
   }
   function createChecklist(
@@ -57,19 +81,19 @@ const Home: NextPage = () => {
   ): ChecklistItem[] {
     return [
       {
-        id: `${timeslot}-walk`,
+        id: nanoid(),
         activity: 'walk',
         timeslot: timeslot,
         label: 'Walk',
       },
       {
-        id: `${timeslot}-food`,
+        id: nanoid(),
         activity: 'food',
         timeslot: timeslot,
         label: 'Food',
       },
       {
-        id: `${timeslot}-poop`,
+        id: nanoid(),
         activity: 'poop',
         timeslot: timeslot,
         label: 'Poop',
@@ -79,38 +103,17 @@ const Home: NextPage = () => {
 
   function createEvent(
     activity: Activity,
-    timeslot: TimeSlot,
+    timeslot: TimeSlotType,
     userId: string,
   ): Event {
     return {
-      id: `${activity}-${timeslot}-${userId}`,
+      id: `${activity}-${timeslot}`, // workaround until we get DB up and running
       createdAt: dayjs().toISOString(),
       createdBy: userId,
       activity: activity,
       timeslot: timeslot,
     };
   }
-
-  const timeslots = [
-    {
-      id: 'morning',
-      label: 'Morning',
-      timeFrame: '07-12',
-      checklist: createChecklist('morning'),
-    },
-    {
-      id: 'lunch',
-      label: 'Lunch',
-      timeFrame: '12-17',
-      checklist: createChecklist('lunch'),
-    },
-    {
-      id: 'dinner',
-      label: 'Dinner',
-      timeFrame: '17-23',
-      checklist: createChecklist('dinner'),
-    },
-  ];
 
   return (
     <>
@@ -146,10 +149,14 @@ const Home: NextPage = () => {
                     <input
                       name={item.id}
                       id={item.id}
-                      checked={doesEventExist(item.id)}
+                      checked={doesEventExist(
+                        `${item.activity}-${item.timeslot}`,
+                      )}
                       type="checkbox"
-                      onClick={() => {
-                        if (doesEventExist(item.id)) {
+                      onChange={() => {
+                        if (
+                          doesEventExist(`${item.activity}-${item.timeslot}`)
+                        ) {
                           setEventIds((prev) =>
                             prev.filter((id) => id !== item.id),
                           );

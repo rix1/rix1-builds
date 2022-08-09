@@ -1,4 +1,4 @@
-export type EventTypes = "walk" | "poop" | "food";
+export type EventTypes = 'walk' | 'poop' | 'food';
 
 export type User = {
   id: string;
@@ -11,12 +11,19 @@ export type Users = {
   [userId: string]: User;
 };
 
-export type TimeSlot = "morning" | "lunch" | "dinner";
-export type Activity = "walk" | "poop" | "food";
+export type TimeSlotType = 'morning' | 'lunch' | 'dinner';
+export type Activity = 'walk' | 'poop' | 'food';
+
+export type TimeSlot = {
+  id: string;
+  label: string;
+  timeFrame: string;
+  checklist: ChecklistItem[];
+};
 
 export type ChecklistItem = {
   id: string;
-  timeslot: TimeSlot;
+  timeslot: TimeSlotType;
   activity: Activity;
   label: string;
 };
@@ -26,5 +33,5 @@ export type Event = {
   createdAt: string;
   createdBy: string;
   activity: Activity;
-  timeslot: TimeSlot;
+  timeslot: TimeSlotType;
 };
