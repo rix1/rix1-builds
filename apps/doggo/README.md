@@ -1,131 +1,159 @@
-# Create T3 App
+# Doggo 🐶 &middot;
 
-This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
+> Apps for dogs
 
-## Why are there `.js` files in here?
+## Developing
 
-As per [T3-Axiom #3](https://github.com/t3-oss/create-t3-app/tree/next#3-typesafety-isnt-optional), we believe take typesafety as a first class citizen. Unfortunately, not all frameworks and plugins support TypeScript which means some of the configuration files have to be `.js` files.
+### Built With
 
-We try to emphasize that these files are javascript for a reason, by explicitly declaring its type (`cjs` or `mjs`) depending on what's supported by the library it is used by. Also, all the `js` files in this project are still typechecked using a `@ts-check` comment at the top.
+The [T3 stack](https://create.t3.gg/). From their website:
 
-## What's next? How do I make an app with this?
+The "T3 Stack" is a web development stack made by Theo focused on simplicity, modularity, and full-stack typesafety. It consists of:
 
-We try to keep this project as simple as possible, so you can start with the most basic configuration and then move on to more advanced configuration.
+- Next.js
+- tRPC
+- Tailwind CSS
+- TypeScript
+- Prisma
+- NextAuth.js
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### Prerequisites
 
-- [Next-Auth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [TailwindCSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io) (using @next version? [see v10 docs here](https://alpha.trpc.io))
+Nothing. Everything should be self contained in the rix1-builds repo.
 
-## How do I deploy this?
+### Setting up your dev environment
 
-### Vercel
+> **Estimated time required: 5 minutes**
 
-We recommend deploying to [Vercel](https://vercel.com/?utm_source=t3-oss&utm_campaign=oss). It makes it super easy to deploy NextJs apps.
+#### 1. Set up the codebase
 
-- Push your code to a GitHub repository.
-- Go to [Vercel](https://vercel.com/?utm_source=t3-oss&utm_campaign=oss) and sign up with GitHub.
-- Create a Project and import the repository you pushed your code to.
-- Add your environment variables.
-- Click **Deploy**
-- Now whenever you push a change to your repository, Vercel will automatically redeploy your website!
+Here's a brief intro about what a developer must do in order to start developing
+the project further:
 
-### Docker
+```shell
+git clone https://github.com/rix1/rix1-builds.git
+cd rix1-builds/apps/doggo/
+pnpm install
+cp dev-template.env .env
+```
 
-You can also dockerize this stack and deploy a container.
+This will clone the repository and install the dependencies and set up a template for your environment variables.
 
-1. In your [next.config.mjs](./next.config.mjs), add the `output: "standalone"` option to your config.
-2. Create a `.dockerignore` file with the following contents:
-   <details>
-   <summary>.dockerignore</summary>
+#### 1. Set up PostgreSQL
 
-   ```
-   Dockerfile
-   .dockerignore
-   node_modules
-   npm-debug.log
-   README.md
-   .next
-   .git
-   ```
+Prerequisite: Make sure you have Postgres installed.
 
-  </details>
+On Mac:
 
-3. Create a `Dockerfile` with the following contents:
-   <details>
-   <summary>Dockerfile</summary>
+```sh
+brew install postgresql
+brew services start postgresql
+```
 
-   ```Dockerfile
-   # Install dependencies only when needed
-   FROM node:16-alpine AS deps
-   # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-   RUN apk add --no-cache libc6-compat
-   WORKDIR /app
+Optionally, create a separate user for the database (good practice):
 
-   # Install dependencies based on the preferred package manager
-   COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-   RUN \
-      if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-      elif [ -f package-lock.json ]; then npm ci; \
-      elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
-      else echo "Lockfile not found." && exit 1; \
-      fi
+```sh
+createuser -E -l -P -s doggo
+```
 
+The -s flag (user is superuser) is needed for Prisma to recreate create new (shadow) databases. From their docs:
 
-   # Rebuild the source code only when needed
-   FROM node:16-alpine AS builder
-   WORKDIR /app
-   COPY --from=deps /app/node_modules ./node_modules
-   COPY . .
+> _Note_
+> The user must be a super user or have CREATEDB privilege. ([source](https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database#shadow-database-user-permissions)). Also, the password you set here, need to be updated in your `.env` file.
 
-   # Next.js collects completely anonymous telemetry data about general usage.
-   # Learn more here: https://nextjs.org/telemetry
-   # Uncomment the following line in case you want to disable telemetry during the build.
-   # ENV NEXT_TELEMETRY_DISABLED 1
+Next, create the database:
 
-   RUN yarn build
+```sh
+createdb -E UTF-8 -T template0 -O doggo doggo
+```
 
-   # If using npm comment out above and use below instead
-   # RUN npm run build
+Now, everything should be ready to roll:
 
-   # Production image, copy all the files and run next
-   FROM node:16-alpine AS runner
-   WORKDIR /app
+```sh
+pnpm run prisma migrate dev
+```
 
-   ENV NODE_ENV production
-   # Uncomment the following line in case you want to disable telemetry during runtime.
-   # ENV NEXT_TELEMETRY_DISABLED 1
+This will push the schema to your local Postgres database.
 
-   RUN addgroup --system --gid 1001 nodejs
-   RUN adduser --system --uid 1001 nextjs
+Last thing to do, open Prisma studio and add some data:
 
-   # You only need to copy next.config.js if you are NOT using the default configuration
-   # COPY --from=builder /app/next.config.js ./
-   COPY --from=builder /app/public ./public
-   COPY --from=builder /app/package.json ./package.json
+```sh
+pnpm run prisma studio
+```
 
-   # Automatically leverage output traces to reduce image size
-   # https://nextjs.org/docs/advanced-features/output-file-tracing
-   COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-   COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+...or start the web server:
 
-   USER nextjs
+```sh
+pnpm run dev
+```
 
-   EXPOSE 3000
+### Building
 
-   ENV PORT 3000
+TODO
 
-   CMD ["node", "server.js"]
-   ```
+<!-- If your project needs some additional steps for the developer to build the
+project after some code changes, state them here. for example:
 
-  </details>
+```shell
+./configure
+make
+make install
+```
 
-4. You can now build an image to deploy yourself, or use a PaaS such as [Railway's](https://railway.app) automated [Dockerfile deployments](https://docs.railway.app/deploy/dockerfiles) to deploy your app.
+Here again you should state what actually happens when the code above gets
+executed. -->
 
-## Useful resources
+### Deploying / Publishing
 
-Here are some resources that we commonly refer to:
+TODO
 
-- [Protecting routes with Next-Auth.js](https://next-auth.js.org/configuration/nextjs#unstable_getserversession)
+<!-- give instructions on how to build and release a new version
+In case there's some step you have to take that publishes this project to a
+server, this is the right time to state it.
+
+```shell
+packagemanager deploy your-project -s server.com -u username -p password
+```
+
+And again you'd need to tell what the previous code actually does. -->
+
+## Versioning
+
+<!-- We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags). -->
+
+TODO: N/A?
+
+## Configuration
+
+You need to create a new `.env` file:
+
+```sh
+cp dev-template.env .env
+```
+
+## Tests
+
+No tests at the moment.
+
+## Style guide
+
+Project is using Prettier and ESlint. ESlint is intentionally not configured with Prettier to avoid configration conflicts. The following commands are available:
+
+```sh
+pnpm run prettier
+pnpm run eslint
+```
+
+Running `pnpm run test` will run Prettier, ESlint and check types with TS.
+
+## Api Reference
+
+Using `tRPC` to run call backend functions in `src/server/`.
+
+## Database
+
+We're using PostgreSQL with Prisma as ORM.
+
+## Licensing
+
+State what the license is and how to find the text version of the license.
