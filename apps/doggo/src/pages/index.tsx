@@ -1,17 +1,14 @@
+import { Activity } from '@prisma/client';
 import dayjs from 'dayjs';
+import { nanoid } from 'nanoid';
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { nanoid } from 'nanoid';
+import EventLog from '../components/EventLog';
 import Navbar from '../components/Navbar';
-import {
-  Activity,
-  ChecklistItem,
-  Event,
-  TimeSlot,
-  TimeSlotType,
-  Users,
-} from '../utils/eventTypes';
+import { ChecklistItem, Event, TimeSlot, Users } from '../utils/eventTypes';
+import { trpc } from '../utils/trpc';
 
 function titleCase(word: string) {
   return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
@@ -44,11 +41,13 @@ const eventState = {
 };
 
 const Home: NextPage = () => {
-  // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  const dogEvents = trpc.useQuery(['dogEvents.getAll']);
+  const eventMutation = trpc.useMutation(['dogEvents.create']);
   const [allEvents, setAllEvents] = useState<{ [key: string]: Event }>({});
   const [eventIds, setEventIds] = useState<string[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string>(userIds[0]);
   const [timeslots, setTimeslots] = useState<TimeSlot[]>([]);
+  const session = useSession();
 
   useEffect(() => {
     setTimeslots([
@@ -101,19 +100,18 @@ const Home: NextPage = () => {
     ];
   }
 
-  function createEvent(
-    activity: Activity,
-    timeslot: TimeSlotType,
-    userId: string,
-  ): Event {
-    return {
-      id: `${activity}-${timeslot}`, // workaround until we get DB up and running
-      createdAt: dayjs().toISOString(),
-      createdBy: userId,
-      activity: activity,
-      timeslot: timeslot,
+  function createNewEvent(activity: Activity) {
+    return () => {
+      if (session.data?.user?.id) {
+        eventMutation.mutate({
+          userId: session.data.user.id,
+          activity: activity,
+        });
+      }
     };
   }
+
+  console.log(dogEvents);
 
   return (
     <>
@@ -144,31 +142,32 @@ const Home: NextPage = () => {
                     <input
                       name={item.id}
                       id={item.id}
-                      checked={doesEventExist(
-                        `${item.activity}-${item.timeslot}`,
-                      )}
+                      // checked={doesEventExist(
+                      //   `${item.activity}-${item.timeslot}`,
+                      // )}
                       type="checkbox"
-                      onChange={() => {
-                        const eventId = `${item.activity}-${item.timeslot}`;
-                        if (doesEventExist(eventId)) {
-                          setEventIds((prev) =>
-                            prev.filter((id) => id !== eventId),
-                          );
-                          const events = allEvents;
-                          delete events[eventId];
-                          setAllEvents(events);
-                        } else {
-                          const newEvent = createEvent(
-                            item.activity,
-                            item.timeslot,
-                            currentUserId,
-                          );
-                          setEventIds((prev) => [...prev, newEvent.id]);
-                          setAllEvents((prev) => ({
-                            ...prev,
-                            [newEvent.id]: newEvent,
-                          }));
-                        }
+                      onChange={(event) => {
+                        // handleCheckboxClick(event.target.checked);
+                        // const eventId = `${item.activity}-${item.timeslot}`;
+                        // if (doesEventExist(eventId)) {
+                        //   setEventIds((prev) =>
+                        //     prev.filter((id) => id !== eventId),
+                        //   );
+                        //   const events = allEvents;
+                        //   delete events[eventId];
+                        //   setAllEvents(events);
+                        // } else {
+                        //   // const newEvent = createEvent(
+                        //   //   item.activity,
+                        //   //   item.timeslot,
+                        //   //   currentUserId,
+                        //   // );
+                        //   // setEventIds((prev) => [...prev, newEvent.id]);
+                        //   // setAllEvents((prev) => ({
+                        //   //   ...prev,
+                        //   //   [newEvent.id]: newEvent,
+                        //   // }));
+                        // }
                       }}
                       className="mr-2"
                     />
@@ -184,33 +183,49 @@ const Home: NextPage = () => {
           </section> */}
 
           <section className="flex-1">
-            <h2 className="text-xl font-bold">DogLog</h2>
-            <ul className="pt-4 flex flex-col">
-              {eventIds.map((eventId) => {
-                const event = allEvents[eventId];
-                const user = users[event?.createdBy || ''];
-                if (!event || !user) {
-                  return null;
-                }
-                return (
-                  <li key={eventId} className="flex-auto space-x-4 my-2">
-                    <div className="flex">
-                      <img
-                        src={user.image}
-                        className="w-7 h-7 rounded-full"
-                        alt={user.name}
-                      />
-                      <span className="ml-3">
-                        {titleCase(event.timeslot)} {event.activity}
-                      </span>
-                      <div className="tabular-nums ml-auto justify-self-center text-gray-500">
-                        {dayjs(event.createdAt).format('hh:mm:ss')}
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="flex">
+              <h2 className="text-xl font-bold">DogLog</h2>
+              <div className="ml-auto">
+                <button
+                  onClick={createNewEvent(Activity.WALK)}
+                  className="bg-green-100 px-3 py-2 rounded text-green-700 ring-2 ring-green-600 font-semibold text-sm tracking-tight hover:bg-green-200 hover:shadow-sm shadow shadow-green-800"
+                >
+                  <span className="text-base">+</span> Add walk
+                </button>
+                <button
+                  onClick={createNewEvent(Activity.POOP)}
+                  className="bg-green-100 px-3 py-2 rounded text-green-700 ring-2 ring-green-600 font-semibold text-sm tracking-tight hover:bg-green-200 hover:shadow-sm shadow shadow-green-800"
+                >
+                  <span className="text-base">+</span> Add Poop
+                </button>
+                <button
+                  onClick={createNewEvent(Activity.FOOD)}
+                  className="bg-green-100 px-3 py-2 rounded text-green-700 ring-2 ring-green-600 font-semibold text-sm tracking-tight hover:bg-green-200 hover:shadow-sm shadow shadow-green-800"
+                >
+                  <span className="text-base">+</span> Add Food
+                </button>
+                <button
+                  onClick={createNewEvent(Activity.PEE)}
+                  className="bg-green-100 px-3 py-2 rounded text-green-700 ring-2 ring-green-600 font-semibold text-sm tracking-tight hover:bg-green-200 hover:shadow-sm shadow shadow-green-800"
+                >
+                  <span className="text-base">+</span> Add Pee
+                </button>
+                <button
+                  onClick={createNewEvent(Activity.PLAY)}
+                  className="bg-green-100 px-3 py-2 rounded text-green-700 ring-2 ring-green-600 font-semibold text-sm tracking-tight hover:bg-green-200 hover:shadow-sm shadow shadow-green-800"
+                >
+                  <span className="text-base">+</span> Add play
+                </button>
+                <button
+                  onClick={createNewEvent(Activity.UNKNOWN)}
+                  className="bg-green-100 px-3 py-2 rounded text-green-700 ring-2 ring-green-600 font-semibold text-sm tracking-tight hover:bg-green-200 hover:shadow-sm shadow shadow-green-800"
+                >
+                  <span className="text-base">+</span> Add other
+                </button>
+              </div>
+            </div>
+
+            <EventLog events={dogEvents.data} key={dogEvents.status} />
           </section>
         </div>
       </main>

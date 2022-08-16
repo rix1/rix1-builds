@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { Activity } from '@prisma/client';
 
 const eventSerializer = z.object({
-  userId: z.string().nullish(),
+  userId: z.string(),
   activity: z.nativeEnum(Activity),
 });
 
