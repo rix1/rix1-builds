@@ -123,12 +123,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar
-        currentUser={users[currentUserId]}
-        users={users}
-        userIds={userIds}
-        onClick={(userId) => setCurrentUserId(userId)}
-      />
+      <Navbar />
 
       <main className="container mx-auto flex flex-col min-h-screen p-4">
         <h1 className="text-3xl font-bold border-l-4 pl-4 border-green-400 mt-4">
