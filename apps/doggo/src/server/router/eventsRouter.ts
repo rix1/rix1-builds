@@ -22,6 +22,15 @@ export const eventsRouter = createRouter()
   .query('getAll', {
     async resolve({ ctx }) {
       return await ctx.prisma.dogEvent.findMany({
+        include: {
+          user: {
+            select: {
+              name: true,
+              id: true,
+              image: true,
+            },
+          },
+        },
         orderBy: [
           {
             createdAt: 'desc',
