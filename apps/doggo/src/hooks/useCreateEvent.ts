@@ -1,5 +1,4 @@
 import { Activity } from '@prisma/client';
-import { useQueryClient } from '@tanstack/react-query';
 import dayjs, { Dayjs } from 'dayjs';
 import { useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';

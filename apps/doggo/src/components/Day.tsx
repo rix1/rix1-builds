@@ -19,7 +19,13 @@ const Day = forwardRef<HTMLDivElement, DayProps>(({ isToday, date }, ref) => {
   ]);
 
   return (
-    <div className={clsx('min-h-[50vh]')} ref={ref}>
+    <div
+      className={clsx(
+        'min-h-[30vh]',
+        'border-t pt-6 border-gray-200 first-of-type:border-t-0',
+      )}
+      ref={ref}
+    >
       <div className="flex items-center mt-4">
         <h1
           className={clsx(
@@ -33,9 +39,6 @@ const Day = forwardRef<HTMLDivElement, DayProps>(({ isToday, date }, ref) => {
       </div>
       <div className="space-y-10 sm:space-y-0 space-x-0 sm:space-x-10 pt-8 flex flex-col sm:flex-row pl-4">
         <section className="flex-1">
-          <div className="flex">
-            <h2 className="text-xl font-bold">DogLog</h2>
-          </div>
           {dogEvents.status === 'loading' && 'Loading...'}
           <EventLog events={dogEvents.data} />
         </section>
