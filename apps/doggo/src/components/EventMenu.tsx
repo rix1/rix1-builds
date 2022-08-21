@@ -31,10 +31,12 @@ const EventMenu = ({ date }: EventMenuProps) => {
   return (
     <Disclosure>
       <Menu as="div" className="relative">
-        <Menu.Button>
-          <span className="sr-only">Open event menu</span>
-          <PlusCircleIcon className="w-6 h-6 text-gray-400" />
-        </Menu.Button>
+        {session.status === 'authenticated' && (
+          <Menu.Button>
+            <span className="sr-only">Open event menu</span>
+            <PlusCircleIcon className="w-6 h-6 text-gray-400" />
+          </Menu.Button>
+        )}
         <Transition
           as={Fragment}
           enter="transition ease-out duration-200"
