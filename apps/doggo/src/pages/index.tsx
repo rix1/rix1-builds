@@ -1,15 +1,12 @@
-import { Activity } from '@prisma/client';
 import dayjs, { Dayjs, UnitType } from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 import Day from '../components/Day';
 import Navbar from '../components/Navbar';
-import { trpc } from '../utils/trpc';
 
 dayjs.extend(isToday);
 
@@ -24,11 +21,9 @@ const Home: NextPage = () => {
   const [daysToRender, setDaysToRender] = useState(
     constructDateArray(dayjs(), 7, 'days'),
   );
-  const session = useSession();
   const todayRef = useRef<HTMLDivElement>(null);
 
   useHotkeys('option+d', () => {
-    console.log('hotkey pressed!');
     todayRef.current?.scrollIntoView();
   });
 
@@ -39,7 +34,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Doggo</title>
+        <title>Dog Log</title>
         <meta name="description" content="Your favourite Dog tracker" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
