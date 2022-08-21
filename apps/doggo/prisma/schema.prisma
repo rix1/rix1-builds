@@ -72,8 +72,9 @@ enum Activity {
     POOP
     FOOD
     PEE
-    PLAY
-    UNKNOWN
+    TRAINING
+    SOCIALIZE
+    OTHER
 }
 
 model DogEvent {
@@ -81,5 +82,5 @@ model DogEvent {
     createdAt DateTime @default(now())
     userId    String
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    activity  Activity
+    activity  Activity @default(OTHER)
 }

@@ -13,6 +13,10 @@ const dateSerializer = z.object({
   date: z.string(),
 });
 
+const deleteSerializer = z.object({
+  eventId: z.string(),
+});
+
 export const eventsRouter = createRouter()
   .mutation('create', {
     input: eventSerializer,
@@ -22,6 +26,16 @@ export const eventsRouter = createRouter()
           user: { connect: { id: input.userId } },
           activity: input.activity,
           createdAt: input.date || undefined,
+        },
+      });
+    },
+  })
+  .mutation('delete', {
+    input: deleteSerializer,
+    async resolve({ input, ctx }) {
+      return await ctx.prisma.dogEvent.delete({
+        where: {
+          id: input.eventId,
         },
       });
     },
