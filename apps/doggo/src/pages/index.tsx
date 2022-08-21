@@ -1,25 +1,40 @@
+import { Activity } from '@prisma/client';
+import dayjs, { Dayjs, UnitType } from 'dayjs';
+import isToday from 'dayjs/plugin/isToday';
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
+import { useEffect, useRef, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
+
 import Day from '../components/Day';
 import Navbar from '../components/Navbar';
-import { daysBetween } from '../utils/dateUtils';
-import { InferQueryOutput, trpc } from '../utils/trpc';
+import { trpc } from '../utils/trpc';
 
-function getDateBoundaries(dogEvents?: InferQueryOutput<'dogEvents.getAll'>) {
-  if (!dogEvents?.length) {
-    return [undefined, undefined];
-  }
+dayjs.extend(isToday);
 
-  return [dogEvents[0]?.createdAt, dogEvents[dogEvents.length - 1]?.createdAt];
+function constructDateArray(center: Dayjs, padding: number, unit: UnitType) {
+  const startDate = center.subtract(padding / 2, 'days');
+  return new Array(padding * 2).fill(undefined).map((el, index) => {
+    return startDate.add(index, 'days').startOf('day');
+  });
 }
 
 const Home: NextPage = () => {
-  const dogEvents = trpc.useQuery(['dogEvents.getAll']);
+  const [daysToRender, setDaysToRender] = useState(
+    constructDateArray(dayjs(), 7, 'days'),
+  );
+  const session = useSession();
+  const todayRef = useRef<HTMLDivElement>(null);
 
-  const [first, last] = getDateBoundaries(dogEvents.data);
+  useHotkeys('option+d', () => {
+    console.log('hotkey pressed!');
+    todayRef.current?.scrollIntoView();
+  });
 
-  const diff = daysBetween(first, last);
-  console.log(diff);
+  useEffect(() => {
+    todayRef.current?.scrollIntoView();
+  });
 
   return (
     <>
@@ -32,8 +47,16 @@ const Home: NextPage = () => {
       <Navbar />
 
       <main className="container mx-auto flex flex-col min-h-screen p-4 space-y-28">
-        {first && <Day date={first} />}
-        {last && <Day date={last} />}
+        {daysToRender.map((day) => (
+          <Day
+            ref={day.isToday() ? todayRef : undefined}
+            date={day}
+            key={day.toISOString()}
+            isToday={day.isToday()}
+          />
+        ))}
+        {/* {first && <Day date={first} />} */}
+        {/* {last && <Day date={last} />} */}
       </main>
     </>
   );

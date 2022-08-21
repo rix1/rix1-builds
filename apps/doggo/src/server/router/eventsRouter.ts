@@ -1,27 +1,41 @@
 import { createRouter } from './context';
 import { z } from 'zod';
 import { Activity } from '@prisma/client';
+import dayjs from 'dayjs';
 
 const eventSerializer = z.object({
   userId: z.string(),
   activity: z.nativeEnum(Activity),
+  date: z.date().nullish(),
+});
+
+const dateSerializer = z.object({
+  date: z.string(),
 });
 
 export const eventsRouter = createRouter()
   .mutation('create', {
     input: eventSerializer,
     async resolve({ input, ctx }) {
-      await ctx.prisma.dogEvent.create({
+      return await ctx.prisma.dogEvent.create({
         data: {
           user: { connect: { id: input.userId } },
           activity: input.activity,
+          createdAt: input.date || undefined,
         },
       });
     },
   })
-  .query('getAll', {
-    async resolve({ ctx }) {
+  .query('getEventsForDate', {
+    input: dateSerializer,
+    async resolve({ input, ctx }) {
       return await ctx.prisma.dogEvent.findMany({
+        where: {
+          createdAt: {
+            gte: dayjs(input.date).startOf('day').toDate(),
+            lte: dayjs(input.date).endOf('day').toDate(),
+          },
+        },
         include: {
           user: {
             select: {
@@ -33,7 +47,7 @@ export const eventsRouter = createRouter()
         },
         orderBy: [
           {
-            createdAt: 'desc',
+            createdAt: 'asc',
           },
         ],
       });

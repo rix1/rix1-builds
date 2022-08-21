@@ -3,7 +3,7 @@ import { titleCase } from '../utils/stringManipulation';
 import { InferQueryOutput } from '../utils/trpc';
 
 type EventLogProps = {
-  events?: InferQueryOutput<'dogEvents.getAll'>;
+  events?: InferQueryOutput<'dogEvents.getEventsForDate'>;
 };
 
 const EventLog = ({ events = [] }: EventLogProps) => {
@@ -25,7 +25,7 @@ const EventLog = ({ events = [] }: EventLogProps) => {
                 {titleCase(event.activity.toLowerCase())}
               </span>
               <div className="tabular-nums ml-auto justify-self-center text-gray-500">
-                {dayjs(event.createdAt).format('hh:mm:ss')}
+                {dayjs(event.createdAt).format('HH:mm:ss')}
               </div>
             </div>
           </li>

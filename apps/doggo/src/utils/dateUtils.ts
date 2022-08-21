@@ -20,7 +20,6 @@
    explanation for that part. http://en.wikipedia.org/wiki/Leap_year#Algorithm
  */
 
-// Expected format 2022-06-27
 function g(year: number, month: number, day: number) {
   const m = (month + 9) % 12;
   const y = year - Math.floor(year / 10);

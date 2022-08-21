@@ -33,7 +33,9 @@
     "next-auth": "^4.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hotkeys-hook": "^3.4.4",
     "react-query": "^3.39.2",
+    "rix-ui": "workspace:*",
     "superjson": "^1.9.1",
     "zod": "^3.17.3"
   },
