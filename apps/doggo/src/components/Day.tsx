@@ -29,7 +29,7 @@ const Day = forwardRef<HTMLDivElement, DayProps>(({ isToday, date }, ref) => {
       <div className="flex items-center mt-4">
         <h1
           className={clsx(
-            'text-3xl font-bold border-l-4 pl-4 mr-4',
+            'text-2xl md:text-3xl font-bold border-l-4 pl-4 mr-4',
             isToday ? 'border-green-400' : 'border-transparent',
           )}
         >
