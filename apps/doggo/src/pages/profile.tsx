@@ -5,7 +5,7 @@ import Head from 'next/head';
 import GithubIcon from '../components/GithubIcon';
 import Navbar from '../components/Navbar';
 
-const ProfilePage: NextPage = ({ isLoading }: ProfilePage) => {
+const ProfilePage: NextPage = () => {
   const { data } = useSession();
   return (
     <>
@@ -20,11 +20,13 @@ const ProfilePage: NextPage = ({ isLoading }: ProfilePage) => {
       <main className="container mx-auto flex flex-col min-h-screen p-4">
         <div className="mt-6">
           <div className="flex ml-4">
-            <img
-              className="h-16 w-16 rounded-full"
-              src={data?.user?.image}
-              alt=""
-            />
+            {data?.user?.image && (
+              <img
+                className="h-16 w-16 rounded-full"
+                src={data?.user?.image}
+                alt=""
+              />
+            )}
             <div className="ml-3">
               <h1 className="text-3xl font-bold leading-none">
                 {data?.user?.name}

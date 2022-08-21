@@ -83,10 +83,12 @@ export default function Navbar({}: NavbarProps) {
                         <Menu.Item disabled>
                           <div className="px-4 py-2 text-sm text-gray-700 w-full text-left flex border-b">
                             <div>
-                              <img
-                                src={data?.user?.image}
-                                className="w-5 h-5 rounded-full mr-2 mt-1"
-                              />
+                              {data?.user?.image && (
+                                <img
+                                  src={data?.user?.image}
+                                  className="w-5 h-5 rounded-full mr-2 mt-1"
+                                />
+                              )}
                             </div>
                             <div>
                               <p className="text-xs text-gray-500">
