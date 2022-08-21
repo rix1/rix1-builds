@@ -1,10 +1,20 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 
 /* This example requires Tailwind CSS v2.0+ */
 const NotFoundPage: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>404 Not found!</title>
+        <meta
+          name="description"
+          content="Could not find the page you're looking for"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       {/*
         This example requires updating your template:
 
