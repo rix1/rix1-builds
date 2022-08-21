@@ -1,4 +1,4 @@
-import { CheckIcon, XCircleIcon } from '@heroicons/react/outline';
+import { TrashIcon, CheckIcon, XCircleIcon } from '@heroicons/react/outline';
 import { XIcon } from '@heroicons/react/solid';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -52,15 +52,19 @@ const ListItem = ({ event }: ListItemProps) => {
             onClick={() => setIsActive(true)}
             className="opacity-0 group-hover:opacity-100"
           >
-            <XCircleIcon className="h-5 w-5 text-gray-400" />
+            <TrashIcon className="h-5 w-5 text-gray-400" />
           </button>
         ) : (
-          <button onClick={handleDelete}>
-            <span className="bg-red-100 text-red-700 py-1 px-2 rounded mr-1">
-              Delete?
-            </span>
-            <CheckIcon className="h-5 w-5 text-gray-400 inline-block align-top" />
-          </button>
+          <>
+            <button onClick={handleDelete}>
+              <span className="bg-red-100 text-red-700 py-1 px-2 rounded mr-1">
+                Delete?
+              </span>
+            </button>
+            <button onClick={() => setIsActive(false)}>
+              <XCircleIcon className="h-5 w-5 text-gray-400" />
+            </button>
+          </>
         )}
       </div>
     </li>
