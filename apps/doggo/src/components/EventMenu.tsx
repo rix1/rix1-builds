@@ -2,7 +2,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { PlusCircleIcon } from '@heroicons/react/outline';
 import { Activity } from '@prisma/client';
 import clsx from 'clsx';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
@@ -51,7 +51,15 @@ const EventMenu = ({ date }: EventMenuProps) => {
               <Menu.Item key={activityMapping[activity].label}>
                 {({ active }) => (
                   <button
-                    onClick={() => createEvent(activity, date)}
+                    onClick={() =>
+                      createEvent(
+                        activity,
+                        dayjs()
+                          .set('date', date.date())
+                          .set('month', date.month())
+                          .set('year', date.year()),
+                      )
+                    }
                     className={clsx(
                       active ? 'bg-gray-100' : 'hover:bg-gray-100',
                       'px-4 py-2 text-sm text-gray-700 w-full text-left flex items-center space-x-5',
