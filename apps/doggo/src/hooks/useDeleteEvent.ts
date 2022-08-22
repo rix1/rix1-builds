@@ -3,14 +3,14 @@ import { InferQueryOutput, trpc } from '../utils/trpc';
 
 type Event = InferQueryOutput<'dogEvents.getEventsForDate'>[0];
 
-function useDeleteEvent(event: Event) {
+function useDeleteEvent() {
   const utils = trpc.useContext();
   const deleteMutation = trpc.useMutation(['dogEvents.delete'], {
     onSuccess(input) {
       utils.invalidateQueries([
         'dogEvents.getEventsForDate',
         {
-          date: dayjs(event.createdAt).format('YYYY-MM-DD'),
+          date: dayjs(input.createdAt).format('YYYY-MM-DD'),
         },
       ]);
     },
