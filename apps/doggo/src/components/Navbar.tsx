@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import GithubIcon from './GithubIcon';
 
-type NavbarProps = {};
+type NavbarProps = { onClick: () => void };
 
 function getNavStyles(route: string, match: string) {
   return clsx(
@@ -20,7 +20,7 @@ function getNavStyles(route: string, match: string) {
   );
 }
 
-export default function Navbar({}: NavbarProps) {
+export default function Navbar({ onClick }: NavbarProps) {
   const router = useRouter();
   const { data, status } = useSession();
 
@@ -31,9 +31,12 @@ export default function Navbar({}: NavbarProps) {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
-                <div className="flex-shrink-0 flex items-center">
+                <button
+                  className="flex-shrink-0 flex items-center cursor-pointer"
+                  onClick={onClick}
+                >
                   <span className="text-3xl">🐶</span>
-                </div>
+                </button>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <Link href="/">

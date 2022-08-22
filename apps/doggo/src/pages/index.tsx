@@ -39,7 +39,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
+      <Navbar
+        onClick={() => {
+          todayRef.current?.scrollIntoView();
+        }}
+      />
 
       <main className="container mx-auto flex flex-col min-h-screen p-4 space-y-28">
         {daysToRender.map((day) => (
