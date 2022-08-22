@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import GithubIcon from './GithubIcon';
 
-type NavbarProps = { onClick: () => void };
+type NavbarProps = { onClick?: () => void };
 
 function getNavStyles(route: string, match: string) {
   return clsx(
