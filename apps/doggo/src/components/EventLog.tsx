@@ -19,7 +19,7 @@ type ListItemProps = {
 
 const ListItem = ({ event }: ListItemProps) => {
   const [isActive, setIsActive] = useState(false);
-  const deleteEvent = useDeleteEvent(event);
+  const deleteEvent = useDeleteEvent();
 
   function handleDelete() {
     setIsActive(false);
