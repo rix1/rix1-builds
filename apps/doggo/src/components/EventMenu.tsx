@@ -21,6 +21,7 @@ const eventActions = [
   Activity.TRAINING,
   Activity.SOCIALIZE,
   Activity.FOOD,
+  Activity.INCIDENT,
   Activity.OTHER,
 ];
 
