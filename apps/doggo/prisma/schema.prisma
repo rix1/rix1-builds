@@ -74,6 +74,7 @@ enum Activity {
     PEE
     TRAINING
     SOCIALIZE
+    INCIDENT
     OTHER
 }
 

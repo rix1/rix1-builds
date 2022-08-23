@@ -8,6 +8,7 @@ const activityMapping = {
   [Activity.SOCIALIZE]: { label: Activity.SOCIALIZE, icon: '🤗' },
   [Activity.FOOD]: { label: Activity.FOOD, icon: '🍗' },
   [Activity.OTHER]: { label: Activity.OTHER, icon: '🤷‍♀️' },
+  [Activity.INCIDENT]: { label: Activity.INCIDENT, icon: '😳' },
 };
 
 export default activityMapping;
