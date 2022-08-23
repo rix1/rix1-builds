@@ -65,17 +65,16 @@ const Home: NextPage = () => {
           </h1>
           <blockquote className="text-2xl leading-normal">
             <p className="">
-              On the internet, I&apos;m usually referred to as{' '}
-              <Link href="https://twitter.com/rix1">@rix1</Link>. <br />{' '}
-              I&apos;m a{' '}
-              <Link href="https://github.com/rix1">product developer</Link> at{' '}
-              <Link href="https://twitter.com/@otovosolar">Otovo</Link>, living
-              in Oslo, Norway. I used to be a brother and mother to{' '}
-              <Link href="https://lh3.googleusercontent.com/pw/AM-JKLX0h8SioeSYDVLLX7S8bHISvHHm-hYancToyZbyvGGYyKpXt_ItTzNa7znM_MJR6Xq3Xn7oCMPKk5HHuAfiRaLk1ssV3q-q3hBtM_OxuwR8VC4WKlCcq6Klg9fmNoeFgvHsust7p5TF_RsmYSqZsb895A=w1536-h2049-no?authuser=0">
-                Sam
-              </Link>
-              , an old belgian shepard full of wisdom. I occationally{' '}
-              <Link href="/posts">write</Link>, but not as often as I aspire to.
+              I&apos;m <Link href="https://twitter.com/rix1">@rix1</Link>, a{' '}
+              <Link href="https://github.com/rix1">product developer</Link>{' '}
+              living in Oslo and I build things for a living: At work, by
+              myself, in open source or simply when cooking food for friends and
+              family. I want to learn all the things and build a better tomorrow
+              doing so. Check out <Link href="/posts">my writing</Link>.
+            </p>
+            <p className="mt-3">
+              I&apos;m currently having fun chasing the sun together with{' '}
+              <Link href="https://twitter.com/@otovosolar">@OtovoSolar</Link>.
             </p>
           </blockquote>
           <div className="mt-8 flex justify-center space-x-5">
