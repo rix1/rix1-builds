@@ -2,34 +2,40 @@ import Link from './Link';
 
 const projects = [
   {
-    title: '46brew',
-    description: 'A coffee timer for the 4:6 brewing method.',
-    link: 'https://46brew.app',
-    repo: 'http://github.com/rix1/46brew',
+    title: 'Cabin planner',
+    date: 'In progress',
+    description:
+      'An app for managing resources in large families, FRP if you want.',
+    link: 'https://hytta.rix1.dev/',
+    repo: 'https://github.com/rix1/rix1-builds/tree/main/apps/cabin-planner',
+  },
+  {
+    title: 'Cabin planner',
+    date: 'In progress',
+    description:
+      'An app for managing resources in large families, FRP if you want.',
+    link: 'https://hytta.rix1.dev/',
+    repo: 'https://github.com/rix1/rix1-builds/tree/main/apps/cabin-planner',
+  },
+  {
+    title: 'Flow Writer',
+    date: 'In progress',
+    description: 'A tool for unclear writing, modelled after my messy brain.',
+    link: 'https://twitter.com/rix1/status/1510736583154147330',
+    repo: 'https://github.com/rix1/rix1-builds/tree/main/apps/flow-writer',
   },
   {
     title: 'Nearme',
-    description: 'A tool to help you track your lockdown-encounters.',
+    date: '2020',
+    description:
+      'COVID-19: A tool to help you track your weekly lockdown-encounters.',
 
     link: 'http://nearme.rix1.dev',
     repo: 'https://github.com/rix1/nearme',
   },
   {
-    title: 'Auth now',
-    description:
-      'Together with some friends, we cooked up a simple passwordless authentication service ✨ (not live)',
-    link: 'https://github.com/rix1/auth-now',
-    repo: 'https://github.com/rix1/auth-now',
-  },
-  {
-    title: 'Feriekolonien.no',
-    description:
-      'A site for a childrens camp where I cook and play during summer.',
-    link: 'https://www.feriekolonien.no',
-    repo: 'https://github.com/feriekolonien/site',
-  },
-  {
     title: 'Plugformac.com',
+    date: '2020 →',
     description: (
       <span>
         I try my best to give a helping hand out to the awesome people at{' '}
@@ -39,13 +45,38 @@ const projects = [
     link: 'https://www.plugformac.com',
   },
   {
+    title: 'Feriekolonien.no',
+    date: '2019 →',
+    description:
+      'A site for a childrens camp where I cook and play during summer.',
+    link: 'https://www.feriekolonien.no',
+    repo: 'https://github.com/feriekolonien/site',
+  },
+  {
+    title: 'Auth now',
+    date: '2019',
+    description:
+      'Together with some friends, we cooked up a simple passwordless authentication service ✨',
+    link: 'https://github.com/rix1/auth-now',
+    repo: 'https://github.com/rix1/auth-now',
+  },
+  {
+    title: '46brew',
+    date: '2018',
+    description: 'A coffee timer for the 4:6 brewing method.',
+    link: 'https://46brew.app',
+    repo: 'http://github.com/rix1/46brew',
+  },
+  {
     title: 'Meeting timer',
+    date: '2018',
     description: 'A stupid tool that wont help you do meetings better.',
     link: 'https://rix1-meeting-timer-kxtvp0psu.now.sh',
     repo: 'https://github.com/rix1/meeting-timer',
   },
   {
     title: 'Gradient mixer',
+    date: '2015',
     description:
       'A simple tool that help you mix a bunch of colors to find nice gradients 💅',
     link: 'http://rix1.github.io/gradient-mixer/',
@@ -58,14 +89,22 @@ type ProjectSectionProps = {};
 const ProjectSection = ({}: ProjectSectionProps) => {
   return (
     <>
-      <h2 className="mb-8 text-center text-3xl">Sometimes I make stuff:</h2>
+      <h2 className="mb-8 text-center text-3xl">Stuff I build:</h2>
       <div className="grid grid-flow-row grid-cols-2 gap-6 text-lg md:grid-cols-3 lg:grid-rows-3">
         {projects.map((project) => (
-          <article key={project.title} className="max-w-xs">
+          <article key={project.title} className="mb-4 max-w-xs">
             <a href={project.link} className="">
-              <h3 className={['', project.link && 'underline'].join(' ')}>
-                {project.title}
+              <h3
+                className={[
+                  'mr-1 inline-block',
+                  project.link && 'underline',
+                ].join(' ')}
+              >
+                {project.title}{' '}
               </h3>
+              <span className="rounded-full bg-gray-100 px-2 text-sm text-gray-600">
+                {project.date}
+              </span>
             </a>
             <h3 className="font-normal text-slate-700">
               {project.description}{' '}
