@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-const withTM = require('next-transpile-modules')(['rix-ui']);
-const withContentlayer = require('next-contentlayer').withContentlayer;
+const { withContentlayer } = require('next-contentlayer');
 
-module.exports = withContentlayer(
-  withTM({
-    reactStrictMode: true,
-  }),
-);
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+};
+
+module.exports = withContentlayer(nextConfig);
