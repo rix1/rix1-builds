@@ -2,12 +2,11 @@ import Link from './Link';
 
 const projects = [
   {
-    title: 'Cabin planner',
+    title: 'Doggo',
     date: 'In progress',
-    description:
-      'An app for managing resources in large families, FRP if you want.',
-    link: 'https://hytta.rix1.dev/',
-    repo: 'https://github.com/rix1/rix1-builds/tree/main/apps/cabin-planner',
+    description: 'An app that help us track daily tasks with our new dog, Yoda',
+    link: 'https://doggo.rix1.dev/',
+    repo: 'https://github.com/rix1/rix1-builds/tree/main/apps/doggo',
   },
   {
     title: 'Cabin planner',
