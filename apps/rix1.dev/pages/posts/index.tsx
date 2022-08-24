@@ -1,4 +1,4 @@
-import { allPosts } from 'contentlayer/generated';
+import { allPosts, Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -13,7 +13,7 @@ export async function getStaticProps() {
   return { props: { posts } };
 }
 
-function PostCard(post) {
+function PostCard(post: Post) {
   return (
     <div className="mb-6">
       <NextLink href={post.url}>
@@ -53,7 +53,7 @@ function PostCard(post) {
   );
 }
 
-export default function Home({ posts }) {
+export default function Home({ posts }: { posts: Post[] }) {
   return (
     <PagePattern>
       <div className="px-4 pt-16 pb-20 font-athelas sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">

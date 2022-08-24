@@ -1,27 +1,36 @@
-import { allPosts } from 'contentlayer/generated';
+import { allPosts, Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Backlink from '../../components/Backlink';
 import PagePattern from '../../components/PagePattern';
 
-export async function getStaticPaths() {
+type Params = { slug: string };
+type Props = {
+  post?: Post; // for some reason this have to be nullable
+};
+
+export const getStaticPaths: GetStaticPaths<Params> = () => {
   const paths = allPosts.map((post) => post.url);
   return {
     paths,
     fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
+  if (!params || !params.slug) return { notFound: true };
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   return {
     props: {
       post,
     },
   };
-}
+};
 
-const PostLayout = ({ post }) => {
+const PostLayout: NextPage<{ post: Post }> = ({ post }) => {
   return (
     <PagePattern>
       <Head>
