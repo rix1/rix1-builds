@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "check-types": "tsc --noemit",
+    "lint": "eslint . --cache",
+    "ts": "tsc --noemit",
     "prettier": "prettier --check . --config ./prettier.config.js --ignore-path ../../.prettierignore",
-    "test": "pnpm prettier && pnpm lint && pnpm check-types"
+    "test": "pnpm prettier && pnpm eslint && pnpm ts"
   },
   "dependencies": {
     "@geist-ui/icons": "^1.0.2",

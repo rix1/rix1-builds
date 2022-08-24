@@ -34,3 +34,7 @@ yarn-error.log*
 
 # Contentlayer
 .contentlayer
+
+
+# eslint
+.eslintcache

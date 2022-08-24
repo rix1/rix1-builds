@@ -6,12 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "postinstall": "prisma generate",
     "prisma": "prisma",
-    "eslint": "eslint . --cache",
-    "ts": "tsc",
-    "prettier": "prettier --check . --ignore-path ../../.prettierignore",
+    "lint": "eslint . --cache",
+    "ts": "tsc --noemit",
+    "prettier": "prettier --check . --config ./prettier.config.js --ignore-path ../../.prettierignore",
     "test": "pnpm prettier && pnpm eslint && pnpm ts"
   },
   "prisma": {
@@ -43,11 +42,7 @@
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
-    "autoprefixer": "^10.4.8",
     "config": "workspace:*",
-    "eslint": "8.18.0",
-    "eslint-config-next": "12.2.3",
-    "postcss": "^8.4.16",
     "prisma": "^4.1.1",
     "tailwindcss": "^3.1.8",
     "typescript": "4.7.4"

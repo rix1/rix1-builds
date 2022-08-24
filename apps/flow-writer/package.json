@@ -6,23 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "check-types": "tsc --noemit",
-    "prettier": "prettier --check . --ignore-path ../../.prettierignore",
-    "test": "pnpm prettier && pnpm lint && pnpm check-types"
+    "lint": "eslint . --cache",
+    "ts": "tsc --noemit",
+    "prettier": "prettier --check . --config ./prettier.config.js --ignore-path ../../.prettierignore",
+    "test": "pnpm prettier && pnpm eslint && pnpm ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@radix-ui/react-tooltip": "^0.1.7",
-    "@tailwindcss/typography": "^0.5.2",
-    "autoprefixer": "^10.4.4",
     "clsx": "^1.1.1",
     "contentlayer": "^0.1.2",
     "dayjs": "^1.11.0",
     "next": "12.0.8",
     "next-contentlayer": "^0.1.2",
-    "postcss": "^8.4.12",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-flow-renderer": "^10.0.6",
@@ -31,7 +28,6 @@
     "react-useportal": "^1.0.16",
     "remark-gfm": "^3.0.1",
     "rooks": "^5.11.0",
-    "tailwindcss": "^3.0.23",
     "rix-ui": "workspace:*",
     "zustand": "^3.7.1"
   },
@@ -39,7 +35,6 @@
     "@types/node": "^17.0.12",
     "@types/react": "17.0.37",
     "config": "workspace:*",
-    "eslint": "7.32.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.3"
   }
