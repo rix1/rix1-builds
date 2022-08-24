@@ -26,14 +26,14 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
   const setContent = useStore((store) => store.setContent);
 
   const [isWriting, setIsWriting] = useState(false);
-  const editorRef = useRef<HTMLTextAreaElement>();
+  const editorRef = useRef<HTMLTextAreaElement>(null);
 
-  const { ref, openPortal, closePortal, isOpen, Portal } = usePortal({
-    bindTo: document && document.getElementById('editor-root'),
+  const { ref, openPortal, isOpen, Portal } = usePortal({
+    bindTo: (document && document.getElementById('editor-root')) || undefined,
   });
 
-  const debouncedOnChange = useCallback(
-    debounce((event) => {
+  const debouncedOnChange = useCallback(() => {
+    return debounce(() => {
       setIsWriting(false);
       if (editorRef.current?.value) {
         setContent(id, {
@@ -41,12 +41,11 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
           raw: editorRef.current.value,
         });
       }
-    }, 300),
-    [nodeContent],
-  );
+    }, 300);
+  }, [nodeContent, id, setContent]);
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && editorRef.current) {
       editorRef.current.focus();
     }
   }, [isOpen]);
@@ -55,9 +54,12 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
     setIsWriting(true);
   }, []);
 
-  const openEditor = useCallback((evt) => {
-    openPortal();
-  }, []);
+  const openEditor = useCallback(
+    (evt) => {
+      openPortal();
+    },
+    [openPortal],
+  );
 
   const { updated_at, created_at } = nodeContent;
 
@@ -109,7 +111,7 @@ function TextAreaNode({ data, id, xPos, yPos, selected }: TextAreaNodeProps) {
                 defaultValue={nodeContent.raw}
                 onChange={(event) => {
                   handleContentChange(event);
-                  debouncedOnChange(event);
+                  debouncedOnChange();
                 }}
               />
             </div>

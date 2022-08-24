@@ -21,15 +21,17 @@ type FlowRootProps = {};
 const FlowRoot = ({}: FlowRootProps) => {
   const content = useStore((store) => store.nodeContent);
   const deleteContent = useStore((store) => store.deleteContent);
-  const [nodes, setNodes, onNodesChange] = useNodesState(
+  const [nodes, onNodesChange] = useNodesState(
     createNodesFromContent(content, NodeType.TextArea),
   );
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const handleChange = useCallback((changes) => {
-    const deleteChanges = changes.filter((change) => change.type === 'remove');
+    const deleteChanges = changes.filter(
+      ({ type }: { type: string }) => type === 'remove',
+    );
 
-    deleteChanges.forEach((toBeDeleted) => {
+    deleteChanges.forEach((toBeDeleted: { id: string }) => {
       deleteContent(toBeDeleted.id);
     });
 

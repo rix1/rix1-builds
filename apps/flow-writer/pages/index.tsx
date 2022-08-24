@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { useHotkeys } from 'react-hotkeys-hook';
 import FlowRoot from '../components/FlowRoot';
 import { HelpTextProvider } from '../context/HelpTextProvider';
 

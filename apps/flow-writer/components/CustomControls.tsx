@@ -14,7 +14,7 @@ const CustomControls = ({}: CustomControlsProps) => {
   const { x: mouseX, y: mouseY } = useMouse();
   const createNode = useStore((store) => store.addContent);
 
-  const { addNodes, project } = useReactFlow();
+  const { addNodes } = useReactFlow();
 
   const addNewNode = () => {
     const newNode = createNode();
