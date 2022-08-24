@@ -6,6 +6,7 @@ export function createNodesFromContent(
   },
   type: NodeType,
 ): FlowNode[] {
+  // @ts-ignore
   return Object.keys(content).map((key, index) => ({
     id: key,
     type: type,

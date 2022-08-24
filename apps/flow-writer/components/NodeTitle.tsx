@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
-import { FlowNode, useStore } from '../lib/store';
+import { useStore } from '../lib/store';
+import { FlowNode } from '../lib/types';
 
 type NodeTitleProps = {
   nodeId: FlowNode['id'];
@@ -8,23 +9,27 @@ type NodeTitleProps = {
 
 const NodeTitle = ({ nodeId }: NodeTitleProps) => {
   const [edit, setEdit] = useState(false);
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
   const nodeContent = useStore((store) => store.getContent(nodeId));
   const updateContent = useStore((store) => store.setContent);
 
   useEffect(() => {
-    if (edit) {
+    if (edit && inputRef.current) {
       inputRef.current.focus();
     }
   }, [edit]);
 
   const handleSave = () => {
     setEdit(false);
-    updateContent(nodeId, { ...nodeContent, title: inputRef.current.value });
+    updateContent(nodeId, {
+      ...nodeContent,
+      title: inputRef?.current?.value || 'Unknown',
+    });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    ``;
     handleSave();
   };
 

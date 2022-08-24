@@ -16,7 +16,7 @@ const emptyContentNode = {
   id: '',
 };
 
-function createContentNode(id) {
+function createContentNode(id: string) {
   return {
     ...emptyContentNode,
     id: id,

@@ -1,10 +1,10 @@
 import { CheckIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 type SaveIndicatorProps = {
   shouldHide: boolean;
-  lastSavedAt: string | void;
+  lastSavedAt: string | null;
 };
 
 const SaveIndicator = ({ shouldHide, lastSavedAt }: SaveIndicatorProps) => {

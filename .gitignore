@@ -35,6 +35,9 @@ yarn-error.log*
 # Contentlayer
 .contentlayer
 
-
 # eslint
 .eslintcache
+
+
+# typescript
+tsconfig.tsbuildinfo
