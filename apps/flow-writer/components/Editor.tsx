@@ -9,66 +9,79 @@ type EditorProps = {
   defaultValue: string;
 };
 
-const Editor = ({ onChange, defaultValue }: EditorProps, editorRef) => {
-  const [preview, setPreview] = useState(false);
+const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
+  ({ onChange, defaultValue }, editorRef) => {
+    const [preview, setPreview] = useState(false);
 
-  useHotkeys(
-    'cmd+shift+p',
-    (event) => {
-      event.preventDefault();
-      setPreview((prev) => !prev);
-    },
-    {
-      enableOnTags: ['TEXTAREA'],
-    },
-  );
+    useHotkeys(
+      'cmd+shift+p',
+      (event) => {
+        event.preventDefault();
+        setPreview((prev) => !prev);
+      },
+      {
+        enableOnTags: ['TEXTAREA'],
+      },
+    );
 
-  useEffect(() => {
-    if (!preview) {
-      const end = editorRef.current.value.length;
-      editorRef.current.setSelectionRange(end, end);
-      editorRef.current.focus();
-    }
-  }, [preview]);
+    useEffect(() => {
+      if (!preview) {
+        // @ts-ignore
+        const end = editorRef.current.value.length;
+        // @ts-ignore
+        editorRef.current.setSelectionRange(end, end);
+        // @ts-ignore
+        editorRef.current.focus();
+      }
+    }, [preview, editorRef]);
 
-  const handleSelect = useCallback(() => {
-    const { selectionStart, selectionEnd, value } = editorRef.current;
-    console.log('you selected', value.substring(selectionStart, selectionEnd));
-  }, []);
+    const handleSelect = useCallback(() => {
+      // @ts-ignore
+      const { selectionStart, selectionEnd, value } = editorRef.current;
+      console.log(
+        'you selected',
+        value.substring(selectionStart, selectionEnd),
+      );
+    }, [editorRef]);
 
-  return (
-    <>
-      <div className="absolute right-2 top-2 flex items-center">
-        <span className="mr-2 text-xs text-slate-500">Preview</span>
-        <Switch
-          checked={preview}
-          onChange={setPreview}
-          className={`${
-            preview ? 'bg-green-400' : 'bg-gray-200'
-          } relative inline-flex h-6 w-11 items-center rounded-full`}
-        >
-          <span
+    return (
+      <>
+        <div className="absolute right-2 top-2 flex items-center">
+          <span className="mr-2 text-xs text-slate-500">Preview</span>
+          <Switch
+            checked={preview}
+            onChange={setPreview}
             className={`${
-              preview ? 'translate-x-6' : 'translate-x-1'
-            } inline-block h-4 w-4 transform rounded-full bg-white`}
-          />
-        </Switch>
-      </div>
-      {preview ? (
-        <div className="prose h-full w-full resize-none overflow-y-scroll bg-transparent px-6 pb-4 pt-12">
-          <ReactMarkdown children={defaultValue} remarkPlugins={[remarkGfm]} />
+              preview ? 'bg-green-400' : 'bg-gray-200'
+            } relative inline-flex h-6 w-11 items-center rounded-full`}
+          >
+            <span
+              className={`${
+                preview ? 'translate-x-6' : 'translate-x-1'
+              } inline-block h-4 w-4 transform rounded-full bg-white`}
+            />
+          </Switch>
         </div>
-      ) : (
-        <textarea
-          className="mt-6 h-[calc(100%-48px)] w-full resize-none bg-transparent px-6 pt-12 font-mono outline-none"
-          defaultValue={defaultValue}
-          ref={editorRef}
-          onChange={onChange}
-          onSelect={handleSelect}
-        />
-      )}
-    </>
-  );
-};
+        {preview ? (
+          <div className="prose h-full w-full resize-none overflow-y-scroll bg-transparent px-6 pb-4 pt-12">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {defaultValue}
+            </ReactMarkdown>
+          </div>
+        ) : (
+          <textarea
+            className="mt-6 h-[calc(100%-48px)] w-full resize-none bg-transparent px-6 pt-12 font-mono outline-none"
+            defaultValue={defaultValue}
+            ref={editorRef}
+            onChange={onChange}
+            onSelect={handleSelect}
+          />
+        )}
+      </>
+    );
+  },
+);
 
-export default forwardRef(Editor);
+Editor.displayName = 'Editor';
+
+export default Editor;
