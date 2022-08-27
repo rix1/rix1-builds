@@ -3,7 +3,7 @@ import { InferQueryOutput, trpc } from '../utils/trpc';
 
 type Event = InferQueryOutput<'dogEvents.getEventsForDate'>[0];
 
-function useDeleteEvent() {
+function useEventMutations() {
   const utils = trpc.useContext();
   const deleteMutation = trpc.useMutation(['dogEvents.delete'], {
     onSuccess(input) {
@@ -16,7 +16,18 @@ function useDeleteEvent() {
     },
   });
 
-  return deleteMutation.mutate;
+  const editEvent = trpc.useMutation(['dogEvents.edit'], {
+    onSuccess(input) {
+      utils.invalidateQueries([
+        'dogEvents.getEventsForDate',
+        {
+          date: dayjs(input.createdAt).format('YYYY-MM-DD'),
+        },
+      ]);
+    },
+  });
+
+  return [editEvent.mutate, deleteMutation.mutate] as const;
 }
 
-export default useDeleteEvent;
+export default useEventMutations;
