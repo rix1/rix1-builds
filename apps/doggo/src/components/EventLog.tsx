@@ -1,11 +1,15 @@
-import { TrashIcon, CheckIcon, XCircleIcon } from '@heroicons/react/outline';
-import { XIcon } from '@heroicons/react/solid';
+import {
+  CheckIcon,
+  PencilIcon,
+  TrashIcon,
+  XCircleIcon,
+} from '@heroicons/react/outline';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import useDeleteEvent from '../hooks/useDeleteEvent';
 import activityMapping from '../utils/eventMapping';
 import { titleCase } from '../utils/stringManipulation';
-import { InferQueryOutput, trpc } from '../utils/trpc';
+import { InferQueryOutput } from '../utils/trpc';
 
 type Events = InferQueryOutput<'dogEvents.getEventsForDate'>;
 
@@ -18,14 +22,29 @@ type ListItemProps = {
 };
 
 const ListItem = ({ event }: ListItemProps) => {
-  const [isActive, setIsActive] = useState(false);
-  const deleteEvent = useDeleteEvent();
+  const [state, setState] = useState('default');
+  const [editEvent, deleteEvent] = useDeleteEvent();
+  const [currentTime, setCurrentTime] = useState(
+    dayjs(event.createdAt).format('HH:mm'),
+  );
 
   function handleDelete() {
-    setIsActive(false);
+    setState('default');
     deleteEvent({
       eventId: event.id,
     });
+  }
+
+  function changeEventTime() {
+    const [hours, minutes] = currentTime.split(':');
+    editEvent({
+      eventId: event.id,
+      newDate: dayjs(event.createdAt)
+        .set('hour', Number(hours))
+        .set('minute', Number(minutes))
+        .toDate(),
+    });
+    setState('default');
   }
 
   return (
@@ -33,39 +52,61 @@ const ListItem = ({ event }: ListItemProps) => {
       <div className="flex items-center">
         <span className="text-xl">{activityMapping[event.activity].icon}</span>
         <span className="ml-3">{titleCase(event.activity.toLowerCase())}</span>
-        <div className="tabular-nums ml-auto justify-self-center text-gray-500 mr-2 flex items-center">
-          {!isActive && (
+        <div className="tabular-nums ml-auto justify-self-center text-gray-500 flex items-center space-x-2">
+          {state === 'default' && (
+            <button
+              type="button"
+              onClick={() => setState('edit')}
+              className="opacity-0 group-hover:opacity-100"
+            >
+              <PencilIcon className="h-5 w-5 text-gray-400" />
+            </button>
+          )}
+          {state === 'edit' && (
+            <button onClick={changeEventTime}>
+              <span className="bg-green-100 text-green-700 py-1 px-2 rounded">
+                Save
+              </span>
+            </button>
+          )}
+          {state === 'edit' && (
             <>
-              {event.user.image && event.user.name && (
-                <img
-                  src={event.user.image}
-                  alt={event.user.name}
-                  className="w-7 h-7 rounded-full inline-block mr-3"
-                />
-              )}
-              {dayjs(event.createdAt).format('HH:mm:ss')}
+              <input
+                type="time"
+                value={currentTime}
+                onChange={(ev) => setCurrentTime(ev.currentTarget.value)}
+              />
+            </>
+          )}
+          {state === 'default' && event.user.image && event.user.name && (
+            <img
+              src={event.user.image}
+              alt={event.user.name}
+              className="w-7 h-7 rounded-full inline-block"
+            />
+          )}
+          {state === 'default' && <span>{currentTime}</span>}
+          {state === 'default' && (
+            <button
+              onClick={() => setState('confirmDelete')}
+              className="opacity-0 group-hover:opacity-100"
+            >
+              <TrashIcon className="h-5 w-5 text-gray-400" />
+            </button>
+          )}
+          {state === 'confirmDelete' && (
+            <>
+              <button onClick={handleDelete}>
+                <span className="bg-red-100 text-red-700 py-1 px-2 rounded">
+                  Delete?
+                </span>
+              </button>
+              <button onClick={() => setState('default')}>
+                <XCircleIcon className="h-5 w-5 text-gray-400" />
+              </button>
             </>
           )}
         </div>
-        {!isActive ? (
-          <button
-            onClick={() => setIsActive(true)}
-            className="opacity-0 group-hover:opacity-100"
-          >
-            <TrashIcon className="h-5 w-5 text-gray-400" />
-          </button>
-        ) : (
-          <>
-            <button onClick={handleDelete}>
-              <span className="bg-red-100 text-red-700 py-1 px-2 rounded mr-1">
-                Delete?
-              </span>
-            </button>
-            <button onClick={() => setIsActive(false)}>
-              <XCircleIcon className="h-5 w-5 text-gray-400" />
-            </button>
-          </>
-        )}
       </div>
     </li>
   );
