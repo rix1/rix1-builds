@@ -88,7 +88,7 @@ type ProjectSectionProps = {};
 const ProjectSection = ({}: ProjectSectionProps) => {
   return (
     <>
-      <h2 className="mb-8 text-center text-3xl">Stuff I build:</h2>
+      <h2 className="mb-8 text-center text-3xl">Some of my creations:</h2>
       <div className="grid grid-flow-row grid-cols-2 gap-6 text-lg md:grid-cols-3 lg:grid-rows-3">
         {projects.map((project) => (
           <article key={project.title} className="mb-4 max-w-xs">
