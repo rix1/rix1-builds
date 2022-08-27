@@ -23,13 +23,28 @@ type ListItemProps = {
 
 const ListItem = ({ event }: ListItemProps) => {
   const [state, setState] = useState('default');
-  const deleteEvent = useDeleteEvent();
+  const [editEvent, deleteEvent] = useDeleteEvent();
+  const [currentTime, setCurrentTime] = useState(
+    dayjs(event.createdAt).format('HH:mm'),
+  );
 
   function handleDelete() {
     setState('default');
     deleteEvent({
       eventId: event.id,
     });
+  }
+
+  function changeEventTime() {
+    const [hours, minutes] = currentTime.split(':');
+    editEvent({
+      eventId: event.id,
+      newDate: dayjs(event.createdAt)
+        .set('hour', Number(hours))
+        .set('minute', Number(minutes))
+        .toDate(),
+    });
+    setState('default');
   }
 
   return (
@@ -40,6 +55,7 @@ const ListItem = ({ event }: ListItemProps) => {
         <div className="tabular-nums ml-auto justify-self-center text-gray-500 flex items-center space-x-2">
           {state === 'default' && (
             <button
+              type="button"
               onClick={() => setState('edit')}
               className="opacity-0 group-hover:opacity-100"
             >
@@ -47,7 +63,7 @@ const ListItem = ({ event }: ListItemProps) => {
             </button>
           )}
           {state === 'edit' && (
-            <button onClick={() => setState('default')} className="">
+            <button onClick={changeEventTime}>
               <span className="bg-green-100 text-green-700 py-1 px-2 rounded">
                 Save
               </span>
@@ -55,7 +71,11 @@ const ListItem = ({ event }: ListItemProps) => {
           )}
           {state === 'edit' && (
             <>
-              <input type={'time'} />
+              <input
+                type="time"
+                value={currentTime}
+                onChange={(ev) => setCurrentTime(ev.currentTarget.value)}
+              />
             </>
           )}
           {state === 'default' && event.user.image && event.user.name && (
@@ -65,9 +85,7 @@ const ListItem = ({ event }: ListItemProps) => {
               className="w-7 h-7 rounded-full inline-block"
             />
           )}
-          {state === 'default' && (
-            <span>{dayjs(event.createdAt).format('HH:mm')}</span>
-          )}
+          {state === 'default' && <span>{currentTime}</span>}
           {state === 'default' && (
             <button
               onClick={() => setState('confirmDelete')}

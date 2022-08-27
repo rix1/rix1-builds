@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { Activity } from '@prisma/client';
 import dayjs from 'dayjs';
 
-const eventSerializer = z.object({
+const createEventSerializer = z.object({
   userId: z.string(),
   activity: z.nativeEnum(Activity),
   date: z.date().nullish(),
@@ -13,13 +13,18 @@ const dateSerializer = z.object({
   date: z.string(),
 });
 
-const deleteSerializer = z.object({
+const deleteEventSerializer = z.object({
   eventId: z.string(),
+});
+
+const editEventSerializer = z.object({
+  eventId: z.string(),
+  newDate: z.date(),
 });
 
 export const eventsRouter = createRouter()
   .mutation('create', {
-    input: eventSerializer,
+    input: createEventSerializer,
     async resolve({ input, ctx }) {
       return await ctx.prisma.dogEvent.create({
         data: {
@@ -31,11 +36,24 @@ export const eventsRouter = createRouter()
     },
   })
   .mutation('delete', {
-    input: deleteSerializer,
+    input: deleteEventSerializer,
     async resolve({ input, ctx }) {
       return await ctx.prisma.dogEvent.delete({
         where: {
           id: input.eventId,
+        },
+      });
+    },
+  })
+  .mutation('edit', {
+    input: editEventSerializer,
+    async resolve({ input, ctx }) {
+      return await ctx.prisma.dogEvent.update({
+        where: {
+          id: input.eventId,
+        },
+        data: {
+          createdAt: input.newDate,
         },
       });
     },
