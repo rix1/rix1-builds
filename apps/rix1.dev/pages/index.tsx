@@ -67,7 +67,7 @@ const Home: NextPage = () => {
             <p className="">
               I&apos;m <Link href="https://twitter.com/rix1">@rix1</Link>, a{' '}
               <Link href="https://github.com/rix1">product developer</Link>{' '}
-              living in Oslo and I build things for a living: At work, by
+              living in Oslo and I create things for a living: At work, by
               myself, in open source or simply when cooking food for friends and
               family. I want to learn all the things and build a better tomorrow
               doing so. Check out <Link href="/posts">my writing</Link>.
