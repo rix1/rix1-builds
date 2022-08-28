@@ -40,16 +40,18 @@ export default function Navbar({ onClick }: NavbarProps) {
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <Link href="/">
-                    <a className={getNavStyles(router.asPath, '/')}>Dog log</a>
+                    <a className={getNavStyles(router.pathname, '/')}>
+                      Dog log
+                    </a>
                   </Link>
                   <Link href="/calendar">
-                    <a className={getNavStyles(router.asPath, '/calendar')}>
+                    <a className={getNavStyles(router.pathname, '/calendar')}>
                       Calendar
                     </a>
                   </Link>
                   {status === 'authenticated' && (
                     <Link href="/profile">
-                      <a className={getNavStyles(router.asPath, '/profile')}>
+                      <a className={getNavStyles(router.pathname, '/profile')}>
                         Profile
                       </a>
                     </Link>
