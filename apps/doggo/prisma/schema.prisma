@@ -84,4 +84,5 @@ model DogEvent {
     userId    String
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     activity  Activity @default(OTHER)
+    meta      Json?
 }
