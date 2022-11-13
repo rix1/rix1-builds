@@ -58,6 +58,17 @@ export const eventsRouter = createRouter()
       });
     },
   })
+  .query('findFirstEvent', {
+    async resolve({ ctx }) {
+      return await ctx.prisma.dogEvent.findFirst({
+        where: {
+          createdAt: {
+            lte: new Date(),
+          },
+        },
+      });
+    },
+  })
   .query('getEventsForDate', {
     input: dateSerializer,
     async resolve({ input, ctx }) {

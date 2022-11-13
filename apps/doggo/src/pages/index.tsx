@@ -1,28 +1,22 @@
-import dayjs, { Dayjs, UnitType } from 'dayjs';
+import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
+import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-import Day from '../components/Day';
+import DayList from '../components/DayList';
 import Navbar from '../components/Navbar';
+import { trpc } from '../utils/trpc';
 
 dayjs.extend(isToday);
-
-function constructDateArray(center: Dayjs, padding: number, unit: UnitType) {
-  const startDate = center.subtract(padding / 2, 'days');
-  return new Array(padding * 2).fill(undefined).map((el, index) => {
-    return startDate.add(index, 'days').startOf('day');
-  });
-}
+dayjs.extend(duration);
 
 const Home: NextPage = () => {
-  const [daysToRender, setDaysToRender] = useState(
-    constructDateArray(dayjs(), 7, 'days'),
-  );
-  const todayRef = useRef<HTMLDivElement>(null);
+  const firstEvent = trpc.useQuery(['dogEvents.findFirstEvent']);
 
+  const todayRef = useRef<HTMLDivElement>(null);
   useHotkeys('option+d', () => {
     todayRef.current?.scrollIntoView();
   });
@@ -30,6 +24,17 @@ const Home: NextPage = () => {
   useEffect(() => {
     todayRef.current?.scrollIntoView();
   });
+
+  const Tag = {
+    loading: () => <>Loading...</>,
+    success: () => (
+      <DayList todayRef={todayRef} firstDate={firstEvent.data?.createdAt} />
+    ),
+    idle: () => <>Idle!</>,
+    error: () => <>Error</>,
+  }[firstEvent.status];
+
+  console.log(firstEvent.status);
 
   return (
     <>
@@ -45,18 +50,7 @@ const Home: NextPage = () => {
         }}
       />
 
-      <main className="container mx-auto flex flex-col min-h-screen p-4 space-y-28">
-        {daysToRender.map((day) => (
-          <Day
-            ref={day.isToday() ? todayRef : undefined}
-            date={day}
-            key={day.toISOString()}
-            isToday={day.isToday()}
-          />
-        ))}
-        {/* {first && <Day date={first} />} */}
-        {/* {last && <Day date={last} />} */}
-      </main>
+      <Tag />
     </>
   );
 };
