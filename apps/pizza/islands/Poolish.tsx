@@ -1,7 +1,7 @@
 import { computed, signal } from "@preact/signals";
 
-const YEAST_GRAMS = 5;
-const HONEY_GRAMS = 5;
+export const YEAST_GRAMS = 5;
+export const HONEY_GRAMS = 5;
 
 export const poolishBase = signal(300);
 export const poolishTotal = computed(() =>

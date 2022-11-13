@@ -7,13 +7,13 @@ const MAX = 30;
 
 const Slider = () => {
   return (
-    <label htmlFor="pizza-slider">
+    <label htmlFor="pizza-slider" className="max-w-lg block">
       Adjust number of pies: <output>{slider.value}</output>
       <input
         name="pizza-slider"
         id="pizza-slider"
         type="range"
-        className="block mt-2 w-96"
+        className="block mt-2 w-full"
         value={slider.value}
         style={{
           backgroundSize: `${((slider.value - MIN) * 100) / (MAX - MIN)}% 100%`,

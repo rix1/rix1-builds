@@ -12,6 +12,7 @@ export default function Home() {
         <link rel="stylesheet" href={asset("/global.css")} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
         <img

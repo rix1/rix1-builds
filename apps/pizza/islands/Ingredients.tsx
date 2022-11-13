@@ -1,4 +1,5 @@
 import { computed } from "@preact/signals";
+import { HONEY_GRAMS, YEAST_GRAMS } from "./Poolish.tsx";
 import { slider } from "./Slider.tsx";
 
 const WATER_GRAMS = 100; // per pizza
@@ -36,6 +37,20 @@ const Ingredients = () => {
           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             {number.format(salt.value)}g{" "}
             <span className="text-gray-500">({SALT_MULTIPLIER * 100}%)</span>
+          </dd>
+        </div>
+        <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+          <dt className="text-sm font-medium text-gray-500">Dry yeast</dt>
+          <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+            {number.format(YEAST_GRAMS)}g{" "}
+            <span className="text-gray-500">(Fixed)</span>
+          </dd>
+        </div>
+        <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+          <dt className="text-sm font-medium text-gray-500">Honey</dt>
+          <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+            {number.format(HONEY_GRAMS)}g{" "}
+            <span className="text-gray-500">(Fixed)</span>
           </dd>
         </div>
       </dl>
