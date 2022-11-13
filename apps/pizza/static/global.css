@@ -1,0 +1,39 @@
+:root {
+  --red: 255, 98, 66; /* #ff6242 */
+  --yellow: 255, 229, 0; /* #ffe500 */
+  --gray: 69, 65, 60; /* #45413c */
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  border: 2px solid rgba(var(--gray), 1);
+  height: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  background-color: rgba(var(--yellow), 0.2);
+  border-radius: 10px;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(rgb(var(--yellow)), rgb(var(--yellow)));
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: rgb(var(--red));
+  border: 2px solid rgba(var(--gray), 1);
+  cursor: ew-resize;
+  /* box-shadow: 0 0 2px 0 #555; */
+  /* transition: background 0.3s ease-in-out; */
+}
+
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="”range”"]::-moz-range-track,
+input[type="”range”"]::-ms-track {
+  width: 100%;
+  /* -webkit-appearance: none; */
+  /* box-shadow: none; */
+  /* border: none; */
+  /* background: transparent; */
+}
