@@ -29,7 +29,13 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-5">
           <div>
             <h2 className="text-xl mt-10 font-medium mb-1">
-              Step 1: Make poolish
+              Step 1: Make{" "}
+              <span
+                className="help"
+                title="Poolish is a highly fluid yeast-cultured dough. It's a type of pre-ferment traditionally used in the production of French bakery products."
+              >
+                poolish
+              </span>
             </h2>
             <p className="text-gray-500 mb-2 text-sm">
               The day before, you'll quickly whip together the following
