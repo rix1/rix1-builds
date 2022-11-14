@@ -8,7 +8,8 @@ const MAX = 30;
 const Slider = () => {
   return (
     <label htmlFor="pizza-slider" className="max-w-lg block">
-      Adjust number of pies: <output>{slider.value}</output>
+      Adjust number of pies: <output>{slider.value}</output>{" "}
+      <span className="text-gray-500">(~260g each)</span>
       <input
         name="pizza-slider"
         id="pizza-slider"
