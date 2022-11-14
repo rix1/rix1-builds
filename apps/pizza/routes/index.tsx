@@ -38,7 +38,7 @@ export default function Home() {
               </span>
             </h2>
             <p className="text-gray-500 mb-2 text-sm">
-              The day before, you'll quickly whip together the following
+              The day before, you'll quickly whip together the following:
             </p>
             <Poolish />
           </div>
@@ -47,13 +47,17 @@ export default function Home() {
               Step 2: Final mix
             </h2>
             <p className="text-gray-500 mb-2 text-sm">
-              A couple of hours before your pizza party, mix the following
+              A couple of hours before your pizza party, mix the following:
             </p>
             <FinalMix />
           </div>
         </div>
         <h2 className="text-xl mt-20 font-medium mb-2">References</h2>
-        <ul>
+        <p className="mb-4">
+          This site will only show you amounts, but the technique and timing is
+          important. I'll add good references here as I go.
+        </p>
+        <ul className="list-disc pl-5">
           <li>
             Vito Iacopelli on YouTube -{" "}
             <a
