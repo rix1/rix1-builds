@@ -10,9 +10,16 @@ export default function Home() {
     <>
       <Head>
         <SEO
-          title="Pizza slider by Rix1"
-          description="You don't have to be an expert to make great pizza."
-          keywords={["pizza", "ingredients", "recipe", "easy"]}
+          title="Pizza slider, a public service by @rix1"
+          description="You don't have to be an expert to make great pizza. Slide away and get accurate ingredient measures instantly."
+          keywords={[
+            "pizza",
+            "ingredients",
+            "recipe",
+            "easy",
+            "blazingly",
+            "fast",
+          ]}
           siteUrl="https://pizza.rix1.dev"
           image={{ src: "/social-card.png" }}
         />
