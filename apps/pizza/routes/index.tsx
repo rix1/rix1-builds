@@ -75,6 +75,22 @@ export default function Home() {
           </li>
         </ul>
       </div>
+      <footer className="max-w-screen-md my-6 text-gray-500 mx-auto px-4">
+        <p>
+          Built with{" "}
+          <a
+            href="https://fresh.deno.dev/"
+            target="_blank"
+            className="text-underline"
+          >
+            Fresh
+          </a>{" "}
+          in November 2022 by{" "}
+          <a href="https://rix1.dev" className="text-underline">
+            @rix1
+          </a>
+        </p>
+      </footer>
     </>
   );
 }
