@@ -1,4 +1,5 @@
 import { asset, Head } from "$fresh/runtime.ts";
+import SEO from "../components/SEO.tsx";
 import FinalMix from "../islands/FinalMix.tsx";
 import Ingredients from "../islands/Ingredients.tsx";
 import Poolish from "../islands/Poolish.tsx";
@@ -8,11 +9,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Pizza</title>
+        <SEO
+          title="Pizza slider by Rix1"
+          description="You don't have to be an expert to make great pizza."
+          keywords={["pizza", "ingredients", "recipe", "easy"]}
+          siteUrl="https://pizza.rix1.dev"
+          image={{ src: "/social-card.png" }}
+        />
         <link rel="stylesheet" href={asset("/global.css")} />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
         <img
@@ -20,7 +24,7 @@ export default function Home() {
           class="w-96 h-32 -ml-5 mt-12"
           alt="the fresh logo: a sliced lemon dripping with juice"
         />
-        <p class="my-6 font-semibold italic">
+        <p class="mt-4 font-semibold italic">
           Welcome to Pizza. Here we make pizza.
         </p>
         <Slider />

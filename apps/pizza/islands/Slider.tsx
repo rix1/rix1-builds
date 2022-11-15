@@ -7,22 +7,27 @@ const MAX = 30;
 
 const Slider = () => {
   return (
-    <label htmlFor="pizza-slider" className="max-w-lg block">
+    <label
+      htmlFor="pizza-slider"
+      className="max-w-lg block font-semibold italic mt-0"
+    >
       Adjust number of pies: <output>{slider.value}</output>{" "}
-      <span className="text-gray-500">(~260g each)</span>
       <input
         name="pizza-slider"
         id="pizza-slider"
         type="range"
-        className="block mt-2 w-full"
+        className="block mt-4 w-full"
         value={slider.value}
         style={{
           backgroundSize: `${((slider.value - MIN) * 100) / (MAX - MIN)}% 100%`,
         }}
         min={MIN}
         max={MAX}
-        onInput={(e) => slider.value = Number(e.currentTarget.value)}
+        onInput={(e) => (slider.value = Number(e.currentTarget.value))}
       />
+      <span className="text-gray-500 font-normal text-sm mt-2 block">
+        ~260g each
+      </span>
     </label>
   );
 };
