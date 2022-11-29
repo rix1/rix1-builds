@@ -2,6 +2,7 @@
   --red: 255, 98, 66; /* #ff6242 */
   --yellow: 255, 229, 0; /* #ffe500 */
   --gray: 69, 65, 60; /* #45413c */
+  --thumb-transform: 0;
 }
 
 input[type="range"] {
@@ -24,6 +25,7 @@ input[type="range"]::-webkit-slider-thumb {
   background: rgb(var(--red));
   border: 2px solid rgba(var(--gray), 1);
   cursor: ew-resize;
+  transform: translateX(var(--thumb-transform));
   /* box-shadow: 0 0 2px 0 #555; */
   /* transition: background 0.3s ease-in-out; */
 }
