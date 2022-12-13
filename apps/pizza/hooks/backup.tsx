@@ -11,47 +11,50 @@ const knobOffset = signal(0);
 const MIN = 4;
 const MAX = 30;
 
+enum Location {
+  LEFT = 0,
+  RIGHT = 1,
+  MIDDLE = 2,
+}
+
 function getTransform(x: number, xReference: number) {
-  const pos = rubberbandIfOutOfBounds(x, xReference - 30, xReference + 30);
+  const pos = rubberbandIfOutOfBounds(x, xReference - 40, xReference);
   return pos - xReference;
 }
 
 const Slider = () => {
-  const sliderRef = useRef(null);
-  const [isNearBounds, setIsNearBounds] = useState<boolean>(false);
-  const [xReference, setXReference] = useState<number>(0);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const sliderRef = useRef<HTMLInputElement>(null);
+  const [knobLocation, setKnobLocation] = useState<Location>(Location.MIDDLE);
+  const [sliderXbounds, setSliderXbounds] = useState([0, 0]);
 
-  useMouseDown(sliderRef, () => {
-    console.log("isDragging: true");
-
-    setIsDragging(true);
-  });
-  const { x } = useMousePosition();
+  const isDragging = useMouseDown(sliderRef);
+  const { x, y } = useMousePosition();
   const springAnimation = useSpring(
     knobOffset,
+    () => {
+      // set;
+    },
   );
 
   useEffect(() => {
+    const { left = 0, right = 0 } =
+      sliderRef.current?.getBoundingClientRect() || {};
+    setSliderXbounds([left, right]);
+  }, []);
+
+  useEffect(() => {
     if (!isDragging) {
-      // setXReference(x);
       springAnimation.current?.updateConfig({ fromValue: knobOffset.value });
       springAnimation.current?.start();
-      // start animation if isNearBounds
     }
-    console.log(springAnimation.current?.stop);
+  }, [isDragging]);
 
-    if (isDragging && springAnimation.current?.isAnimating) {
-      console.log("should stop animation");
-
-      springAnimation.current.updateConfig({ fromValue: 0 });
-      springAnimation.current.stop();
-    }
-  }, [isDragging, setXReference, x]);
-
-  if (isDragging && isNearBounds) {
-    knobOffset.value = getTransform(x, xReference);
+  if (isDragging && knobLocation) {
+    knobOffset.value = getTransform(x, sliderXbounds[knobLocation]);
   }
+  //  else {
+  //   knobOffset.value = 0;
+  // }
 
   // const xPos = isDragging ? currentKnobPos : animationValue.value;
 
@@ -74,18 +77,15 @@ const Slider = () => {
         }}
         min={MIN}
         max={MAX}
-        onMouseUp={() => {
-          console.log("isDragging: false");
-          setIsDragging(false);
-        }}
         onInput={(e) => {
           const val = Number(e.currentTarget.value);
 
-          if (val === MAX || val === MIN) {
-            setIsNearBounds(true);
-            setXReference(x);
+          if (val === MAX) {
+            setKnobLocation(Location.RIGHT);
+          } else if (val === MIN) {
+            setKnobLocation(Location.LEFT);
           } else {
-            setIsNearBounds(false);
+            setKnobLocation(Location.MIDDLE);
           }
           slider.value = val;
         }}

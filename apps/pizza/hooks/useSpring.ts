@@ -8,9 +8,9 @@ function useSpring(animationValue: Signal) {
   useEffect(() => {
     springRef.current = new Spring({
       toValue: 0,
-      mass: 1.2,
+      mass: 12,
       stiffness: 120,
-      damping: 6,
+      damping: 1,
     }).onUpdate((s) => animationValue.value = s.currentValue).start();
     return () => {
       if (springRef.current) {

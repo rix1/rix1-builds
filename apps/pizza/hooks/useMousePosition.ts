@@ -21,30 +21,16 @@ export const useMousePosition = () => {
   return mousePosition;
 };
 
-export const useMouseDown = (ref: RefObject<HTMLInputElement>) => {
-  const [isDown, setIsDown] = useState(false);
+export const useMouseDown = (
+  ref: RefObject<HTMLInputElement>,
+  cb: () => void,
+) => {
   useEffect(() => {
-    console.log("runniing mouse down effect");
-
     const element = ref?.current || document;
-    const onMouseDown = (ev) => {
-      console.log("mouse down!");
-
-      setIsDown(true);
-    };
-    const onMouseUp = () => {
-      console.log("mouse up!");
-      setIsDown(false);
-    };
-
-    element.addEventListener("mousedown", onMouseDown);
-    element.addEventListener("mouseup", onMouseUp);
+    element.addEventListener("mousedown", cb);
 
     return () => {
-      element.removeEventListener("mousedown", onMouseDown);
-      element.removeEventListener("mouseup", onMouseUp);
+      element.removeEventListener("mousedown", cb);
     };
   }, []);
-
-  return isDown;
 };
