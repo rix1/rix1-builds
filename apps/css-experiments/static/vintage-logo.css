@@ -1,0 +1,111 @@
+:root {
+  --bg-color: rgb(20, 20, 20);
+  --purple: hsl(261, 100%, 67%);
+  --blue: hsl(211, 100%, 62%);
+  --green: hsl(158, 100%, 45%);
+  --yellow: hsl(56, 100%, 70%);
+  --orange: hsl(12, 100%, 64%);
+  --white: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+/* @keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 0.1;
+  }
+  33% {
+    opacity: 0.1;
+  }
+  34% {
+    opacity: 0.4;
+  }
+  66% {
+    opacity: 0.4;
+  }
+  67% {
+    opacity: 0.6;
+  }
+  99% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+} */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.txt {
+  --time: 1000ms;
+  --steps: 5;
+  font-size: 10vw;
+  color: var(--text-color);
+  /* padding-left: 4em; */
+  /* margin-left: 50%; */
+  -webkit-text-stroke: 2px currentColor;
+  /* letter-spacing: -20px; */
+  cursor: pointer;
+  line-height: 0;
+  opacity: 0;
+  animation: fadeIn var(--time) steps(var(--steps)) forwards;
+  animation-delay: calc(var(--delay) * calc(var(--time) / var(--steps) * 2));
+  transition: color 300ms;
+}
+
+.txt::before {
+  content: "";
+  width: 100%;
+  background-color: currentColor;
+  height: 1ch;
+  margin-right: 1vw;
+  border-radius: 2px;
+}
+
+.txt > svg {
+  margin-left: 0vw;
+  z-index: 1;
+}
+
+svg > path {
+  stroke-width: 5px;
+}
+
+.hyphen {
+  width: 1.5vw;
+  background-color: currentColor;
+  height: 0.16ch;
+  align-self: center;
+  margin-bottom: -0.45ch;
+  z-index: 10;
+  border-radius: 0.06ch;
+}
+
+.stripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--bg-color),
+    var(--bg-color) 0.3vw,
+    transparent 0.3vw,
+    transparent 1vw
+  );
+}
+
+.group:has(.txt:hover) .txt:not(.txt:hover) {
+  color: rgb(40, 40, 40);
+  transition: color 300ms;
+}

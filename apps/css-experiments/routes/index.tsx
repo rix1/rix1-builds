@@ -6,6 +6,7 @@ function Layout(props: { children?: ComponentChildren }) {
   return (
     <>
       <Head>
+        <title>Rix1 | Misc</title>
         <link rel="stylesheet" href={asset("/lux-button.css")} />
       </Head>
       {props.children}
@@ -16,9 +17,6 @@ function Layout(props: { children?: ComponentChildren }) {
 export default function Home() {
   return (
     <Layout>
-      <Head>
-        <title>Rix1 | Misc</title>
-      </Head>
       <div class="relative font-janson flex-col text-2xl p-4 w-full justify-center flex items-center h-screen border gap-8">
         {/* <div class="absolute inset-0 bg-gradient-to-r  via-red-100 via-[#A5C4AF] to-[#A5C4AF] -z-10" /> */}
         {
