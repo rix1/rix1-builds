@@ -4,18 +4,18 @@
 
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/index.tsx";
-import * as $1 from "./routes/vintage-logo.tsx";
+import * as $1 from "./routes/retro.tsx";
 import * as $$0 from "./islands/DelayClasses.tsx";
-import * as $$1 from "./islands/LuxButton.tsx";
+import * as $$1 from "./islands/LinearButton.tsx";
 
 const manifest = {
   routes: {
     "./routes/index.tsx": $0,
-    "./routes/vintage-logo.tsx": $1,
+    "./routes/retro.tsx": $1,
   },
   islands: {
     "./islands/DelayClasses.tsx": $$0,
-    "./islands/LuxButton.tsx": $$1,
+    "./islands/LinearButton.tsx": $$1,
   },
   baseUrl: import.meta.url,
   config,

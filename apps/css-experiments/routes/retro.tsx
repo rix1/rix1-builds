@@ -7,7 +7,7 @@ function Layout(props: { children?: ComponentChildren }) {
     <>
       <Head>
         <title>Rix1 | Misc</title>
-        <link rel="stylesheet" href={asset("/vintage-logo.css")} />
+        <link rel="stylesheet" href={asset("/retro.css")} />
       </Head>
       <div class="text-white font-pressStart">
         {props.children}
