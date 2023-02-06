@@ -19,14 +19,10 @@ const DelayClasses = (
 ) => {
   const [ready, setReady] = useState(false);
   useEffect(() => {
-    console.log("effect running");
     setTimeout(() => {
-      console.log("delay done");
-
       setReady(true);
     }, delay);
   }, []);
-  console.log("helo");
 
   const lines = [
     { color: "--purple", text: "home", icon: Home },
