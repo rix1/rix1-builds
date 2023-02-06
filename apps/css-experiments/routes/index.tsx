@@ -1,13 +1,13 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { ComponentChildren } from "https://esm.sh/v102/preact@10.11.0/src/index";
-import LuxButton from "../islands/LuxButton.tsx";
+import LuxButton from "../islands/LinearButton.tsx";
 
 function Layout(props: { children?: ComponentChildren }) {
   return (
     <>
       <Head>
         <title>Rix1 | Misc</title>
-        <link rel="stylesheet" href={asset("/lux-button.css")} />
+        <link rel="stylesheet" href={asset("/linear-button.css")} />
       </Head>
       {props.children}
     </>
