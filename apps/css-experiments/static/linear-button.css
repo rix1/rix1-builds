@@ -1,0 +1,37 @@
+:root {
+  --bg-color: rgb(20, 20, 20);
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+.lux {
+  /* border: 1px solid rgb(250, 223, 114); */
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgb(252, 248, 242, 0.2);
+  color: rgb(252, 248, 242);
+  /* box-shadow: 0 25psx 50px -12px rgb(252, 248, 242, 0.09); */
+}
+
+.lux:hover::before {
+  opacity: 1;
+}
+
+.lux::before {
+  content: "";
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.1),
+    transparent 40%
+  );
+  border-radius: inherit;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 500ms;
+}
