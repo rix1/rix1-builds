@@ -1,3 +1,5 @@
+import { start } from "repl";
+
 type Props = {
   str: string;
   indices: Set<number>;
