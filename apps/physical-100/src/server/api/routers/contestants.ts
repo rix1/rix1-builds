@@ -1,4 +1,3 @@
-import { z } from "zod";
 import contestants from "./data.json";
 
 // export const people = z.array(
