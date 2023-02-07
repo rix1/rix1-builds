@@ -1,6 +1,8 @@
 # Search Physical:100 (Netflix)
 
-Search contestants from the [Netflix show Physical:100](https://www.netflix.com/no-en/title/81587446)
+Search contestants from the [Netflix show Physical:100](https://www.netflix.com/no-en/title/81587446).
+
+<small>**Note:** I do not own the rights to neither the logo or the images. If you're Netflix and want me to remove them, please reach out.</small>
 
 ## Roadmap
 
@@ -25,4 +27,4 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 
 ## How do I contribute?
 
-PRs are welcome.
+PRs are welcome 🤗
