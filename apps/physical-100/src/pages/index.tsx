@@ -7,6 +7,7 @@ import HighlightChars from "../components/HighlightChars";
 import { InstagramLogo } from "../components/icons";
 
 import { api } from "../utils/api";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const { data, isLoading } = api.contestants.getAll.useQuery();
@@ -84,7 +85,9 @@ const Home: NextPage = () => {
       <main className="relative flex min-h-screen flex-col items-center">
         <div className="container flex flex-col items-center gap-12 px-4 py-16">
           <div className="relative w-full max-w-prose">
-            <img
+            <Image
+              unoptimized
+              alt="Physical:100 Netflix logo"
               className="w-72"
               src="https://occ-0-606-41.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABVHzR4OU3FIiCMxVn94Tl-RkOQ0pCQJqfkQ6fM35FMS8EmWmUzPYWnoToAVvy967GuAWyuKjhDpwIo1R0S2PwwOdv2jJroEKgARKwgDQkbyJVPNsQfsfCAuhmW-RHNxxjnK19glS1SU5IiksQAjXfz4cw658CHir1mDlU-GyPAYGZ11dEj1QFA.png?r=540"
             />
