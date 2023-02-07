@@ -1,4 +1,5 @@
 import { Fzf } from "fzf";
+import { NextSeo } from "next-seo";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
@@ -21,6 +22,43 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <NextSeo
+        title="Physical:100 Search contestants"
+        description="Easily search Physical:100 (Netflix) contestants without any trackers or ads."
+        canonical="https://search-100.rix1.dev"
+        openGraph={{
+          url: "https://search-100.rix1.dev",
+          title: "Physical:100 Search contestants",
+          description:
+            "Easily search Physical:100 (Netflix) contestants without any trackers or ads.",
+          images: [
+            {
+              url: "https://search-100.rix1.dev/social-open-graph.jpg",
+              width: 1200,
+              height: 629,
+              alt: "Easily search Physical:100 (Netflix) contestants without any trackers or ads.",
+              type: "image/jpeg",
+            },
+            {
+              url: "https://search-100.rix1.dev/social-open-graph.jpg",
+              width: 1024,
+              height: 512,
+              alt: "Easily search Physical:100 (Netflix) contestants without any trackers or ads.",
+              type: "image/jpeg",
+            },
+          ],
+          siteName: "Physical:100 Search",
+        }}
+        twitter={{
+          handle: "@rix1",
+          site: "@rix1",
+          cardType: "summary_large_image",
+        }}
+      />
+
       <a
         rel="noreferrer"
         target="_blank"
@@ -42,14 +80,6 @@ const Home: NextPage = () => {
           </g>
         </svg>
       </a>
-      <Head>
-        <title>Physical:100 Search contestants</title>
-        <meta
-          name="description"
-          content="Easily search Physical:100 (Netflix) contestants without any trackers or ads"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div className="fixed inset-0 bg-black bg-hero-mobile bg-no-repeat md:bg-hero-desktop"></div>
       <main className="relative flex min-h-screen flex-col items-center">
         <div className="container flex flex-col items-center gap-12 px-4 py-16">
