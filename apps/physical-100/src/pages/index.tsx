@@ -89,6 +89,8 @@ const Home: NextPage = () => {
               unoptimized
               alt="Physical:100 Netflix logo"
               className="w-72"
+              width={288}
+              height={64}
               src="https://occ-0-606-41.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABVHzR4OU3FIiCMxVn94Tl-RkOQ0pCQJqfkQ6fM35FMS8EmWmUzPYWnoToAVvy967GuAWyuKjhDpwIo1R0S2PwwOdv2jJroEKgARKwgDQkbyJVPNsQfsfCAuhmW-RHNxxjnK19glS1SU5IiksQAjXfz4cw658CHir1mDlU-GyPAYGZ11dEj1QFA.png?r=540"
             />
             <h1 className="text-7xl font-extrabold tracking-tight text-white">
@@ -137,10 +139,20 @@ const Home: NextPage = () => {
 
                       <div className="block">
                         <p>
-                          <HighlightChars
-                            str={person.name}
-                            indices={positions}
-                          />{" "}
+                          <a
+                            className=""
+                            rel="noreferrer"
+                            target="_blank"
+                            href={`https://www.google.com/search?q=${person.name.replace(
+                              " ",
+                              "+"
+                            )}+netflix`}
+                          >
+                            <HighlightChars
+                              str={person.name}
+                              indices={positions}
+                            />
+                          </a>{" "}
                           {person.instagram && (
                             <a
                               rel="noreferrer"
