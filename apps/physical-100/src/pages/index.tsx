@@ -126,7 +126,7 @@ const Home: NextPage = () => {
                   <li className="block h-10 w-full animate-pulse rounded-md bg-slate-400/5"></li>
                 </ul>
               )}
-              {contestants.length && (
+              {!!contestants.length && (
                 <ul className="flex w-full max-w-prose flex-col items-center gap-4">
                   {filtered.map(({ item: person, positions }) => (
                     <li
