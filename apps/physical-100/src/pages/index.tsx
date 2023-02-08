@@ -135,7 +135,18 @@ const Home: NextPage = () => {
                       className="group/item flex w-full gap-3 rounded-md py-1 px-2 text-2xl tracking-wider text-slate-400"
                       key={person.name}
                     >
-                      <div className="mt-1 h-8 w-8 rounded-md bg-slate-700" />
+                      <span className="relative inline-block">
+                        <Image
+                          className="h-12 w-12 rounded-md object-cover object-[center_20%]"
+                          width={32}
+                          height={32}
+                          unoptimized
+                          src={`/avatars/${person.name
+                            .toLowerCase()
+                            .replaceAll(" ", "-")}.png`}
+                          alt=""
+                        />
+                      </span>
 
                       <div className="block">
                         <p>
