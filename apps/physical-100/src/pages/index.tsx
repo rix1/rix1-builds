@@ -4,7 +4,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import HighlightChars from "../components/HighlightChars";
-import { InstagramLogo } from "../components/icons";
+import { GoogleLogo, InstagramLogo } from "../components/icons";
 
 import { api } from "../utils/api";
 import Image from "next/image";
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
         <svg
           stroke="currentColor"
           fill="currentColor"
-          stroke-width="0"
+          strokeWidth="0"
           viewBox="0 0 24 24"
           className="absolute right-3 top-3 z-10 h-8 w-8 text-white"
           height="1em"
@@ -149,26 +149,25 @@ const Home: NextPage = () => {
                       </span>
 
                       <div className="block">
-                        <p>
+                        <p className="">
+                          <HighlightChars
+                            str={person.name}
+                            indices={positions}
+                          />
                           <a
-                            className=""
-                            rel="noreferrer"
-                            target="_blank"
+                            className="ml-2 inline-block rounded-md align-middle leading-[0] text-slate-600 outline-none ring-red-400 focus:ring-2"
                             href={`https://www.google.com/search?q=${person.name.replace(
                               " ",
                               "+"
-                            )}+netflix`}
+                            )}+physical+100`}
                           >
-                            <HighlightChars
-                              str={person.name}
-                              indices={positions}
-                            />
-                          </a>{" "}
+                            <GoogleLogo className="h-5 w-5" />
+                          </a>
                           {person.instagram && (
                             <a
                               rel="noreferrer"
                               target="_blank"
-                              className="inline-block rounded-md leading-none outline-none ring-red-400 focus:ring-2"
+                              className="ml-1 inline-block rounded-md leading-[0] text-slate-600 outline-none ring-red-400 focus:ring-2"
                               href={`https://instagram.com/${person.instagram.replace(
                                 "@",
                                 ""
