@@ -6,7 +6,7 @@ Search contestants from the [Netflix show Physical:100](https://www.netflix.com/
 
 ## Roadmap
 
-- [ ] Add contestant avatars/images
+- [x] Add contestant avatars/images
   - [ ] Add alternative card list format
 - [ ] Add support for updating/editing contestant information. Ideally this would be a community effort...
   - [ ] Add support for more data points per contestant?
