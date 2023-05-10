@@ -2,15 +2,22 @@
   "extends": "tsconfig/nextjs.json",
   "include": [
     "next-env.d.ts",
-    "**/*.tsx",
     "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
     ".contentlayer/generated"
   ],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "contentlayer/generated": ["./.contentlayer/generated"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   }
 }

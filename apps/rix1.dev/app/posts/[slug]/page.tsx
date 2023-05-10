@@ -1,41 +1,30 @@
-import { allPosts, Post } from 'contentlayer/generated';
+import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import Head from 'next/head';
-import Backlink from '../../components/Backlink';
-import PagePattern from '../../components/PagePattern';
+import Backlink from '../../../components/Backlink';
+import PagePattern from '../../../components/PagePattern';
 
-type Params = { slug: string };
-type Props = {
-  post?: Post; // for some reason this have to be nullable
-};
+export const generateStaticParams = async () =>
+  allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
 
-export const getStaticPaths: GetStaticPaths<Params> = () => {
-  const paths = allPosts.map((post) => post.url);
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<Props, Params> = async ({
-  params,
-}) => {
-  if (!params || !params.slug) return { notFound: true };
+export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
-  return {
-    props: {
-      post,
-    },
-  };
-};
 
-const PostLayout: NextPage<{ post: Post }> = ({ post }) => {
+  if (!post) {
+    throw new Error(`Post not found for slug: ${params.slug}`);
+  }
+
+  return { title: post.title };
+};
+export const dynamicParams = false;
+
+const PostLayout = ({ params }: { params: { slug: string } }) => {
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
+  if (!post) {
+    throw new Error(`Post not found for slug: ${params.slug}`);
+  }
+
   return (
     <PagePattern>
-      <Head>
-        <title>rix1.dev: {post.title}</title>
-      </Head>
       <div className="py-16 px-4 font-athelas sm:px-6 lg:px-8 xl:py-36">
         <div className="mx-auto max-w-max lg:max-w-7xl">
           <div className="relative z-10 mb-8 md:mb-2 md:px-6">

@@ -18,8 +18,8 @@ const Link = ({ children, href }: LinkProps) => {
     );
   }
   return (
-    <NextLink href={href}>
-      <a className={classNames}>{children}</a>
+    <NextLink className={classNames} href={href}>
+      {children}
     </NextLink>
   );
 };
