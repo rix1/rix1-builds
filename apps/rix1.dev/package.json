@@ -13,20 +13,20 @@
   },
   "dependencies": {
     "@geist-ui/icons": "^1.0.2",
-    "contentlayer": "^0.2.7",
-    "dayjs": "^1.11.2",
-    "next": "12.2.5",
-    "next-contentlayer": "^0.2.7",
+    "contentlayer": "^0.3.2",
+    "dayjs": "^1.11.7",
+    "eslint-config-next": "^13.4.1",
+    "next": "13.4.1",
+    "next-contentlayer": "^0.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.7.11",
-    "@types/react": "18.0.17",
-    "@types/react-dom": "18.0.6",
+    "@types/node": "20.1.2",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
     "config": "workspace:*",
-    "next-transpile-modules": "9.0.0",
     "tsconfig": "workspace:*",
-    "typescript": "4.7.4"
+    "typescript": "5.0.4"
   }
 }
