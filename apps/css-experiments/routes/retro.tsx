@@ -20,6 +20,10 @@ export default function VintageLogo() {
   return (
     <Layout>
       <DelayClasses classNames="group" delay={3500} />
+      <p class="mt-24 text-xs text-white opacity-10">
+        Inspired by a{" "}
+        <a href="/retro-inspo.mp4" class="underline">video found in a tweet</a>
+      </p>
     </Layout>
   );
 }
