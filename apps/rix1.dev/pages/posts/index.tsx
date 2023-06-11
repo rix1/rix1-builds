@@ -27,8 +27,8 @@ function PostCard(post: Post) {
           <a href={post.url}>
             <span className="sr-only">Rikard Eide</span>
             <Image
-              width="40px"
-              height="40px"
+              width="40"
+              height="40"
               className="h-10 w-10 rounded-full"
               src="https://s3.eu-north-1.amazonaws.com/rix1.dev/first-thursday-450x450.jpg"
               alt=""
