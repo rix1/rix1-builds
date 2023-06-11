@@ -52,8 +52,8 @@ const Home: NextPage = () => {
         <section className="mx-auto max-w-3xl text-center">
           <div className="inline-block h-24 w-24 rounded-full shadow-lg">
             <Image
-              width="96px"
-              height="96px"
+              width="96"
+              height="96"
               className="h-24 w-24 rounded-full"
               src="https://s3.eu-north-1.amazonaws.com/rix1.dev/first-thursday-450x450.jpg"
               alt=""
