@@ -1,10 +1,14 @@
+import { ComponentChildren } from "preact";
+
 type Props = {
   href: string;
+  children: ComponentChildren;
 };
 
-const ExternalLink = ({ href }: Props) => {
+const ExternalLink = ({ href, children }: Props) => {
   return (
     <a className="underline" target="_blank" href={href}>
+      {children}
       <svg
         className="inline-block ml-1 mb-1"
         xmlns="http://www.w3.org/2000/svg"
