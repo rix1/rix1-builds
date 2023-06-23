@@ -9,9 +9,6 @@ export default function Home() {
         <title>Eddie's graduation 2023</title>
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
-        <div className="fixed right-3 bottom-1">
-          <img className="w-60 md:w-96" src="/eddie.png" />
-        </div>
         <div className="px-4 sm:px-6 lg:px-8 mt-8">
           <h1 className="text-2xl font-semibold leading-6 text-gray-900">
             Eddie's graduation 2023 🩺
@@ -26,22 +23,28 @@ export default function Home() {
                 Fra 12:00 - Velkomsthalloi & innsjekk
               </h3>
               <p className="inline-block">
-                Sted: Corinthia Budapest - Budapest, Erzsébet krt{" "}
-                <ExternalLink href="https://maps.google.com/maps?q=Budapest, Erzsébet krt" />
+                Sted:{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=Budapest, Erzsébet krt">
+                  Corinthia Budapest - Budapest, Erzsébet krt
+                </ExternalLink>
               </p>
             </div>
             <div>
               <h3 className="font-semibold">14:00 - Lunsj</h3>
               <p className="inline-block">
-                Sted: Két Szerecsen
-                <ExternalLink href="https://maps.google.com/maps?q=Két Szerecsen, budapest" />
+                Sted:{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=Két Szerecsen, budapest">
+                  Két Szerecsen
+                </ExternalLink>
               </p>
             </div>
             <div>
               <h3 className="font-semibold">19:30 - Kickoff</h3>
               <p className="inline-block">
-                Sted: High Note Skybar
-                <ExternalLink href="https://maps.google.com/maps?q=High Note Skybar, budapest" />
+                Sted:{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=High Note Skybar, budapest">
+                  High Note Skybar
+                </ExternalLink>
               </p>
               <p>Antrekk: Sommerklær, komfortabelt og fint.</p>
             </div>
@@ -57,8 +60,10 @@ export default function Home() {
             <div>
               <h3 className="font-semibold">08:30 - Graduation-seremoni</h3>
               <p className="inline-block">
-                Sted: Papp László Budapest sportaréna, Stefánia út 2, 1143
-                <ExternalLink href="https://maps.google.com/maps?q=Papp László Budapest sportaréna" />
+                Sted:{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=Papp László Budapest sportaréna">
+                  Papp László Budapest sportaréna, Stefánia út 2, 1143
+                </ExternalLink>
               </p>
               <p>Antrekk: Pent</p>
             </div>
@@ -67,15 +72,19 @@ export default function Home() {
                 14:00 - Feiringen fortsetter med lunsj
               </h3>
               <p className="inline-block">
-                Sted: Leo Rooftop
-                <ExternalLink href="https://maps.google.com/maps?q=Leo Rooftop, budapest" />
+                Sted:{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=Leo Rooftop, budapest">
+                  Leo Rooftop
+                </ExternalLink>
               </p>
             </div>
             <div>
               <h3 className="font-semibold">20:00 - Festmiddag</h3>
               <p className="inline-block">
-                Sted: Felix Kitchen & Bar
-                <ExternalLink href="https://maps.google.com/maps?q=Felix Kitchen & Bar, budapest" />
+                Sted:{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=Felix Kitchen & Bar, budapest">
+                  Felix Kitchen & Bar
+                </ExternalLink>
               </p>
               <p>Antrekk: Mørk dress</p>
             </div>
@@ -84,7 +93,7 @@ export default function Home() {
               <p>Ungarsk folkedans med Gunn & Dr Eide</p>
             </div>
           </section>
-          <section className="mt-10 space-y-4 mb-96">
+          <section className="mt-10 space-y-4">
             <h2 className="text-lg border-l-4 pl-3 -ml-4 border-[#F6ADAF]">
               <strong>Søndag</strong> 25. juni
             </h2>
@@ -106,8 +115,10 @@ export default function Home() {
             <div>
               <h3 className="font-semibold">14:00 - Lunsj</h3>
               <p className="inline-block">
-                Sted: Robinson Restaurant
-                <ExternalLink href="https://maps.google.com/maps?q=Robinson Restaurant, budapest" />
+                Sted:{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=Robinson Restaurant, budapest">
+                  Robinson Restaurant
+                </ExternalLink>
               </p>
               <p>Antrekk: Hva enn du måtte ønske.</p>
               <p>
@@ -124,6 +135,9 @@ export default function Home() {
               </p>
             </div>
           </section>
+          <div className="right-3 bottom-1">
+            <img className="w-60 md:w-96" src="/eddie.png" />
+          </div>
         </div>
       </div>
     </>
