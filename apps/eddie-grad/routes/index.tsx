@@ -11,7 +11,7 @@ export default function Home() {
       <div class="p-4 mx-auto max-w-screen-md">
         <div className="px-4 sm:px-6 lg:px-8 mt-8">
           <h1 className="text-2xl font-semibold leading-6 text-gray-900">
-            Eddie's graduation 2023 🩺
+            Eddie's graduation 2023! 🩺
           </h1>
           <p className="mt-2 text-sm text-gray-700">Plan for the weekend</p>
           <section className="mt-10 space-y-4">
