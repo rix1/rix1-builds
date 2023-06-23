@@ -1,104 +1,129 @@
 import { Head } from "$fresh/runtime.ts";
+import ExternalLink from "../components/ExternalLink.tsx";
 import Counter from "../islands/Counter.tsx";
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Fresh App</title>
+        <title>Eddie's graduation 2023</title>
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="sm:flex sm:items-center">
-            <div className="sm:flex-auto">
-              <h1 className="text-base font-semibold leading-6 text-gray-900">
-                Wine aromas
-              </h1>
-              <p className="mt-2 text-sm text-gray-700">
-                A list of some wine aromas.
+        <div className="fixed right-3 bottom-1">
+          <img className="w-60 md:w-96" src="/eddie.png" />
+        </div>
+        <div className="px-4 sm:px-6 lg:px-8 mt-8">
+          <h1 className="text-2xl font-semibold leading-6 text-gray-900">
+            Eddie's graduation 2023 🩺
+          </h1>
+          <p className="mt-2 text-sm text-gray-700">Plan for the weekend</p>
+          <section className="mt-10 space-y-4">
+            <h2 className="text-lg border-l-4 pl-3 -ml-4 border-[#99E2F3]">
+              <strong>Fredag</strong> 23. juni
+            </h2>
+            <div>
+              <h3 className="font-semibold">
+                Fra 12:00 - Velkomsthalloi & innsjekk
+              </h3>
+              <p className="inline-block">
+                Sted: Corinthia Budapest - Budapest, Erzsébet krt{" "}
+                <ExternalLink href="https://maps.google.com/maps?q=Budapest, Erzsébet krt" />
               </p>
             </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              data-name="Layer 1"
-              viewBox="0 0 642.28 506.05"
-            >
-              <path d="M642.28 331.88c0 .81-.76 1.4-1.54 1.21-17.24-4.28-34.78-7.97-52.63-7.48-11 .24-22 .72-32.87 2.76-9.11 1.71-18.36 2.76-27.42 4.68-35.48 7.61-71.9 5.36-107.93 6.48-.7.01-1.4 0-2.2.57 5.8 1.19 11.71 3.03 16.68 6.25 6.11 4.24 5.89 11.15-.69 14.67-13.63 7.81-68.59 8.53-81.97.45-6.49-3.96-6.58-10.76-.37-15.09 5.36-3.74 11.52-4.71 17.69-5.44 10.78-1.39 21.58-2.05 32.36-3.37 1.03-.13 1.45-1.39.72-2.12-5.28-5.27-6.35-12.09-6.79-19.07-1.24-19.42-.88-38.84.31-58.25.66-10.83 1.3-21.69 2.72-32.44 1.13-8.62 5.01-16.35 11.34-22.49 6.02-5.83 12.54-11.13 18.49-17.02 7.53-7.45 13.24-16.2 17.67-25.89 15.96-35.75 10.06-76.55-1.53-112.63-1.66-5.15-5.53-7.57-10.63-7.61-17.04-.13-34.08-.04-51.13-.02-.15 0-.29.12-.75.32 3.49 31.21 7.01 62.46 8.7 93.83 1.86 31.75-4.51 66.36-28.06 89.4-12.95 13.3-29.77 21.69-44.77 32.36-10.43 6.86-18.22 16.75-18.64 29.63-1.11 44.51-.67 89.05.39 133.56.17 7.86 1.87 15.39 7.79 21.18 9.01 8.6 22.2 9.49 33.02 14.64 34.87 17 15.33 36.08-13.68 40.53-20.29 3.74-40.78 5.11-61.39 3.95-23.47-1.2-46.56-5.91-69.79-9.13-32.17-5.37-64.71-2.5-96.66 3.01-11.9 1.92-23.64 4.74-35.52 6.81-9.79 1.71-19.67 2.87-29.51 4.32-10.78 1.58-21.63 1.8-32.49 1.52a1.244 1.244 0 0 1 .04-2.49c26.98.32 53.64-4.45 80.09-9.34 30.13-5.77 60.49-10.77 91.27-8.62 16.38.83 32.49 3.5 48.56 6.46 38.34 6.34 80.72 8.86 118.28-2.45 12.33-4.42 24.52-13.85 10.81-25.62-12.44-11.02-30.54-10.05-43.31-20.39-5.21-4.38-8.35-10.08-8.97-16.74-3.1-38.63-1.71-77.48-2.36-116.2-.03-9.13.17-18.29.92-27.38 1.98-23.24 26.79-33.07 43.54-44.82 11.76-7.96 22.54-16.98 30.64-28.93 18.32-26.91 18.98-60.73 16.24-92.01-1.64-25.55-4.46-50.82-7.53-76.24-.08-.63-.61-1.1-1.24-1.1-8.76-.03-17.48.34-26.21.91-5.41.42-9.05 3.52-10.21 8.85-8.08 35.24-10.7 58.79-1.93 94.46 2.79 11.12 6.6 22.02 7.73 33.54.95 9.75-.09 19.06-5.61 27.44-3.42 5.19-7.79 9.54-12.74 13.25-18.31 13.85-39.61 24.2-40.78 50.16-1.36 53.73-.58 107.52-1.45 161.26-.06 19.43-4.17 43.98-26.27 49.1-12.61 3.27-25.41 2.87-38.1 0-1.72-.39-3.31-1.39-4.95-2.12-7.98-3.55-7.76-11.83-1.12-17.28 4.49-3.68 9.72-5.96 15.24-7.76 7.39-2.42 14.72-5.03 21.94-7.9 10.48-4.15 16.08-12.46 17.4-23.27 1.36-11.09 2.04-22.29 2.46-33.46 1.48-32.58.84-65.16-.44-97.74-.28-9.25-2.27-18.17-6.9-26.16-8.56-14.86-21.08-26.81-32.39-39.54-40.89-45.75-30.02-104.11-22.84-159.48 2.32-16.14 4.53-32.38 7.89-48.34C221.49 5.35 227.93.65 238.79.48 277.9.24 317 .36 356.1 0c3.09 0 6.23.5 9.26 1.16 8.27 1.81 11.6 8.06 13.04 15.55 1.29 6.56 1.73 13.06 2.88 19.65.1.6.63 1.03 1.23 1.04 15.8.04 31.55-.26 47.34-.14 3.15.02 6.4.55 9.41 1.46 4.97 1.5 6.93 5.94 8.26 10.36 10.93 35.31 16.69 78.96.22 113.38-4.47 9.28-9.94 17.96-17.49 25.11-4.57 4.33-9.1 8.76-13.98 12.73-11.03 8.98-15.9 20.74-16.6 34.62-.83 16.43-2.12 32.85-2.48 49.29-.27 12.23.37 24.5 1.14 36.72.35 5.65 2.77 10.79 7.64 14.34 1.76 1.28 3.54 1.99 5.88 1.95 32.22-.75 64.63.78 96.67-3.36 36.06-5.96 72.83-14.61 109.46-8.22 7.82 1.14 15.47 3.38 23.26 4.7.6.1 1.04.61 1.04 1.22v.32ZM377.56 37.89c.75 0 1.34-.66 1.25-1.41-1.05-8.38-2.63-15.85-4.36-24.06-1.09-4.65-4.34-7.84-9.18-8.57-5.1-.76-10.27-1.4-15.41-1.39-26.67.06-53.34.38-80.01.54-10.12.06-20.25-.2-30.37-.05-6.65.1-12.99 1.53-16.04 8.4-1.58 3.56-2.82 7.39-3.44 11.22-2.62 16.29-5.05 32.62-7.34 48.96-7.43 52.07-14.87 108.63 23.32 151.04 7.75 9.03 15.96 17.67 23.8 26.64 5.1 5.84 9.42 12.38 11.79 19.75 2.02 6.26 3.46 12.88 3.96 19.44.97 12.62 1.47 25.31 1.49 37.98-.13 31.42-.1 62.9-3.35 94.18-1.11 11.67-7.02 20.44-17.7 25.4-5.78 2.68-11.93 4.61-18.02 6.56-7.6 2.44-15.23 4.65-21.16 10.46-4.07 3.99-3.79 8.69 1.27 11.29 3.23 1.65 6.86 3.11 10.41 3.39 8.08.63 16.29 1.16 24.33.41 5.29-.49 10.71-2.65 15.47-5.18 15.65-8.83 15.83-30.25 16.14-46.14.29-27.33.49-54.65.66-81.98.14-21.98.24-43.96.25-65.94 0-8.19.83-16.23 3.46-24.02 6.63-19.1 26.03-27.71 40.65-39.76 5.57-4.32 10.17-9.55 13.04-16.12 6.98-15.61.05-31.84-3.48-47.33-2.95-12.54-6.31-25.05-6.67-38-.25-9.36-.31-18.8.62-28.09 1.06-10.58 3.24-21.06 5.07-31.55 1.65-10.8 7.08-15.79 18.5-16.01 6.94-.11 13.88-.05 21.04-.04Zm5.32 326.43c4.23.41 8.49.48 12.73.22 7.8-.48 14.57-.85 21.32-1.51 5.1-.5 10.35-.83 14.9-3.73 5.82-3.71 5.4-7.26.85-11.29-.62-.55-1.36-.98-2.15-1.24-4.58-1.49-9.15-3.02-13.76-4.39-3.19-.95-6.47-2.38-9.69-2.35-8.04.08-16.12.56-24.11 1.47-7.72.88-15.38 2.39-23.03 3.84-3.58.68-6.85 2.18-9.33 5.11-5.14 6.14 4.84 11.18 10.02 11.63 7.69.84 15.4 1.58 22.25 2.24Z" />
-            </svg>
-          </div>
-          <div className="mt-8 flow-root">
-            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <table className="min-w-full divide-y divide-gray-300">
-                  <thead>
-                    <tr>
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                      >
-                        <a href="#" className="group inline-flex">
-                          Aroma
-                          <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              class="w-5 h-5"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </span>
-                        </a>
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      >
-                        Category
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      >
-                        Taste
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    {wine_aroma_list.map((aromaDetails) => (
-                      <tr key={aromaDetails.aroma}>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                          {aromaDetails.aroma}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {aromaDetails.category}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {aromaDetails.taste}
-                        </td>
-
-                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                          <a
-                            href="#"
-                            className="text-indigo-600 hover:text-indigo-900"
-                          >
-                            Edit
-                            <span className="sr-only">
-                              , {aromaDetails.aroma}
-                            </span>
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            <div>
+              <h3 className="font-semibold">14:00 - Lunsj</h3>
+              <p className="inline-block">
+                Sted: Két Szerecsen
+                <ExternalLink href="https://maps.google.com/maps?q=Két Szerecsen, budapest" />
+              </p>
             </div>
-          </div>
+            <div>
+              <h3 className="font-semibold">19:30 - Kickoff</h3>
+              <p className="inline-block">
+                Sted: High Note Skybar
+                <ExternalLink href="https://maps.google.com/maps?q=High Note Skybar, budapest" />
+              </p>
+              <p>Antrekk: Sommerklær, komfortabelt og fint.</p>
+            </div>
+          </section>
+          <section className="mt-10 space-y-4">
+            <h2 className="text-lg border-l-4 pl-3 -ml-4 border-[#DFC2DC]">
+              <strong>Lørdag</strong> 24. juni
+            </h2>
+            <div>
+              <h3 className="font-semibold">07:00 - Frokost</h3>
+              <p>Vi spiser på hotellet</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">08:30 - Graduation-seremoni</h3>
+              <p className="inline-block">
+                Sted: Papp László Budapest sportaréna, Stefánia út 2, 1143
+                <ExternalLink href="https://maps.google.com/maps?q=Papp László Budapest sportaréna" />
+              </p>
+              <p>Antrekk: Pent</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">
+                14:00 - Feiringen fortsetter med lunsj
+              </h3>
+              <p className="inline-block">
+                Sted: Leo Rooftop
+                <ExternalLink href="https://maps.google.com/maps?q=Leo Rooftop, budapest" />
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold">20:00 - Festmiddag</h3>
+              <p className="inline-block">
+                Sted: Felix Kitchen & Bar
+                <ExternalLink href="https://maps.google.com/maps?q=Felix Kitchen & Bar, budapest" />
+              </p>
+              <p>Antrekk: Mørk dress</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">23:00 - No mercy 💃</h3>
+              <p>Ungarsk folkedans med Gunn & Dr Eide</p>
+            </div>
+          </section>
+          <section className="mt-10 space-y-4 mb-96">
+            <h2 className="text-lg border-l-4 pl-3 -ml-4 border-[#F6ADAF]">
+              <strong>Søndag</strong> 25. juni
+            </h2>
+            <div>
+              <h3 className="font-semibold">07:00 - Frokost</h3>
+              <p>Vi spiser på hotellet</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">10:00 - Relax & plask</h3>
+              <p className="inline-block">Sted: Corinthia Spa</p>
+              <p>Antrekk: Badekåpe og svømmeføtter</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">12:00 - Utsjekk</h3>
+              <p className="inline-block">
+                Spurt om muligheter til sen utsjekk, kan ikke garanteres.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold">14:00 - Lunsj</h3>
+              <p className="inline-block">
+                Sted: Robinson Restaurant
+                <ExternalLink href="https://maps.google.com/maps?q=Robinson Restaurant, budapest" />
+              </p>
+              <p>Antrekk: Hva enn du måtte ønske.</p>
+              <p>
+                Ingen planer etter dette - sightseeing, shopping, Costes beach
+                club (20 min med taxi- burde bookes om ønskelig) eller Cortile
+                Sky Bar&pool (burde bestilles)
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold">??:?? - Middag før avreise</h3>
+              <p>
+                Pizza ved operaen før avreise til Oslo gjengen? Trenger ikke
+                bestilles.
+              </p>
+            </div>
+          </section>
         </div>
       </div>
     </>
