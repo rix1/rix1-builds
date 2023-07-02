@@ -11,7 +11,7 @@ export default function Home() {
       <div class="p-4 mx-auto max-w-screen-md">
         <div className="px-4 sm:px-6 lg:px-8 mt-8">
           <h1 className="text-2xl font-semibold leading-6 text-gray-900">
-            Eddie's graduation 2023! 🩺
+            Eddie's graduation 2023 🩺
           </h1>
           <p className="mt-2 text-sm text-gray-700">Plan for the weekend</p>
           <section className="mt-10 space-y-4">
@@ -136,7 +136,14 @@ export default function Home() {
             </div>
           </section>
           <div className="right-3 bottom-1">
-            <img className="w-60 md:w-96" src="/eddie.png" />
+            <img
+              src="/proud.png"
+              className="fixed left-2 bottom-2 -z-10  w-60 md:w-96"
+            />
+            <img
+              className="fixed right-2 bottom-2 -z-10 w-60 md:w-96"
+              src="/eddie.png"
+            />
           </div>
         </div>
       </div>
