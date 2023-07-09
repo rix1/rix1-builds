@@ -47,15 +47,13 @@ const Ingredients = () => {
                 onclick={(e) =>
                   (hydrationIndex.value = Number(e.currentTarget.value))
                 }
-                type="radio"
-                id={pair[1]}
-                name="flour"
-                value={index}
-                type="radio"
-                name="flour-option"
+                aria-labelledby={`flour-option-${index}-label`}
                 checked={index === hydrationIndex.value}
                 class="sr-only"
-                aria-labelledby={`flour-option-${index}-label`}
+                id={pair[1]}
+                name="flour-option"
+                type="radio"
+                value={index}
               />
               <span id={`flour-option-${index}-label`}>{pair[1]}</span>
             </label>
