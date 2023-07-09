@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "RzaLight";
+  src: url("/RzaLight-Web.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap; /* optional, but recommended */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "RzaLight", "serif";
+}
+
 :root {
   --red: 255, 98, 66; /* #ff6242 */
   --yellow: 255, 229, 0; /* #ffe500 */
