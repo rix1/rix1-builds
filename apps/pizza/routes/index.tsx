@@ -31,11 +31,8 @@ export default function Home() {
           class="w-96 h-32 -ml-5 mt-12"
           alt="the fresh logo: a sliced lemon dripping with juice"
         />
-        <p class="mt-4 font-semibold italic">
-          Welcome to Pizza. Here we make pizza.
-        </p>
+        <h1 class="mt-4 text-xl">Welcome to Pizza. Here we make pizza.</h1>
         <Slider />
-        <h2 className="text-xl mt-10 font-medium mb-2">Ingredients</h2>
         <Ingredients />
         <div className="grid md:grid-cols-2 gap-5">
           <div>
