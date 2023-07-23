@@ -1,11 +1,23 @@
 import { computed, signal } from "@preact/signals";
+import { slider } from "./Slider.tsx";
 
 export const YEAST_GRAMS = 5;
-export const HONEY_GRAMS = 5;
+export const HONEY_GRAMS = computed(() => (slider.value > 40 ? 10 : 5));
 
-export const poolishBase = signal(300);
-export const poolishTotal = computed(() =>
-  poolishBase.value * 2 + YEAST_GRAMS + HONEY_GRAMS
+function getPoolishSize() {
+  switch (true) {
+    case slider.value > 40:
+      return 2000;
+    case slider.value > 20:
+      return 600;
+    default:
+      return 300;
+  }
+}
+
+export const poolishBase = computed(getPoolishSize);
+export const poolishTotal = computed(
+  () => poolishBase.value * 2 + YEAST_GRAMS + HONEY_GRAMS
 );
 
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
