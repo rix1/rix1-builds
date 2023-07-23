@@ -3,7 +3,7 @@ import { signal } from "@preact/signals";
 export const slider = signal(8);
 
 const MIN = 4;
-const MAX = 30;
+const MAX = 60;
 
 const Slider = () => {
   return (
