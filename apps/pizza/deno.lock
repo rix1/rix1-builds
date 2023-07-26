@@ -292,6 +292,7 @@
     "https://esm.sh/stable/preact@10.15.1/denonext/debug.js": "e8e5e198bd48c93d484c91c4c78af1900bd81d9bfcfd543e8ac75216f5404c10",
     "https://esm.sh/stable/preact@10.15.1/denonext/devtools.js": "7e3009ee2208a6cc8bbf747b61e9468d177ef55d94cf9b774ad2a6c926ae51cb",
     "https://esm.sh/stable/preact@10.15.1/denonext/hooks.js": "5c989ad368cf4f2cb3a5d7d1801843d9348c599fe3e7731d04728f7b845d724e",
+    "https://esm.sh/stable/preact@10.15.1/denonext/hooks/src.js": "4acaac313a85528fb12da6e8b3e17a25f5b72bd2932e977005d19b40ea4ba5fd",
     "https://esm.sh/stable/preact@10.15.1/denonext/jsx-runtime.js": "52806054f5b3477005ab4bdc17de3d219ccc6c130d0cd803c45667b0cac2f6ed",
     "https://esm.sh/stable/preact@10.15.1/denonext/preact.mjs": "30710ac1d5ff3711ae0c04eddbeb706f34f82d97489f61aaf09897bc75d2a628",
     "https://esm.sh/twind@0.16.17": "2a697a2240c77b744644d1682c742c3ba9f530c595a8371f5a82a52a2f2b3396",
@@ -309,6 +310,7 @@
     "https://esm.sh/v117/@preact/signals@1.1.3/X-ZS8q/deno/signals.mjs": "9107036efc63362c0d88965534957e5c9e3cc4c6da6f10f7a7dcb3e8a29fb624",
     "https://esm.sh/v128/@preact/signals-core@1.0.1/X-ZS8q/denonext/signals-core.mjs": "87d32b7ba224d7061ba8477c745a2fde80eb51fe8e61d4c304a64b60d67e55aa",
     "https://esm.sh/v128/@preact/signals@1.0.3/X-ZS8q/denonext/signals.mjs": "ef6a7bc71971b9224cf7a30d9e501d98ec49f5b8807d3b28b0529b14acb39166",
+    "https://esm.sh/v128/preact@10.15.1/hooks/src/index.js": "e720a336d56f0379f72b1e26247523c6fc8d1806a4503f56d35bafaf4f1d1581",
     "https://esm.sh/v129/preact-render-to-string@6.2.0/X-ZS8q/denonext/preact-render-to-string.mjs": "835eb2413a25f1142bcb87ea4df7d85bb3dbf48569ec3aa693b80a618cec3706"
   }
 }

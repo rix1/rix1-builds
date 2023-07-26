@@ -1,14 +1,12 @@
-import { signal } from "@preact/signals";
-
-export const slider = signal(8);
-
-const MIN = 4;
-const MAX = 60;
+import { slider, SLIDER_MAX, SLIDER_MIN } from "../lib/recipe.ts";
 
 const Slider = () => {
   return (
-    <label htmlFor="pizza-slider" className="max-w-lg block mt-4">
-      Adjust number of pies (<output>{slider.value}</output>){" "}
+    <label
+      htmlFor="pizza-slider"
+      className="max-w-lg block mt-4 text-gray-500 text-sm"
+    >
+      Adjust number of 260g pies (<output>{slider.value}</output>){" "}
       <input
         name="pizza-slider"
         id="pizza-slider"
@@ -16,15 +14,14 @@ const Slider = () => {
         className="block mt-2 w-full"
         value={slider.value}
         style={{
-          backgroundSize: `${((slider.value - MIN) * 100) / (MAX - MIN)}% 100%`,
+          backgroundSize: `${
+            ((slider.value - SLIDER_MIN) * 100) / (SLIDER_MAX - SLIDER_MIN)
+          }% 100%`,
         }}
-        min={MIN}
-        max={MAX}
+        min={SLIDER_MIN}
+        max={SLIDER_MAX}
         onInput={(e) => (slider.value = Number(e.currentTarget.value))}
       />
-      <span className="text-gray-500 font-normal text-sm mt-2 block">
-        ~260g each
-      </span>
     </label>
   );
 };
