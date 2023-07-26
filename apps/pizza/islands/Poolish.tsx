@@ -1,24 +1,5 @@
-import { computed, signal } from "@preact/signals";
-import { slider } from "./Slider.tsx";
-
-export const YEAST_GRAMS = 5;
-export const HONEY_GRAMS = computed(() => (slider.value > 40 ? 10 : 5));
-
-function getPoolishSize() {
-  switch (true) {
-    case slider.value > 40:
-      return 2000;
-    case slider.value > 20:
-      return 600;
-    default:
-      return 300;
-  }
-}
-
-export const poolishBase = computed(getPoolishSize);
-export const poolishTotal = computed(
-  () => poolishBase.value * 2 + YEAST_GRAMS + HONEY_GRAMS
-);
+import { computed } from "@preact/signals";
+import { honeyAmount, poolishBase, YEAST_GRAMS } from "../lib/recipe.ts";
 
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 
@@ -47,7 +28,7 @@ const Poolish = () => {
         <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
           <dt className="text-sm font-medium text-gray-500">Honey</dt>
           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-            {number.format(HONEY_GRAMS)}g
+            {number.format(honeyAmount.value)}g
           </dd>
         </div>
       </dl>

@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Head>
         <SEO
-          title="Pizza slider, a public service by @rix1"
+          title="Pizza slider, a service by and for @rix1"
           description="You don't have to be an expert to make great pizza. Slide away and get accurate ingredient measures instantly."
           keywords={[
             "pizza",
@@ -60,6 +60,15 @@ export default function Home() {
             <FinalMix />
           </div>
         </div>
+        <div>
+          <h2 className="text-xl mt-10 font-medium mb-1">
+            Notes
+          </h2>
+          <p className="text-gray-500 mb-2 text-sm">
+            A couple of hours before your pizza party, mix the following:
+          </p>
+        </div>
+
         <h2 className="text-xl mt-20 font-medium mb-2">References</h2>
         <p className="mb-4">
           This site will only show you amounts, but the technique and timing is
@@ -79,6 +88,7 @@ export default function Home() {
           </li>
         </ul>
       </div>
+
       <footer className="max-w-screen-md my-6 text-gray-500 mx-auto px-4">
         <p>
           Built with{" "}

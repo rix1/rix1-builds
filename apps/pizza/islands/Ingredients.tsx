@@ -1,27 +1,17 @@
-import { computed, signal } from "@preact/signals";
-import { HONEY_GRAMS, YEAST_GRAMS } from "./Poolish.tsx";
-import { slider } from "./Slider.tsx";
-
-const WATER_GRAMS = 100; // per pizza
-const FLOUR_MULTIPLIER = [
-  [1.6, "62.5%"],
-  [1.555, "64%"],
-  [1.465, "68%"],
-  [1.425, "70%"],
-  [1.325, "75%"],
-];
-const hydrationIndex = signal(1);
-const SALT_PERCENTAGE = 2.56;
-
-export const water = computed(() => slider.value * WATER_GRAMS);
-export const flour = computed(
-  () => water.value * FLOUR_MULTIPLIER[hydrationIndex.value][0]
-);
-export const salt = computed(() => flour.value * (SALT_PERCENTAGE / 100));
+import {
+  flourAmount,
+  honeyAmount,
+  HYDRATION_OPTIONS,
+  hydrationIndex,
+  SALT_PERCENTAGE,
+  saltAmount,
+  waterAmount,
+  YEAST_GRAMS,
+} from "../lib/recipe.ts";
 
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 
-function cx(...classes) {
+function cx(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -31,7 +21,7 @@ const Ingredients = () => {
       <fieldset>
         <legend className="mb-2">Select hydration</legend>
         <div class="grid grid-cols-3 gap-3 sm:grid-cols-6 mb-4">
-          {FLOUR_MULTIPLIER.map((pair, index) => (
+          {HYDRATION_OPTIONS.map((pair, index) => (
             <label
               key={pair[1]}
               for={pair[1]}
@@ -41,13 +31,13 @@ const Ingredients = () => {
                 index === hydrationIndex.value
                   ? "bg-[rgb(var(--yellow))] text-[rgb(var(--red))] hover:bg-[rgba(var(--yellow),0.8)]"
                   : " bg-white text-gray-900 hover:bg-gray-50",
-                "flex items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1 ring-2 ring-inset ring-[rgb(var(--gray))]"
+                "flex items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1 ring-2 ring-inset ring-[rgb(var(--gray))]",
               )}
             >
               <input
-                onclick={(e) =>
-                  (hydrationIndex.value = Number(e.currentTarget.value))
-                }
+                onClick={(
+                  e,
+                ) => (hydrationIndex.value = Number(e.currentTarget.value))}
                 aria-labelledby={`flour-option-${index}-label`}
                 checked={index === hydrationIndex.value}
                 class="sr-only"
@@ -67,23 +57,23 @@ const Ingredients = () => {
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Water</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(water.value)}g{" "}
+              {number.format(waterAmount.value)}g{" "}
               <span className="text-gray-500">
-                ({Math.round((water.value / flour.value) * 100)}%)
+                ({Math.round((waterAmount.value / flourAmount.value) * 100)}%)
               </span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Flour</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(flour.value)}g{" "}
+              {number.format(flourAmount.value)}g{" "}
               <span className="text-gray-500">(100%)</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Salt</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(salt.value)}g{" "}
+              {number.format(saltAmount.value)}g{" "}
               <span className="text-gray-500">({SALT_PERCENTAGE}%)</span>
             </dd>
           </div>
@@ -97,7 +87,7 @@ const Ingredients = () => {
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Honey</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(HONEY_GRAMS)}g{" "}
+              {number.format(honeyAmount.value)}g{" "}
               <span className="text-gray-500">(Fixed)</span>
             </dd>
           </div>
@@ -105,11 +95,11 @@ const Ingredients = () => {
             <dt className="text-sm font-medium text-gray-500">In total</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               {number.format(
-                water.value +
-                  flour.value +
-                  salt.value +
+                waterAmount.value +
+                  flourAmount.value +
+                  saltAmount.value +
                   YEAST_GRAMS +
-                  HONEY_GRAMS
+                  honeyAmount.value,
               )}
               g
             </dd>
