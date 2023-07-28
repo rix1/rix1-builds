@@ -2,6 +2,7 @@ import { asset, Head } from "$fresh/runtime.ts";
 import SEO from "../components/SEO.tsx";
 import FinalMix from "../islands/FinalMix.tsx";
 import Ingredients from "../islands/Ingredients.tsx";
+import Notes from "../islands/Notes.tsx";
 import Poolish from "../islands/Poolish.tsx";
 import Slider from "../islands/Slider.tsx";
 
@@ -36,7 +37,7 @@ export default function Home() {
         <Ingredients />
         <div className="grid md:grid-cols-2 gap-5">
           <div>
-            <h2 className="text-xl mt-10 font-medium mb-1">
+            <h2 className="text-xl mt-10 font-medium mb-2">
               Step 1: Make{" "}
               <span
                 className="help"
@@ -51,7 +52,7 @@ export default function Home() {
             <Poolish />
           </div>
           <div>
-            <h2 className="text-xl mt-10 font-medium mb-1">
+            <h2 className="text-xl mt-10 font-medium mb-2">
               Step 2: Final mix
             </h2>
             <p className="text-gray-500 mb-2 text-sm">
@@ -61,12 +62,10 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <h2 className="text-xl mt-10 font-medium mb-1">
+          <h2 className="text-xl mt-10 font-medium mb-2">
             Notes
           </h2>
-          <p className="text-gray-500 mb-2 text-sm">
-            A couple of hours before your pizza party, mix the following:
-          </p>
+          <Notes />
         </div>
 
         <h2 className="text-xl mt-20 font-medium mb-2">References</h2>
@@ -74,7 +73,7 @@ export default function Home() {
           This site will only show you amounts, but the technique and timing is
           important. I'll add good references here as I go.
         </p>
-        <ul className="list-disc pl-5">
+        <ul className="list-disc pl-5 space-y-2">
           <li>
             Vito Iacopelli on YouTube -{" "}
             <a
