@@ -9,7 +9,8 @@ import {
   YEAST_GRAMS,
 } from "../lib/recipe.ts";
 
-const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
+const decimalNumber = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
+const wholeNumber = new Intl.NumberFormat("en", { maximumFractionDigits: 0 });
 
 function cx(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -19,7 +20,7 @@ const Ingredients = () => {
   return (
     <div className="mt-6">
       <fieldset>
-        <legend className="mb-2">Select hydration</legend>
+        <legend className="mb-2 text-gray-500 text-sm">Select hydration</legend>
         <div class="grid grid-cols-3 gap-3 sm:grid-cols-6 mb-4">
           {HYDRATION_OPTIONS.map((pair, index) => (
             <label
@@ -56,8 +57,8 @@ const Ingredients = () => {
         <dl className="sm:divide-y sm:divide-gray-200">
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Water</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(waterAmount.value)}g{" "}
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+              {wholeNumber.format(waterAmount.value)}g{" "}
               <span className="text-gray-500">
                 ({Math.round((waterAmount.value / flourAmount.value) * 100)}%)
               </span>
@@ -65,43 +66,43 @@ const Ingredients = () => {
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Flour</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(flourAmount.value)}g{" "}
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+              {wholeNumber.format(flourAmount.value)}g{" "}
               <span className="text-gray-500">(100%)</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Salt</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(saltAmount.value)}g{" "}
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+              {decimalNumber.format(saltAmount.value)}g{" "}
               <span className="text-gray-500">({SALT_PERCENTAGE}%)</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Dry yeast</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(YEAST_GRAMS)}g{" "}
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+              {decimalNumber.format(YEAST_GRAMS)}g{" "}
               <span className="text-gray-500">(Fixed)</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Honey</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(honeyAmount.value)}g{" "}
-              <span className="text-gray-500">(Fixed)</span>
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+              {decimalNumber.format(honeyAmount.value)}g{" "}
+              <span className="text-gray-500"></span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">In total</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {number.format(
-                waterAmount.value +
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+              {decimalNumber.format(
+                (waterAmount.value +
                   flourAmount.value +
                   saltAmount.value +
                   YEAST_GRAMS +
-                  honeyAmount.value,
+                  honeyAmount.value) / 1000,
               )}
-              g
+              kg
             </dd>
           </div>
         </dl>
