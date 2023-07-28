@@ -85,6 +85,51 @@ export default function Home() {
               How to Make Perfect Pizza Dough - For the House
             </a>
           </li>
+          <li>
+            Vito Iacopelli on YouTube -{" "}
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-blue-700"
+              href="https://www.youtube.com/watch?v=b8VQUAx0WFU"
+            >
+              Best Way to Develop the Gluten in Pizza Dough
+            </a>
+          </li>
+          <li>
+            My Pizza Corner -{" "}
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-blue-700"
+              href="https://mypizzacorner.com/pizza-dough-calculator/"
+            >
+              Pizza Dough Calculator
+            </a>
+          </li>
+          <li>
+            My Pizza Corner -{" "}
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-blue-700"
+              href="https://mypizzacorner.com/pizza-tips/pizza-dough-problems/"
+            >
+              How to fix pizza dough that won’t stretch
+            </a>
+          </li>
+          <li>
+            Godt.no -{" "}
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-blue-700"
+              href="https://www.godt.no/oppskrifter/pizza/2449/pizzadeig-jan-vardoeens-pizzabunn"
+            >
+              Jan Vardøens pizzabunn
+            </a>{" "}
+            (Norwegian)
+          </li>
         </ul>
       </div>
 
