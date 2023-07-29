@@ -22,7 +22,7 @@ const Notes = () => {
       </li>
       <li>
         <strong>Divide into balls:</strong>{" "}
-        After it's doubled in sice, divide into{" "}
+        After it's doubled in size, divide into{" "}
         {pieSize.value}g balls. Just fold a few times to shape the balls, but
         don't apply too much tension. Coat each ball in olive oil.
       </li>
