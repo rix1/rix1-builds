@@ -79,7 +79,17 @@ const Ingredients = () => {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Dry yeast</dt>
+            <dt
+              className="text-sm font-medium text-gray-500 help"
+              title={`Active or instant?
+
+If the package says "add to dry ingredients", it's instant dried yeast. If the package says that you need to activate it 5 minutes in water first, it's active dried yeast.
+
+There's a 1:3 relationship between dry and fresh yeast. 1 gram of dry yeast equates to 3 grams of fresh yeast.
+              `}
+            >
+              Dry yeast
+            </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {decimalNumber.format(YEAST_GRAMS)}g{" "}
               <span className="text-gray-500">(Fixed)</span>
