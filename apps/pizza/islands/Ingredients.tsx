@@ -1,4 +1,5 @@
 import {
+  allCombined,
   flourAmount,
   honeyAmount,
   HYDRATION_OPTIONS,
@@ -8,13 +9,10 @@ import {
   waterAmount,
   YEAST_GRAMS,
 } from "../lib/recipe.ts";
+import { cx } from "../lib/stringUtils.ts";
 
 const decimalNumber = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 const wholeNumber = new Intl.NumberFormat("en", { maximumFractionDigits: 0 });
-
-function cx(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const Ingredients = () => {
   return (
@@ -79,7 +77,17 @@ const Ingredients = () => {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Dry yeast</dt>
+            <dt
+              className="text-sm font-medium text-gray-500 help"
+              title={`Active or instant?
+
+If the package says "add to dry ingredients", it's instant dried yeast. If the package says that you need to activate it 5 minutes in water first, it's active dried yeast.
+
+There's a 1:3 relationship between dry and fresh yeast. 1 gram of dry yeast equates to 3 grams of fresh yeast.
+              `}
+            >
+              Dry yeast
+            </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {decimalNumber.format(YEAST_GRAMS)}g{" "}
               <span className="text-gray-500">(Fixed)</span>
@@ -96,11 +104,7 @@ const Ingredients = () => {
             <dt className="text-sm font-medium text-gray-500">In total</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {decimalNumber.format(
-                (waterAmount.value +
-                  flourAmount.value +
-                  saltAmount.value +
-                  YEAST_GRAMS +
-                  honeyAmount.value) / 1000,
+                allCombined.value / 1000,
               )}
               kg
             </dd>
