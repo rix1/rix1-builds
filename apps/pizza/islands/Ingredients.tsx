@@ -1,4 +1,5 @@
 import {
+  allCombined,
   flourAmount,
   honeyAmount,
   HYDRATION_OPTIONS,
@@ -8,13 +9,10 @@ import {
   waterAmount,
   YEAST_GRAMS,
 } from "../lib/recipe.ts";
+import { cx } from "../lib/stringUtils.ts";
 
 const decimalNumber = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 const wholeNumber = new Intl.NumberFormat("en", { maximumFractionDigits: 0 });
-
-function cx(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const Ingredients = () => {
   return (
@@ -106,11 +104,7 @@ There's a 1:3 relationship between dry and fresh yeast. 1 gram of dry yeast equa
             <dt className="text-sm font-medium text-gray-500">In total</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {decimalNumber.format(
-                (waterAmount.value +
-                  flourAmount.value +
-                  saltAmount.value +
-                  YEAST_GRAMS +
-                  honeyAmount.value) / 1000,
+                allCombined.value / 1000,
               )}
               kg
             </dd>
