@@ -51,7 +51,7 @@ const Notes = () => {
       </li>
       <li>
         <strong className={cx("block", skipAtolyse && "line-through")}>
-          Autolyse the flour and water
+          Optional: Autolyse the flour and water
         </strong>{" "}
         {/* Ken Forksih - page 33  */}
         <span className={cx(skipAtolyse && "line-through")}>
@@ -68,8 +68,10 @@ const Notes = () => {
             title="The dough's ability to be stretched and hold its shape without being so elastic that it snaps back."
           >
             extensibility
-          </span>, autolyse the dough. Do this by mixing flour and water and let
-          them rest for 15-30 minutes before adding salt, yeast and the poolish.
+          </span>, autolyse the dough<Sup href="#ref-ken-page-33-autolyse">
+            1.2
+          </Sup>. Do this by mixing flour and water and let them rest for 15-30
+          minutes before adding salt, yeast and the poolish.
         </span>
         {skipAtolyse && (
           <Tip>
@@ -82,17 +84,20 @@ const Notes = () => {
       </li>
       <li>
         <strong className="block">Mix</strong>{" "}
-        Mix poolish with ingredients. Get to a place where all ingredients are
-        mixed; the dough should have smooth-ish surface and a sticky consistency
-        before you dump it onto the counter. Use the slap and fold technique
-        <Sup href="#ref-slap-and-fold">
-          1
+        Mix poolish with
+        ingredients<Sup href="#ref-richard-bertinet-mix-ingredients">2.1</Sup>
+        {" "}
+        Get to a place where all ingredients are mixed; the dough should have
+        smooth-ish surface and a sticky consistency before you dump it onto the
+        counter. Use the slap and fold technique
+        <Sup href="#ref-richard-bertinet-slap-and-fold">
+          2.2
         </Sup>{" "}
         to build strenght. When things get messy, "take the dog for a
-        walk"<Sup href="#ref-walk-the-dog">2</Sup>. Try to do this until the
-        dough let's go from your hands. Always keep the top on top. For optimal
-        flavour, the final mix temperature should be between 24°C and 27°C{" "}
-        <Sup href="#ref-ken-page-28-temperature">4</Sup>
+        walk"<Sup href="#ref-richard-bertinet-walking-the-dog">2.3</Sup>. Try to
+        do this until the dough let's go from your hands. Always keep the top on
+        top. For optimal flavour, the final mix temperature should be between
+        24°C and 27°C <Sup href="#ref-ken-page-28-temperature">1.1</Sup>.
       </li>
       <li>
         <strong className="block">
@@ -105,7 +110,7 @@ const Notes = () => {
         sticky anymore, and the surface will be super smooth. Higher hydration
         doughts can benefit from three or four folds during bulk fermenting to
         give them the appropriate strength<Sup href="#ref-ken-forkish-folding">
-          3
+          1.3
         </Sup>, consider this the first bulk ferment fold.
       </li>
       <li>
@@ -128,7 +133,8 @@ const Notes = () => {
       <li>
         <strong className="block">Divide into balls</strong>{" "}
         After it's doubled in size, divide into{" "}
-        {pieSize.value}g balls. Again, always "keep top on top": The smooth
+        {pieSize.value}g balls. Again, always "keep top on
+        top"<Sup href="#ref-richard-bertinet-two sides">2.4</Sup>: The smooth
         surface should face up, the sticky bottom should face down. If you
         didn't fold in the previous step, the dough might be very soft and hard
         to handle. This is ok. Just fold each ball a few times to firm it up.
@@ -150,7 +156,8 @@ const Notes = () => {
         <strong className="block">Re-shape balls, apply tension</strong>{" "}
         Re-shape the rested balls again. Now, apply more tension by pulling them
         towards you on the counter. The ball should be firm and smooth. Use the
-        "finger dent test" <Sup href="#ref-ken-page-74-finger-dent-test">4</Sup>
+        "finger dent test"{" "}
+        <Sup href="#ref-ken-page-74-finger-dent-test">1.4</Sup>.
       </li>
       <li>
         <strong className="block">Rest (15-20min)</strong>{" "}

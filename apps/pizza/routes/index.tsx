@@ -14,7 +14,7 @@ const Ref = (
     target="_blank"
     rel="noreferrer noopener"
     className="text-blue-700"
-    href="https://youtu.be/bWN9mxR_iXI?t=421"
+    href={href}
   >
     {children}
   </a>
@@ -88,83 +88,105 @@ export default function Home() {
           temperature and timing is important. I'll add good references here as
           I go.
         </p>
-        <ul className="list-disc pl-5 space-y-2">
+        <ol className="list-decimal pl-5 space-y-2">
           <li>
-            Vito Iacopelli on YouTube -{" "}
-            <Ref href="https://www.youtube.com/watch?v=G-jPoROGHGE">
-              How to Make Perfect Pizza Dough - For the House
-            </Ref>
+            <Ref href="https://g.co/kgs/7ewUv5">
+              Flour Water Salt Yeast: The Fundamentals of Artisan Bread and
+              Pizza
+            </Ref>{" "}
+            by Ken Forkish (book)
+            <ul className="list-decimal pl-5 space-y-1">
+              <li id="ref-ken-page-28-temperature">
+                Temperature, page 26-28
+              </li>
+              <li id="ref-ken-page-33-autolyse">
+                Autolyse, page 33-34
+              </li>
+              <li id="ref-ken-forkish-folding">
+                Folding, page 69
+              </li>
+              <li id="ref-ken-page-74-finger-dent-test">
+                Finger dent test, page 74
+              </li>
+            </ul>
+          </li>
+          <li id="ref-richard-bertinet">
+            Bookmarks from Gluten Morgen TV with Richard Bertinet on YouTube
+            <ol className="list-decimal pl-5 space-y-1">
+              <li id="ref-richard-bertinet-mix-ingredients">
+                <Ref href="https://youtu.be/bWN9mxR_iXI?t=421">
+                  "Mix ingredients"
+                </Ref>
+              </li>
+              <li id="ref-richard-bertinet-slap-and-fold">
+                <Ref href="https://youtu.be/bWN9mxR_iXI?t=568">
+                  "Slap & fold kneading"
+                </Ref>
+              </li>
+              <li id="ref-richard-bertinet-walking-the-dog">
+                <Ref href="https://youtu.be/bWN9mxR_iXI?t=665">
+                  "Walking the dog"
+                </Ref>
+              </li>
+              <li id="ref-richard-bertinet-two sides">
+                <Ref href="https://youtu.be/bWN9mxR_iXI?t=682">
+                  "Top on top" - The two sides of the dough
+                </Ref>
+              </li>
+            </ol>
           </li>
           <li>
-            Vito Iacopelli on YouTube -{" "}
-            <Ref href="https://www.youtube.com/watch?v=b8VQUAx0WFU">
-              Best Way to Develop the Gluten in Pizza Dough
-            </Ref>
+            Vito Iacopelli on YouTube{" "}
+            <ul className="list-disc pl-5 space-y-1">
+              <li>
+                <Ref href="https://www.YouTube.com/watch?v=G-jPoROGHGE">
+                  How to Make Perfect Pizza Dough - For the House
+                </Ref>
+              </li>
+              <li>
+                <Ref href="https://www.YouTube.com/watch?v=b8VQUAx0WFU">
+                  Best Way to Develop the Gluten in Pizza Dough
+                </Ref>
+              </li>
+            </ul>
+          </li>
+
+          <li id="ref-pull-dough-along-the-counter">
+            <Ref href="https://youtu.be/vEG1BjWroT0?t=252">
+              High Hydration dough Shaping
+            </Ref>{" "}
+            - San Francisco Baking Institute on Youtube
+          </li>
+
+          <li id="ref-test-poolish">
+            <Ref href="https://youtu.be/w-5B7vsHcok?t=463">
+              How to test poolish
+            </Ref>{" "}
+            - Novita Listyani on YouTube
           </li>
           <li>
-            My Pizza Corner -{" "}
-            <Ref href="https://mypizzacorner.com/pizza-dough-calculator/">
-              Pizza Dough Calculator
-            </Ref>
+            My Pizza Corner
+            <ul className="list-disc pl-5 space-y-1">
+              <li>
+                <Ref href="https://mypizzacorner.com/pizza-dough-calculator/">
+                  Pizza Dough Calculator
+                </Ref>. I unfortunately I came across this <i>after</i>{" "}
+                building this site. Looks like a really good resource.
+              </li>
+              <li>
+                <Ref href="https://mypizzacorner.com/pizza-tips/pizza-dough-problems/">
+                  How to fix pizza dough that won’t stretch
+                </Ref>
+              </li>
+            </ul>
           </li>
           <li>
-            My Pizza Corner -{" "}
-            <Ref href="https://mypizzacorner.com/pizza-tips/pizza-dough-problems/">
-              How to fix pizza dough that won’t stretch
-            </Ref>
-          </li>
-          <li>
-            Godt.no -{" "}
             <Ref href="https://www.godt.no/oppskrifter/pizza/2449/pizzadeig-jan-vardoeens-pizzabunn">
               Jan Vardøens pizzabunn
             </Ref>{" "}
-            (Norwegian)
+            at Godt.no (Norwegian)
           </li>
-          <li id="ref-slap-and-fold">
-            Gluten Morgen TV on Youtube -{" "}
-            <Ref href="https://youtu.be/bWN9mxR_iXI?t=421">
-              "The Bertinet Method: Slap & fold kneading technique" with Richard
-              Bertinet
-            </Ref>
-          </li>
-          <li id="ref-walk-the-dog">
-            Walking the dog -{" "}
-            <Ref href="https://youtu.be/bWN9mxR_iXI?t=421">
-              "The Bertinet Method: Slap & fold kneading technique" with Richard
-              Bertinet
-            </Ref>
-          </li>
-          <li id="ref-ken-forkish-folding">
-            Page 69 in{"  "}
-            <Ref href="#TODO">
-              Water Flour Yeast
-            </Ref>
-          </li>
-          <li id="ref-pull-dough-along-the-counter">
-            Pulling dough in{"  "}
-            <Ref href="https://youtu.be/vEG1BjWroT0?t=252">
-              Water Flour Yeast
-            </Ref>
-          </li>
-          <li id="#ref-ken-page-74-finger-dent-test">
-            Finger dent test
-            <Ref href="https://youtu.be/vEG1BjWroT0?t=252">
-              Water Flour Yeast
-            </Ref>
-          </li>
-          <li id="ref-ken-page-28-temperature">
-            Temperature
-            <Ref href="https://youtu.be/vEG1BjWroT0?t=252">
-              Water Flour Yeast
-            </Ref>
-          </li>
-          <li id="ref-ken-page-28-temperature">
-            Test poolish
-            <Ref href="https://youtu.be/w-5B7vsHcok?t=463">
-              On youtubbe
-            </Ref>
-          </li>
-        </ul>
+        </ol>
       </div>
 
       <footer className="max-w-screen-md my-6 text-gray-500 mx-auto px-4">
