@@ -47,3 +47,13 @@ function getPoolishSize() {
 }
 
 export const poolishBase = computed(getPoolishSize);
+export const poolishTotal = computed(
+  () => poolishBase.value * 2 + YEAST_GRAMS + honeyAmount.value,
+);
+
+export const allCombined = computed(() => (waterAmount.value +
+  flourAmount.value +
+  saltAmount.value +
+  YEAST_GRAMS +
+  honeyAmount.value)
+);
