@@ -1,5 +1,6 @@
 import { computed } from "@preact/signals";
 import { honeyAmount, poolishBase, YEAST_GRAMS } from "../lib/recipe.ts";
+import HelpText from "../components/HelpText.tsx";
 
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 
