@@ -6,6 +6,8 @@ import Ingredients from "../islands/Ingredients.tsx";
 import Notes from "../islands/Notes.tsx";
 import Poolish from "../islands/Poolish.tsx";
 import Slider from "../islands/Slider.tsx";
+import HelpText from "../components/HelpText.tsx";
+import PoolishHeading from "../islands/PoolishHeading.tsx";
 
 const Ref = (
   { children, href }: { children: ComponentChild; href: string },
@@ -51,15 +53,7 @@ export default function Home() {
         <Ingredients />
         <div className="grid md:grid-cols-2 gap-5">
           <div>
-            <h2 className="text-xl mt-10 font-medium mb-2">
-              Step 1: Make{" "}
-              <span
-                className="help"
-                title="Poolish is a highly fluid yeast-cultured dough. It's a type of pre-ferment traditionally used in the production of French bakery products."
-              >
-                poolish
-              </span>
-            </h2>
+            <PoolishHeading />
             <p className="text-gray-500 mb-2 text-sm">
               The day before, you'll quickly whip together the following:
             </p>
