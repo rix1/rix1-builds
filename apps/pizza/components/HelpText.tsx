@@ -8,6 +8,8 @@ const HelpText = (
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
+    // Act on click outside the dialog element
+
     const handleClick = (e: Event) => {
       if (
         isOpen && dialogRef.current &&
