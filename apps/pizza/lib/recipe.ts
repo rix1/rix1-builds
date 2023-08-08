@@ -36,10 +36,13 @@ export const saltAmount = computed(() =>
 
 // Steps
 function getPoolishSize() {
+  const waterAndFlour = waterAmount.value +
+    flourAmount.value;
+
   switch (true) {
-    case slider.value > 40:
+    case waterAndFlour > 7200:
       return 2000;
-    case slider.value > 20:
+    case waterAndFlour > 2600:
       return 600;
     default:
       return 300;
