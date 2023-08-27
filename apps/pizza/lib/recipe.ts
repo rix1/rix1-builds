@@ -2,7 +2,7 @@ import { computed, signal } from "@preact/signals-core";
 
 // Slider
 export const SLIDER_MIN = 4;
-const SLIDER_DEFAULT = 8;
+export const SLIDER_DEFAULT = 8;
 export const SLIDER_MAX = 60;
 export const slider = signal(SLIDER_DEFAULT);
 
