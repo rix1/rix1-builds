@@ -11,9 +11,9 @@ const Activity = ({ activity }: Props) => {
       <h3 className="font-semibold">
         {activity.startTime} - {activity.title}
       </h3>
-      <p className="inline-block">{activity.description}</p>
+      {activity.description && <p className="">{activity.description}</p>}
       {activity.location && (
-        <p className="inline-block">
+        <p className="">
           Sted:{" "}
           <ExternalLink
             href={`https://maps.google.com/maps?q=${activity.location.mapsLink}`}
@@ -22,6 +22,7 @@ const Activity = ({ activity }: Props) => {
           </ExternalLink>
         </p>
       )}
+      {activity.dessCode && <p>Antrekk: {activity.dessCode}</p>}
     </div>
   );
 };
