@@ -1,0 +1,10 @@
+details,
+details summary {
+  padding-left: 0;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
