@@ -23,7 +23,7 @@ export const schedule: Schedule = {
   title: "Program Pappa 70 år!",
   days: [
     {
-      date: new Date("2023-09-02"),
+      date: new Date("2023-09-07"),
       activities: [
         {
           startTime: "12:00",
