@@ -133,7 +133,7 @@ export const schedule: Schedule = {
           description: "Danskene reiser med 08.00 – fergen fra Larvik",
         },
         {
-          startTime: "15:30",
+          startTime: "13:00",
           title: "Bursdag for Idun",
           description: "Tor Erling og Cecilie inviterer til ettårsdag 👶",
           location: {
