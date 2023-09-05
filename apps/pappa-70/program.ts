@@ -77,12 +77,12 @@ export const schedule: Schedule = {
           title: "Innsjekk Grand Hotel",
           description: "Gjelder bare for de som skal bo på på hotell.",
         },
-        { startTime: "15:30", title: "Søsken får tilgang til Rococo salen" },
+        { startTime: "15:30", title: "Søsken får tilgang til Rococosalen" },
         { startTime: "16:00", title: "Eva hårtime på Høvik" },
         {
           startTime: "17:45",
-          title: "Samling for Bjørstad Eide",
-          description: "Hele flokken møtes utenfor Rococo salen.",
+          title: "Familien samles på Grand",
+          description: "Søsken m/følge og mamma og pappa møtes nede kl 17.45",
         },
         {
           startTime: "18:00",
