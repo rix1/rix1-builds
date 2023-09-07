@@ -23,7 +23,7 @@ export default function Home() {
         />
         <meta
           property="og:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://family-events.s3.eu-north-1.amazonaws.com/_DSC2642.jpg"
         />
 
         <meta property="twitter:card" content="summary_large_image" />
@@ -35,7 +35,7 @@ export default function Home() {
         />
         <meta
           property="twitter:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://family-events.s3.eu-north-1.amazonaws.com/_DSC2642.jpg"
         />
       </Head>
       <div class="p-4 ml-2 mr-auto max-w-screen-md mb-36">

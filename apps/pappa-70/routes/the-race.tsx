@@ -23,7 +23,7 @@ const TheRacePage = () => {
         />
         <meta
           property="og:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://family-events.s3.eu-north-1.amazonaws.com/bookie-sm.jpg"
         />
 
         <meta property="twitter:card" content="summary_large_image" />
@@ -38,7 +38,7 @@ const TheRacePage = () => {
         />
         <meta
           property="twitter:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://family-events.s3.eu-north-1.amazonaws.com/bookie-sm.jpg"
         />
       </Head>
       <div className="p-4 max-w-prose mx-auto mb-6">
