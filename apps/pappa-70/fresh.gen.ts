@@ -4,15 +4,23 @@
 
 import * as $0 from "./routes/_app.tsx";
 import * as $1 from "./routes/index.tsx";
-import * as $$0 from "./islands/ImageCarousel.tsx";
+import * as $2 from "./routes/the-race.tsx";
+import * as $$0 from "./islands/BettingTable.tsx";
+import * as $$1 from "./islands/ImageCarousel.tsx";
+import * as $$2 from "./islands/Payouts.tsx";
+import * as $$3 from "./islands/RaceResultSelector.tsx";
 
 const manifest = {
   routes: {
     "./routes/_app.tsx": $0,
     "./routes/index.tsx": $1,
+    "./routes/the-race.tsx": $2,
   },
   islands: {
-    "./islands/ImageCarousel.tsx": $$0,
+    "./islands/BettingTable.tsx": $$0,
+    "./islands/ImageCarousel.tsx": $$1,
+    "./islands/Payouts.tsx": $$2,
+    "./islands/RaceResultSelector.tsx": $$3,
   },
   baseUrl: import.meta.url,
 };

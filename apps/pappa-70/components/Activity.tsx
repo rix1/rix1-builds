@@ -23,6 +23,19 @@ const Activity = ({ activity }: Props) => {
         </p>
       )}
       {activity.dessCode && <p>Antrekk: {activity.dessCode}</p>}
+      {activity.isRace && (
+        <div className="bg-green-100 text-green-800 inline-block p-3 mt-2 rounded-md">
+          <strong className="text-green-900">
+            Vil du vedde på hvem som vinner?
+          </strong>
+          <p>
+            Finn bookie på Bislett.{" "}
+            <a className="underline" href="/the-race">
+              Les regler for deltagelse.
+            </a>
+          </p>
+        </div>
+      )}
     </div>
   );
 };

@@ -2,6 +2,7 @@ export type ActivityType = {
   startTime: string;
   title: string;
   description?: string;
+  isRace?: boolean;
   dessCode?: string;
   location?: {
     mapsLink: string;
@@ -64,6 +65,7 @@ export const schedule: Schedule = {
         {
           startTime: "11:00",
           title: "The race 🏃",
+          isRace: true,
           description: "Far & 5 sønner løper 300 meter på Bislett Stadion.",
         },
         {
