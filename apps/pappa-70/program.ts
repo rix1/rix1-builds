@@ -53,7 +53,7 @@ export const schedule: Schedule = {
       date: new Date("2023-09-08"),
       activities: [
         {
-          startTime: "08:30",
+          startTime: "09:00",
           title: "Bursdagmorgen i U47",
           description:
             'Frokost og kaffe på senga. Husk: "...og se NÅ vil vi masjere".',
