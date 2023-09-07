@@ -43,7 +43,7 @@ export const ImageCarousel = () => {
         <img
           src={url}
           alt={`Image ${index + 1}`}
-          className={`absolute top-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out rounded-md ${
+          className={`absolute left-0 top-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out rounded-md ${
             currentImageIndex === index ? "opacity-100" : "opacity-0"
           }`}
         />

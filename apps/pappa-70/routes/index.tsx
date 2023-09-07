@@ -7,7 +7,36 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{schedule.title}</title>
+        <title>Program Pappa 70 år!</title>
+        <meta name="title" content="Program Pappa 70 år!" />
+        <meta
+          name="description"
+          content="I helgen skal det feires minst 4 bursdager, 5 sønner skal løpe om kapp og fattern blir 70 🎉"
+        />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://metatags.io/" />
+        <meta property="og:title" content="Program Pappa 70 år!" />
+        <meta
+          property="og:description"
+          content="I helgen skal det feires minst 4 bursdager, 5 sønner skal løpe om kapp og fattern blir 70 🎉"
+        />
+        <meta
+          property="og:image"
+          content="https://metatags.io/images/meta-tags.png"
+        />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://metatags.io/" />
+        <meta property="twitter:title" content="Program Pappa 70 år!" />
+        <meta
+          property="twitter:description"
+          content="I helgen skal det feires minst 4 bursdager, 5 sønner skal løpe om kapp og fattern blir 70 🎉"
+        />
+        <meta
+          property="twitter:image"
+          content="https://metatags.io/images/meta-tags.png"
+        />
       </Head>
       <div class="p-4 ml-2 mr-auto max-w-screen-md mb-36">
         <div className="px-4 sm:px-6 lg:px-8 mt-8">
