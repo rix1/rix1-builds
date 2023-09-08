@@ -1,8 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
 
-import BettingTable from "../islands/BettingTable.tsx";
-import Payouts from "../islands/Payouts.tsx";
-import RaceResultSelector from "../islands/RaceResultSelector.tsx";
+import { BettingTable } from "../islands/BettingTable.tsx";
+import { Payouts } from "../islands/Payouts.tsx";
+import { RaceResultSelector } from "../islands/RaceResultSelector.tsx";
 
 const TheRacePage = () => {
   return (
