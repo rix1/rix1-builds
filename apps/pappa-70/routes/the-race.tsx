@@ -1,5 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
 
+import BettingTable from "../islands/BettingTable.tsx";
+import Payouts from "../islands/Payouts.tsx";
+import RaceResultSelector from "../islands/RaceResultSelector.tsx";
+
 const TheRacePage = () => {
   return (
     <>
@@ -118,7 +122,7 @@ const TheRacePage = () => {
             <li>Vipps innsatsbeløpet ditt til 95 16 56 29, før lunsj.</li>
           </ol>
         </div>
-        {/* <hr className="my-10" />
+       <hr className="my-10" />
       <div className="space-y-6">
         <BettingTable bets={bets} />
         <RaceResultSelector
@@ -132,7 +136,7 @@ const TheRacePage = () => {
           secondPlace={secondPlace}
           thirdPlace={thirdPlace}
         />
-      </div> */}
+      </div>
       </div>
     </>
   );
