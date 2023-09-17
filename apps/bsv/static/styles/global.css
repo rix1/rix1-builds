@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+}
+
+@font-face {
+  font-family: "RzaLight";
+  src: url("/RzaLight-Web.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap; /* optional, but recommended */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.font-rzaLight {
+  font-family: "RzaLight", "serif";
+}
