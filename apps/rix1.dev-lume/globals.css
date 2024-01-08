@@ -6,6 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -14,16 +15,92 @@ body {
   box-sizing: border-box;
 }
 
-main a {
+a:not(.clear) {
   --tw-gradient-from: #ea5634;
+  --tw-gradient-to: #db2777;
   --tw-gradient-stops: var(--tw-gradient-from),
     var(--tw-gradient-to, rgba(234, 86, 52, 0));
-  --tw-gradient-to: #db2777;
-  text-decoration: none !important;
   background-image: linear-gradient(
     to right,
     var(--tw-gradient-stops)
   ) !important;
   background-clip: text !important;
   color: transparent !important;
+
+  &:hover {
+    --tw-gradient-from: #fca5a5;
+    --tw-gradient-to: #f87171;
+  }
+}
+
+#blobby-avatar {
+  width: 400px;
+  height: 400px;
+  padding: 1rem;
+
+  background-image: url(https://s3.eu-north-1.amazonaws.com/rix1.dev/first-thursday-450x450.jpg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  animation-name: floating;
+  animation-duration: 15s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+
+  mask-image: url(assets/blob.svg);
+  mask-size: 400px;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, -12px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
+}
+
+#blur {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  backdrop-filter: blur(75px);
+  z-index: -1;
+}
+
+#blob {
+  position: absolute;
+  inset: 0px 80px;
+  background: linear-gradient(135deg, #00eaff, #ff7b00, #ff00ab);
+  opacity: 0.6;
+  border-radius: 50%;
+  z-index: -10;
+  animation: move 8.5s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    border-radius: 50%;
+  }
+  25% {
+    transform: translateX(2rem) rotate(-90deg);
+    border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
+  }
+  50% {
+    transform: translateX(-2rem) rotate(-180deg);
+    border-radius: 50% 50% 40% 60% / 40% 60% 40% 60%;
+  }
+  75% {
+    transform: translateX(0rem) rotate(-270deg);
+    border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
+  }
 }

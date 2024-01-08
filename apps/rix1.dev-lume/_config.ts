@@ -30,4 +30,6 @@ site.use(
 );
 site.use(postcss());
 
+site.copy("assets");
+
 export default site;
