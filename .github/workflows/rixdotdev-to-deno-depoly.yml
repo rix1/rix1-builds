@@ -27,5 +27,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: rix1dotdev
-          import-map: "./deno.json"
-          entrypoint: serve.ts
+          import-map: "./apps/rix1.dev-lume/deno.json"
+          entrypoint: "./apps/rix1.dev-lume/serve.ts"
