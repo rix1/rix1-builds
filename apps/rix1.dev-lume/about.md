@@ -32,6 +32,6 @@ In conclusion, I approach work as I do life\* with a blend of ambition, inspirat
 
 <small>\*I don't think about it differently to be honest</small>
 
-That should do it for now. If you want to read more, check out my [writing](/posts).
+That should do it for now. If you still haven't gotten enough, [here's some content](https://rix1-dev.vercel.app/posts) from my old site that still haven't been ported.
 
-Rikard
+_Rix1_
