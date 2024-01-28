@@ -15,6 +15,13 @@ body {
   box-sizing: border-box;
 }
 
+mark {
+  background-color: #ffb4b4;
+  color: #db2777;
+  padding: 0 0.25rem;
+  border-radius: 2px;
+}
+
 a:not(.clear) {
   --tw-gradient-from: #ea5634;
   --tw-gradient-to: #db2777;
