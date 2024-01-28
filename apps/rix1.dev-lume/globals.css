@@ -21,7 +21,7 @@ body {
 }
 
 mark {
-  background-color: #ffb4b4;
+  background-color: hsl(333, 71%, 90%);
   color: #db2777;
   padding: 0 0.25rem;
   border-radius: 2px;
