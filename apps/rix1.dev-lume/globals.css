@@ -78,12 +78,12 @@ a:not(.clear) {
 
 #blob {
   position: absolute;
-  inset: 0px 80px;
-  background: linear-gradient(135deg, #00eaff, #ff7b00, #ff00ab);
-  opacity: 0.6;
+  inset: 10% 10%;
+  background: linear-gradient(135deg, #00eaff, #ff00ab, #ff7b00);
+  opacity: 0.7;
   border-radius: 50%;
   z-index: -10;
-  animation: move 8.5s linear infinite;
+  animation: move 12.5s linear infinite;
 }
 
 @keyframes move {
@@ -103,4 +103,58 @@ a:not(.clear) {
     transform: translateX(0rem) rotate(-270deg);
     border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
   }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    border-radius: 50%;
+  }
+}
+
+/* blob and have data-attribute data-pos */
+[data-pos="top-right"] {
+  bottom: -120px;
+  left: 20vw;
+  min-width: 200px;
+  min-height: 200px;
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  pointer-events: none;
+}
+
+.share-icons > a > svg {
+  /* fill: transparent; */
+  transition: all 0.3s ease-out;
+}
+
+.share-icons > a > small {
+  opacity: 0;
+  transform: scale(0.5) translateY(-0.5rem);
+  color: #db2777;
+  transition: all 0.3s ease-out;
+  font-size: 12px;
+}
+
+/* only target svgs with stroke property */
+.share-icons > a > svg[stroke] {
+  fill: transparent;
+}
+
+.share-icons > a:hover > small {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: all 0.3s ease-out;
+}
+
+.share-icons > a:hover > svg[stroke] {
+  --timing: 0.3s;
+  transform: scale(1.2) translateY(-0.5rem);
+  stroke: #db2777;
+  transition: fill var(--timing) ease-out, transform var(--timing) ease-out;
+}
+
+.share-icons > a:hover > svg:not([stroke]) {
+  --timing: 0.3s;
+  transform: scale(1.2) translateY(-0.5rem);
+  fill: #db2777;
+  transition: fill var(--timing) ease-out, transform var(--timing) ease-out;
 }

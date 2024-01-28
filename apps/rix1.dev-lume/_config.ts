@@ -26,7 +26,7 @@ site.use(
     options: {
       plugins: [typography],
     },
-  })
+  }),
 );
 site.use(postcss());
 
