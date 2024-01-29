@@ -13,7 +13,7 @@ I was a bit hesitant to joining such a large organisation, but the folks at DNB 
 
 That morning, I walked back into the office of a client I had been working with for the past 6 months – the newly [founded solar startup, Otovo](https://www.dn.no/solenergi/grunder/energi/selger-teslaen-for-a-folge-i-elon-musks-fotspor/1-1-5560478). Although they were surprised to see me, they got really excited when I asked if I could get a full-time job.
 
-After a quick meeting with [Simen](https://twitter.com/simenfur) and [Andreas](https://twitter.com/athornor), I signed a contract for a engineering position with Otovo. 2016 was a crazy year. Now, over eight years and countless experiences later, I'm still having fun chasing the sun together with Otovo from our [office in Torggata](https://maps.app.goo.gl/QVtntdVEEdDjDazK7).
+After a quick chat with [Simen](https://twitter.com/simenfur) and [Andreas](https://twitter.com/athornor), I signed a contract for a engineering position with Otovo. 2016 was a crazy year. Now, eight years and countless experiences later, I'm still having fun chasing the sun together with Otovo from our [office in Torggata](https://maps.app.goo.gl/QVtntdVEEdDjDazK7).
 
 > ### I never worked a day in my life, I just laid back and let the big beat lead me
 >
@@ -21,7 +21,7 @@ After a quick meeting with [Simen](https://twitter.com/simenfur) and [Andreas](h
 
 These experiences were never strategic career moves for me. They were lessons in navigating uncertainty and the importance of having fun while placing bets on who to surround yourself with.
 
-Away from the <kbd>keyboard</kbd>, I love cooking. Ideally for larger crowds - as I come from a big family. I have fun when I can be curious, have attention to detail, do _just enough™_ planning and focus on <mark>playful execution</mark>.
+Away from the <kbd>keyboard</kbd>, I find cooking extremely interesting. Ideally for larger crowds - as I come from a big family. I have fun when I can be curious, have attention to detail, do _just enough™_ planning and focus on <mark>playful execution</mark>.
 
 I'm definitively a dog person, as I've had two Belgian shepherds since 2007. Dogs are pretty great. They not only provide unconditional love, but are also a daily reminder that patience, commitment and consistency go a long way.
 
@@ -31,6 +31,6 @@ In conclusion, I approach work as I do life\* – with a blend of ambition, insp
 
 <small>\*I don't think about it that differently to be honest</small>
 
-That should do it for now. If you still haven't gotten enough, [here's some content](https://rix1-dev.vercel.app/posts) from my old site that still haven't been ported.
+That should do it for now. If you still haven't gotten enough, [here's some content](https://old.rix1.dev/posts) from my old site that still haven't been ported.
 
 _Cheers - Rix1_
