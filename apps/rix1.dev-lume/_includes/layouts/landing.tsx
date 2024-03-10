@@ -30,14 +30,14 @@ export default ({ comp, title, children, index }: Lume.Data) => {
         <title>{title}</title>
       </head>
       <body
-        className={`relative px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl mt-12 ${proseClasses}`}
+        className={`relative mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 ${proseClasses}`}
       >
-        <main className="grid md:grid-cols-2 items-end gap-4">
+        <main className="grid items-end gap-4 md:grid-cols-2">
           {children}
-          <div className="font-[1.25rem] mb-[1.2em]">
+          <div className="mb-[1.2em] font-[1.25rem]">
             <div className="relative ">
               <div
-                className="mx-auto my-0 not-prose p-0 md:[--image-size:400px]"
+                className="not-prose mx-auto my-0 p-0 md:[--image-size:400px]"
                 id="blobby-avatar"
               />
               <div id="blob"></div>
@@ -51,8 +51,8 @@ export default ({ comp, title, children, index }: Lume.Data) => {
           <div className="grid grid-flow-row grid-cols-2 gap-6 md:grid-cols-3 lg:grid-rows-3">
             {(index.repos as Project[]).map((project) => (
               <article key={project.title} className="mb-4 max-w-xs">
-                <p className="inline-flex items-baseline gap-2 flex-wrap my-0 not-prose">
-                  <a href={project.link} className="underline font-semibold">
+                <p className="not-prose my-0 inline-flex flex-wrap items-baseline gap-2">
+                  <a href={project.link} className="font-semibold underline">
                     {project.title}
                   </a>
                   <span className="rounded-full text-sm">{project.when}</span>
@@ -66,7 +66,7 @@ export default ({ comp, title, children, index }: Lume.Data) => {
                     {project.status}
                   </span>
                 </p>
-                <p className="block my-0 not-prose">{project.description}</p>
+                <p className="not-prose my-0 block">{project.description}</p>
                 {project.repo && (
                   <div className="self-end">
                     <a
