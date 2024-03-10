@@ -13,10 +13,16 @@ function badgeForStatus(status: Project["status"]) {
       return "bg-red-100 text-red-600";
     case "unfinished":
       return "bg-gray-100 text-gray-600";
+    case "cli":
+      return "bg-blue-100 text-blue-600";
     case "live":
     default:
       return "bg-green-100 text-green-600";
   }
+}
+
+function compareFn(a: Project, b: Project) {
+  return Number(b.when) - Number(a.when);
 }
 
 export default ({ comp, title, children, index }: Lume.Data) => {
@@ -49,7 +55,7 @@ export default ({ comp, title, children, index }: Lume.Data) => {
         <section className="mt-24">
           <h2 className="mb-8">{index.repos.length} of my latest creations:</h2>
           <div className="grid grid-flow-row grid-cols-2 gap-6 md:grid-cols-3 lg:grid-rows-3">
-            {(index.repos as Project[]).map((project) => (
+            {(index.repos as Project[]).sort(compareFn).map((project) => (
               <article key={project.title} className="mb-4 max-w-xs">
                 <p className="not-prose my-0 inline-flex flex-wrap items-baseline gap-2">
                   <a href={project.link} className="font-semibold underline">

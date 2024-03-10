@@ -1,10 +1,28 @@
 export const repos = [
   {
+    title: "unvote",
+    when: "2024",
+    status: "Unfinished",
+    description:
+      'A little tool for scraping all UN voting documents and storing them locally.',
+    link: "https://github.com/rix1/unvote",
+    repo: "https://github.com/rix1/unvote",
+  },
+  {
+    title: "Cashflow",
+    when: "2024",
+    status: "CLI",
+    description:
+      'Simplify the management of personal finances by parsing and normalizing CSV exports from Norwegian bank statements.',
+    link: "https://github.com/rix1/cashflow",
+    repo: "https://github.com/rix1/cashflow",
+  },
+  {
     title: "Physical 100",
     when: "2023",
     status: "Live",
     description:
-      'Search contestants from the Netflix show "Physical:100". Built with T3 stack. Search was done with a JavsScript port of fzf.',
+      'Search contestants from the Netflix show "Physical:100". Built with T3 stack and fzf.',
     link: "https://search-100.rix1.dev/",
     repo: "https://github.com/rix1/rix1-builds/tree/main/apps/physical-100",
   },
