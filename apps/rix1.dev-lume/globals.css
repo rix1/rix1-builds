@@ -63,12 +63,15 @@ mark.playful:hover {
     100% {
         transform: rotate(-2deg);
     }
+
     25% {
         transform: rotate(2deg);
     }
+
     50% {
         transform: rotate(-2deg);
     }
+
     75% {
         transform: rotate(2deg);
     }
@@ -116,9 +119,11 @@ a:not(.clear) {
     0% {
         transform: translate(0, 0px);
     }
+
     50% {
         transform: translate(0, -12px);
     }
+
     100% {
         transform: translate(0, -0px);
     }
@@ -150,6 +155,7 @@ a:not(.clear) {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(359deg);
     }
@@ -160,16 +166,20 @@ a:not(.clear) {
         transform: translateY(0rem);
         border-radius: 50%;
     }
+
     25% {
         border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
     }
+
     50% {
         transform: translateY(1rem);
         border-radius: 50% 50% 40% 60% / 40% 60% 40% 60%;
     }
+
     75% {
         border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
     }
+
     100% {
         transform: translateY(0rem);
         border-radius: 50%;
@@ -187,6 +197,60 @@ a:not(.clear) {
 
 [data-pos="center"] > #blob {
     inset: 0 0;
+}
+
+span[title] {
+    position: relative;
+    display: inline-block;
+    margin-right: 4px;
+    cursor: help;
+}
+
+span[title]:before {
+    content: "ℹ";
+    opacity: 0.6;
+    background-color: rgba(219, 39, 119, 0.3);
+    line-height: 1;
+    text-align: center;
+    border-radius: 100%;
+    padding: 0 3px;
+    padding-bottom: 2px;
+    color: rgba(219, 39, 119, 1);
+    position: absolute;
+    top: -10%;
+    right: -7px;
+    font-size: 12px;
+}
+
+span[title]:hover:after {
+    opacity: 1;
+    transition: opacity 100ms ease-in;
+}
+
+span[title]:after {
+    position: relative;
+    content: attr(title);
+    position: absolute;
+    display: block;
+    width: 160px;
+    text-align: center;
+    font-weight: 500;
+    top: -1.2em;
+    padding: 8px 12px;
+    border: 1px solid rgba(219, 39, 119, 0.12);
+    line-height: 1.4;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow:
+        0 1px 1px rgba(219, 39, 119, 0.12),
+        0 2px 2px rgba(219, 39, 119, 0.12),
+        0 4px 4px rgba(219, 39, 119, 0.12),
+        0 8px 8px rgba(219, 39, 119, 0.12),
+        0 16px 16px rgba(219, 39, 119, 0.12);
+    left: 100%;
+    opacity: 0;
+    transition: opacity 100ms ease-out;
+    font-size: 12px;
 }
 
 .share-icons > a > svg {
