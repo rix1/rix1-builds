@@ -4,7 +4,7 @@ export const repos = [
     when: "2024",
     status: "Unfinished",
     description:
-      'A little tool for scraping all UN voting documents and storing them locally.',
+      'In which I embark on a quest to scrape all UN voting documents to face the harsh reality of UNs effectiveness.',
     link: "https://github.com/rix1/unvote",
     repo: "https://github.com/rix1/unvote",
   },
