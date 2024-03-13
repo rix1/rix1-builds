@@ -2,7 +2,7 @@ export const repos = [
   {
     title: "unvote",
     when: "2024",
-    status: "Unfinished",
+    status: "In progress",
     description:
       'In which I embark on a quest to scrape all UN voting documents to face the harsh reality of UNs effectiveness.',
     link: "https://github.com/rix1/unvote",
