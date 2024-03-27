@@ -11,7 +11,7 @@ I'm [@rix1](https://twitter.com/rix1), an Oslo-based
 [product developer](https://github.com/rix1) and engineering manager with a
 passion for music and dogs.
 
-Born in Norway and raised amidst a lively <span title="I'm one of seven kids">pack</span> of siblings, I'm on
+Born in Norway and raised amidst a lively pack of <span data-tooltip="Six to be exact 🫶">siblings</span>, I'm on
 a quest to make sense of the world through the lens of products, technology, and
 design. I take pride in _creating_ things, both on the computer and
 in the kitchen ✨

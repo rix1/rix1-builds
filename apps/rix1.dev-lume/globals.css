@@ -199,14 +199,14 @@ a:not(.clear) {
     inset: 0 0;
 }
 
-span[title] {
+span[data-tooltip] {
     position: relative;
     display: inline-block;
     margin-right: 4px;
     cursor: help;
 }
 
-span[title]:before {
+span[data-tooltip]:before {
     content: "ℹ";
     opacity: 0.6;
     background-color: rgba(219, 39, 119, 0.3);
@@ -222,14 +222,14 @@ span[title]:before {
     font-size: 12px;
 }
 
-span[title]:hover:after {
+span[data-tooltip]:hover:after {
     opacity: 1;
     transition: opacity 100ms ease-in;
 }
 
-span[title]:after {
+span[data-tooltip]:after {
     position: relative;
-    content: attr(title);
+    content: attr(data-tooltip);
     position: absolute;
     display: block;
     width: 160px;
