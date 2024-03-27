@@ -7,18 +7,9 @@ type Project = {
   repo?: string;
 };
 
-function badgeForStatus(status: Project["status"]) {
-  switch (status.toLowerCase()) {
-    case "broken":
-      return "bg-red-100 text-red-600";
-    case "unfinished":
-      return "bg-gray-100 text-gray-600";
-    case "cli":
-      return "bg-blue-100 text-blue-600";
-    case "live":
-    default:
-      return "bg-green-100 text-green-600";
-  }
+function markdownToHtmlLinks(markdown: string) {
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  return markdown.replace(regex, '<a href="$2">$1</a>');
 }
 
 function compareFn(a: Project, b: Project) {
@@ -36,7 +27,7 @@ export default ({ comp, title, children, index }: Lume.Data) => {
         <title>{title}</title>
       </head>
       <body
-        className={`relative mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 ${proseClasses}`}
+        className={`relative mx-auto my-24 max-w-7xl px-4 sm:px-6 lg:px-8 ${proseClasses}`}
       >
         <main className="grid items-end gap-4 md:grid-cols-2">
           {children}
@@ -61,18 +52,15 @@ export default ({ comp, title, children, index }: Lume.Data) => {
                   <a href={project.link} className="font-semibold underline">
                     {project.title}
                   </a>
-                  <span className="rounded-full text-sm">{project.when}</span>
                   &middot;
-                  <span
-                    className={[
-                      "rounded-full px-2 py-[2px] text-xs",
-                      badgeForStatus(project.status),
-                    ].join(" ")}
-                  >
-                    {project.status}
-                  </span>
+                  <span className="rounded-full text-sm">{project.when}</span>
                 </p>
-                <p className="not-prose my-0 block">{project.description}</p>
+                <p
+                  className="not-prose my-0 block"
+                  dangerouslySetInnerHTML={{
+                    __html: markdownToHtmlLinks(project.description),
+                  }}
+                />
                 {project.repo && (
                   <div className="self-end">
                     <a
