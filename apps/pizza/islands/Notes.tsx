@@ -8,7 +8,7 @@ const Sup = (
 ) => (
   <a
     href={href}
-    className="align-super text-xs text-blue-500"
+    class="align-super text-xs text-blue-500"
   >
     [{children}]
   </a>
@@ -17,7 +17,7 @@ const Sup = (
 const Tip = (
   { children }: { children: ComponentChild },
 ) => (
-  <p className="mt-2 italic text-xs">
+  <p class="mt-2 italic text-xs">
     {children}
   </p>
 );
@@ -26,9 +26,9 @@ const Notes = () => {
   const skipAtolyse = poolishBase.value / flourAmount.value > 0.4;
 
   return (
-    <ol className="text-gray-500 mb-2 text-sm list-decimal pl-4 space-y-3">
+    <ol class="text-gray-500 mb-2 text-sm list-decimal pl-4 space-y-3">
       <li>
-        <strong className="block">Mix Poolish (16-24 hours in advance)</strong>
+        <strong class="block">Mix Poolish (16-24 hours in advance)</strong>
         Mix together equal parts water and flour together with a{" "}
         <HelpText label="tiny bit">
           Usually the amount of yeast in a poolish is a lot less than what
@@ -44,11 +44,11 @@ const Notes = () => {
         </Tip>
       </li>
       <li>
-        <strong className={cx("block", skipAtolyse && "line-through")}>
+        <strong class={cx("block", skipAtolyse && "line-through")}>
           Optional: Autolyse the flour and water
         </strong>{" "}
         {/* Ken Forksih - page 33  */}
-        <span className={cx(skipAtolyse && "line-through")}>
+        <span class={cx(skipAtolyse && "line-through")}>
           For improved{" "}
           <HelpText label="gluten development">
             Resulting in better gas retention and better volume in the finished
@@ -73,7 +73,7 @@ const Notes = () => {
         )}
       </li>
       <li>
-        <strong className="block">Mix</strong>{" "}
+        <strong class="block">Mix</strong>{" "}
         Mix poolish with
         ingredients<Sup href="#ref-richard-bertinet-mix-ingredients">2.1</Sup>
         {" "}
@@ -90,7 +90,7 @@ const Notes = () => {
         24°C and 27°C <Sup href="#ref-ken-page-28-temperature">1.1</Sup>.
       </li>
       <li>
-        <strong className="block">
+        <strong class="block">
           Make it smooth (rest 15min)
         </strong>{" "}
         Let it rest for 15 minutes on the counter before doing a few more folds.
@@ -104,7 +104,7 @@ const Notes = () => {
         </Sup>, consider this the first bulk ferment fold.
       </li>
       <li>
-        <strong className="block">
+        <strong class="block">
           Bulk ferment until double in size (1-3hr)
         </strong>{"  "}
         Lightly coat the the (big) smooth ball with olive oil and let it rest in
@@ -121,7 +121,7 @@ const Notes = () => {
         </Tip>
       </li>
       <li>
-        <strong className="block">Divide into balls</strong>{" "}
+        <strong class="block">Divide into balls</strong>{" "}
         After it's doubled in size, divide into{" "}
         {pieSize.value}g balls. Again, always "keep top on
         top"<Sup href="#ref-richard-bertinet-two sides">2.4</Sup>: The smooth
@@ -131,7 +131,7 @@ const Notes = () => {
         Coat each ball in olive oil.
       </li>
       <li>
-        <strong className="block">Rest (30min)</strong>{" "}
+        <strong class="block">Rest (30min)</strong>{" "}
         Let the balls rest for at least 30 minutes. If you don't plan on baking
         them within the next hour, consider{" "}
         <HelpText label="retarding">
@@ -141,19 +141,19 @@ const Notes = () => {
         them.
       </li>{" "}
       <li>
-        <strong className="block">Re-shape balls, apply tension</strong>{" "}
+        <strong class="block">Re-shape balls, apply tension</strong>{" "}
         Re-shape the rested balls again. Now, apply more tension by pulling them
         towards you on the counter. The ball should be firm and smooth. Use the
         "finger dent test"{" "}
         <Sup href="#ref-ken-page-74-finger-dent-test">1.4</Sup>.
       </li>
       <li>
-        <strong className="block">Rest (15-20min)</strong>{" "}
+        <strong class="block">Rest (15-20min)</strong>{" "}
         The balls will be too tight to stretch out at this point, so let them
         rest up a bit.
       </li>
       <li>
-        <strong className="block">Bake!</strong>{" "}
+        <strong class="block">Bake!</strong>{" "}
         You're finally ready to form the balls into pies. Use semolina flour and
         stretch them into roughly {Math.round(30 / 260 * pieSize.value)}cm pies.
         <Tip>

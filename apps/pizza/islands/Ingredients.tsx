@@ -17,9 +17,9 @@ const wholeNumber = new Intl.NumberFormat("en", { maximumFractionDigits: 0 });
 
 const Ingredients = () => {
   return (
-    <div className="mt-6">
+    <div class="mt-6">
       <fieldset>
-        <legend className="mb-2 text-gray-500 text-sm">Select hydration</legend>
+        <legend class="mb-2 text-gray-500 text-sm">Select hydration</legend>
         <div class="grid grid-cols-3 gap-3 sm:grid-cols-6 mb-4">
           {HYDRATION_OPTIONS.map((pair, index) => (
             <label
@@ -51,64 +51,64 @@ const Ingredients = () => {
           ))}
         </div>
       </fieldset>
-      <h2 className="text-xl mt-4 font-medium mb-2">Ingredients</h2>
-      <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
-        <dl className="sm:divide-y sm:divide-gray-200">
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Water</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+      <h2 class="text-xl mt-4 font-medium mb-2">Ingredients</h2>
+      <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+        <dl class="sm:divide-y sm:divide-gray-200">
+          <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Water</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {wholeNumber.format(waterAmount.value)}g{" "}
-              <span className="text-gray-500">
+              <span class="text-gray-500">
                 ({Math.round((waterAmount.value / flourAmount.value) * 100)}%)
               </span>
             </dd>
           </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Flour</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+          <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Flour</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {wholeNumber.format(flourAmount.value)}g{" "}
-              <span className="text-gray-500">(100%)</span>
+              <span class="text-gray-500">(100%)</span>
             </dd>
           </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Salt</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+          <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Salt</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {decimalNumber.format(saltAmount.value)}g{" "}
-              <span className="text-gray-500">({SALT_PERCENTAGE}%)</span>
+              <span class="text-gray-500">({SALT_PERCENTAGE}%)</span>
             </dd>
           </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">
+          <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
               <HelpText label="Dry yeast">
-                <strong className="block">Active or instant?</strong>
+                <strong class="block">Active or instant?</strong>
 
-                <span className="block mb-2">
+                <span class="block mb-2">
                   If the package says "add to dry ingredients", it's instant
                   dried yeast. If the package says that you need to activate it
                   5 minutes in water first, it's active dried yeast.
                 </span>
 
-                <span className="block">
+                <span class="block">
                   There's a 1:3 relationship between dry and fresh yeast. 1 gram
                   of dry yeast equates to 3 grams of fresh yeast.
                 </span>
               </HelpText>
             </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {decimalNumber.format(YEAST_GRAMS)}g{" "}
-              <span className="text-gray-500">(Fixed)</span>
+              <span class="text-gray-500">(Fixed)</span>
             </dd>
           </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Honey</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
+          <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Honey</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
               {decimalNumber.format(honeyAmount.value)}g{" "}
-              <span className="text-gray-500"></span>
+              <span class="text-gray-500"></span>
             </dd>
           </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm text-gray-500 italic">In total</dt>
-            <dd className="mt-1 text-sm text-gray-500 sm:col-span-2 sm:mt-0 tabular-nums italic">
+          <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+            <dt class="text-sm text-gray-500 italic">In total</dt>
+            <dd class="mt-1 text-sm text-gray-500 sm:col-span-2 sm:mt-0 tabular-nums italic">
               {decimalNumber.format(
                 allCombined.value / 1000,
               )}

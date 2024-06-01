@@ -19,7 +19,7 @@ const Ref = (
   <a
     target="_blank"
     rel="noreferrer noopener"
-    className="text-blue-700"
+    class="text-blue-700"
     href={href}
   >
     {children}
@@ -54,45 +54,45 @@ export default function Home() {
         <h1 class="mt-4 text-xl">Welcome to Pizza. Here we make pizza.</h1>
         <Slider />
         <Ingredients />
-        <div className="grid md:grid-cols-2 gap-5">
+        <div class="grid md:grid-cols-2 gap-5">
           <div>
             <PoolishHeading />
-            <p className="text-gray-500 mb-2 text-sm">
+            <p class="text-gray-500 mb-2 text-sm">
               The day before, you'll quickly whip together the following:
             </p>
             <Poolish />
           </div>
           <div>
-            <h2 className="text-xl mt-10 font-medium mb-2">
+            <h2 class="text-xl mt-10 font-medium mb-2">
               Step 2: Final mix
             </h2>
-            <p className="text-gray-500 mb-2 text-sm">
+            <p class="text-gray-500 mb-2 text-sm">
               A couple of hours before your pizza party, mix the following:
             </p>
             <FinalMix />
           </div>
         </div>
         <div>
-          <h2 className="text-xl mt-10 font-medium mb-2">
+          <h2 class="text-xl mt-10 font-medium mb-2">
             Instructions & Notes
           </h2>
           <Notes />
         </div>
 
-        <h2 className="text-xl mt-20 font-medium mb-2">References</h2>
-        <p className="mb-4">
+        <h2 class="text-xl mt-20 font-medium mb-2">References</h2>
+        <p class="mb-4">
           This site is most useful to calculate amounts, but the technique,
           temperature and timing is important. I'll add good references here as
           I go.
         </p>
-        <ol className="list-decimal pl-5 space-y-2">
+        <ol class="list-decimal pl-5 space-y-2">
           <li>
             <Ref href="https://g.co/kgs/7ewUv5">
               Flour Water Salt Yeast: The Fundamentals of Artisan Bread and
               Pizza
             </Ref>{" "}
             by Ken Forkish (book)
-            <ul className="list-decimal pl-5 space-y-1">
+            <ul class="list-decimal pl-5 space-y-1">
               <li id="ref-ken-page-28-temperature">
                 Temperature, page 26-28
               </li>
@@ -109,7 +109,7 @@ export default function Home() {
           </li>
           <li id="ref-richard-bertinet">
             Bookmarks from Gluten Morgen TV with Richard Bertinet on YouTube
-            <ol className="list-decimal pl-5 space-y-1">
+            <ol class="list-decimal pl-5 space-y-1">
               <li id="ref-richard-bertinet-mix-ingredients">
                 <Ref href="https://youtu.be/bWN9mxR_iXI?t=421">
                   "Mix ingredients"
@@ -134,7 +134,7 @@ export default function Home() {
           </li>
           <li>
             Vito Iacopelli on YouTube{" "}
-            <ul className="list-disc pl-5 space-y-1">
+            <ul class="list-disc pl-5 space-y-1">
               <li>
                 <Ref href="https://www.YouTube.com/watch?v=G-jPoROGHGE">
                   How to Make Perfect Pizza Dough - For the House
@@ -163,7 +163,7 @@ export default function Home() {
           </li>
           <li>
             My Pizza Corner
-            <ul className="list-disc pl-5 space-y-1">
+            <ul class="list-disc pl-5 space-y-1">
               <li>
                 <Ref href="https://mypizzacorner.com/pizza-dough-calculator/">
                   Pizza Dough Calculator
@@ -186,18 +186,18 @@ export default function Home() {
         </ol>
       </div>
 
-      <footer className="max-w-screen-md my-6 text-gray-500 mx-auto px-4">
+      <footer class="max-w-screen-md my-6 text-gray-500 mx-auto px-4">
         <p>
           Built with{" "}
           <a
             href="https://fresh.deno.dev/"
             target="_blank"
-            className="text-underline"
+            class="text-underline"
           >
             Fresh
           </a>{" "}
           in November 2022 by{" "}
-          <a href="https://rix1.dev" className="text-underline">
+          <a href="https://rix1.dev" class="text-underline">
             @rix1
           </a>
         </p>

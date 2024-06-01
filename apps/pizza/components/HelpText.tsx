@@ -26,21 +26,21 @@ const HelpText = (
 
   return (
     <>
-      <button className="help" type="button" onClick={() => setIsOpen(!isOpen)}>
+      <button class="help" type="button" onClick={() => setIsOpen(!isOpen)}>
         {label}
       </button>
       <dialog
         ref={dialogRef}
         open={isOpen}
-        className="max-w-xs shadow-sm ring-2 ring-inset ring-[rgb(var(--gray))] rounded-md p-5 pb-3"
+        class="max-w-xs shadow-sm ring-2 ring-inset ring-[rgb(var(--gray))] rounded-md p-5 pb-3"
       >
-        <p className="font-normal text-sm">{children}</p>
+        <p class="font-normal text-sm">{children}</p>
         <form
-          className="text-right"
+          class="text-right"
           method="dialog"
           onSubmit={() => setIsOpen(false)}
         >
-          <button className="font-rzaLight text-base">Close</button>
+          <button class="font-rzaLight text-base">Close</button>
         </form>
       </dialog>
     </>

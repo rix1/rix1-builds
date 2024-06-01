@@ -12,14 +12,14 @@ const PieSize = () => {
 
   if (isLocked) {
     return (
-      <span className="tabular-nums" onClick={() => setIsLocked(false)}>
+      <span class="tabular-nums" onClick={() => setIsLocked(false)}>
         {pieSize.value}g{" "}
         <button type="button" onClick={() => setIsLocked(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="w-4 h-4 inline-block -mt-1 "
+            class="w-4 h-4 inline-block -mt-1 "
           >
             <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
             <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
@@ -32,7 +32,7 @@ const PieSize = () => {
     <>
       <input
         value={pieSize.value}
-        className="max-w-[56px] focus:bg-gray-50 mr-1 rounded-md ring-2 ring-inset ring-[rgb(var(--gray))] px-1 text-gray-900"
+        class="max-w-[56px] focus:bg-gray-50 mr-1 rounded-md ring-2 ring-inset ring-[rgb(var(--gray))] px-1 text-gray-900"
         onChange={(e) => pieSize.value = Number(e.currentTarget.value)}
         onBlur={() => setIsLocked(true)}
         type="number"
@@ -42,7 +42,7 @@ const PieSize = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="w-4 h-4 inline-block -mt-1 text-green-700"
+          class="w-4 h-4 inline-block -mt-1 text-green-700"
         >
           <path
             fillRule="evenodd"
@@ -87,7 +87,7 @@ const Slider = () => {
   return (
     <label
       htmlFor="pizza-slider"
-      className="max-w-lg block mt-4 text-gray-500 text-sm"
+      class="max-w-lg block mt-4 text-gray-500 text-sm"
     >
       Adjust number of pies: <output>{slider.value}</output> x <PieSize />
       <input
@@ -95,7 +95,7 @@ const Slider = () => {
         id="pizza-slider"
         type="range"
         step="any"
-        className="block mt-2 w-full"
+        class="block mt-2 w-full"
         value={val}
         style={{
           backgroundSize: `${

@@ -2,7 +2,7 @@ import HelpText from "../components/HelpText.tsx";
 
 const PoolishHeading = () => {
   return (
-    <h2 className="text-xl mt-10 font-medium mb-2">
+    <h2 class="text-xl mt-10 font-medium mb-2">
       Step 1: Make{" "}
       <HelpText label="poolish">
         Poolish is a highly fluid yeast-cultured dough. It's a type of
