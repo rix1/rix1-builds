@@ -7,6 +7,8 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
+    "deploy:prod": "deno task build && deployctl deploy --project=rix1-pizza --entrypoint=main.ts --prod",
+    "deploy:preview": "deno task build && deployctl deploy --project=rix1-pizza --entrypoint=main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
