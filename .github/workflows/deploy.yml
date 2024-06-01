@@ -30,5 +30,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "rix1-pizza"
-          entrypoint: "./apps/pizza/main.ts"
+          entrypoint: "main.ts"
           root: "./apps/pizza/"
