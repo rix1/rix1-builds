@@ -32,7 +32,7 @@ const PieSize = () => {
     <>
       <input
         value={pieSize.value}
-        className="max-w-[48px] focus:bg-gray-50 mr-1 border-b-2 "
+        className="max-w-[56px] focus:bg-gray-50 mr-1 rounded-md ring-2 ring-inset ring-[rgb(var(--gray))] px-1 text-gray-900"
         onChange={(e) => pieSize.value = Number(e.currentTarget.value)}
         onBlur={() => setIsLocked(true)}
         type="number"

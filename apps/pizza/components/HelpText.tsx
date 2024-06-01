@@ -32,9 +32,9 @@ const HelpText = (
       <dialog
         ref={dialogRef}
         open={isOpen}
-        className="max-w-xs shadow-sm ring-2 ring-inset ring-[rgb(var(--gray))] rounded-md"
+        className="max-w-xs shadow-sm ring-2 ring-inset ring-[rgb(var(--gray))] rounded-md p-5 pb-3"
       >
-        <p className="font-normal text-sm font-sans">{children}</p>
+        <p className="font-normal text-sm">{children}</p>
         <form
           className="text-right"
           method="dialog"
