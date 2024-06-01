@@ -1,5 +1,11 @@
 import { useState } from "preact/hooks";
-import { pieSize, slider, SLIDER_DEFAULT, SLIDER_MAX, SLIDER_MIN } from "../lib/recipe.ts";
+import {
+  pieSize,
+  slider,
+  SLIDER_DEFAULT,
+  SLIDER_MAX,
+  SLIDER_MIN,
+} from "../lib/recipe.ts";
 
 const PieSize = () => {
   const [isLocked, setIsLocked] = useState(true);
@@ -50,7 +56,6 @@ const PieSize = () => {
 };
 
 /**
- *
  * WEBKIT_OFFSET_HELPER
  * Webkit browsers (Safari, Chrome) have built in validation that don't allow
  * you to submit a form if an <input type="range" />'s value is larger than the
@@ -58,7 +63,6 @@ const PieSize = () => {
  * at comparing decimal numbers. So even if value=5.00000001 and max=5.00000001
  * are equal, they're not able to figure that out... So we're helping them a bit
  * by ensuring that the value can never be _too_ close to the max value.
- *
  */
 const WEBKIT_OFFSET_HELPER = 0.001;
 
@@ -70,17 +74,15 @@ export function clamp(value: number, max: number): number {
   return Math.min(value, max - WEBKIT_OFFSET_HELPER);
 }
 
-
 function logaritmicToLinear(value: number): number {
-  return Math.round(Math.exp(value))
+  return Math.round(Math.exp(value));
 }
 const Slider = () => {
-  const min = Math.log(SLIDER_MIN)
-  const max = Math.log(SLIDER_MAX)
-  const initial = Math.log(SLIDER_DEFAULT)
+  const min = Math.log(SLIDER_MIN);
+  const max = Math.log(SLIDER_MAX);
+  const initial = Math.log(SLIDER_DEFAULT);
 
-  const [val, setVal] = useState(initial)
-
+  const [val, setVal] = useState(initial);
 
   return (
     <label
@@ -96,15 +98,17 @@ const Slider = () => {
         className="block mt-2 w-full"
         value={val}
         style={{
-          backgroundSize: `${((val - Math.log(SLIDER_MIN)) * 100) / (Math.log(SLIDER_MAX) - Math.log(SLIDER_MIN))
-            }% 100%`,
+          backgroundSize: `${
+            ((val - Math.log(SLIDER_MIN)) * 100) /
+            (Math.log(SLIDER_MAX) - Math.log(SLIDER_MIN))
+          }% 100%`,
         }}
         min={min}
         max={max}
         onInput={(e) => {
-          const newVal = clamp(Number(e.currentTarget.value), max)
+          const newVal = clamp(Number(e.currentTarget.value), max);
           setVal(newVal);
-          slider.value = logaritmicToLinear(newVal)
+          slider.value = logaritmicToLinear(newVal);
         }}
       />
     </label>

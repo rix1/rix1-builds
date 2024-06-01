@@ -20,18 +20,11 @@
   },
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
+      "tags": ["fresh", "recommended"]
     },
-    "exclude": [
-      "_fresh"
-    ]
+    "exclude": ["_fresh"]
   },
   "fmt": {
-    "exclude": [
-      "_fresh"
-    ]
+    "exclude": ["_fresh"]
   }
 }
