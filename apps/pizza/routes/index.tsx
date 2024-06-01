@@ -1,4 +1,4 @@
-import { asset, Head } from "$fresh/runtime.ts";
+import { Head } from "$fresh/runtime.ts";
 import { ComponentChild } from "preact";
 import SEO from "../components/SEO.tsx";
 import FinalMix from "../islands/FinalMix.tsx";
@@ -6,11 +6,15 @@ import Ingredients from "../islands/Ingredients.tsx";
 import Notes from "../islands/Notes.tsx";
 import Poolish from "../islands/Poolish.tsx";
 import Slider from "../islands/Slider.tsx";
-import HelpText from "../components/HelpText.tsx";
 import PoolishHeading from "../islands/PoolishHeading.tsx";
 
+type RefProps = {
+  children: ComponentChild;
+  href: string;
+};
+
 const Ref = (
-  { children, href }: { children: ComponentChild; href: string },
+  { children, href }: RefProps,
 ) => (
   <a
     target="_blank"
@@ -40,7 +44,6 @@ export default function Home() {
           siteUrl="https://pizza.rix1.dev"
           image={{ src: "/social-card.png" }}
         />
-        <link rel="stylesheet" href={asset("/global.css")} />
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
         <img

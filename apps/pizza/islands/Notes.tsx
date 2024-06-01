@@ -1,12 +1,5 @@
 import { ComponentChild } from "preact";
-import {
-  allCombined,
-  flourAmount,
-  pieSize,
-  poolishBase,
-  poolishTotal,
-} from "../lib/recipe.ts";
-import { computed } from "@preact/signals";
+import { flourAmount, pieSize, poolishBase } from "../lib/recipe.ts";
 import { cx } from "../lib/stringUtils.ts";
 import HelpText from "../components/HelpText.tsx";
 

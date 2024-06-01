@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "RzaLight";
   src: url("/RzaLight-Web.woff2") format("woff2");
@@ -13,6 +17,10 @@ h4,
 h5,
 .font-rzaLight {
   font-family: "RzaLight", "serif";
+}
+
+p {
+  @apply font-sans;
 }
 
 :root {
