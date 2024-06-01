@@ -2,29 +2,30 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_app.tsx";
-import * as $1 from "./routes/index.tsx";
-import * as $$0 from "./islands/FinalMix.tsx";
-import * as $$1 from "./islands/Ingredients.tsx";
-import * as $$2 from "./islands/Notes.tsx";
-import * as $$3 from "./islands/Poolish.tsx";
-import * as $$4 from "./islands/PoolishHeading.tsx";
-import * as $$5 from "./islands/Slider.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $index from "./routes/index.tsx";
+import * as $FinalMix from "./islands/FinalMix.tsx";
+import * as $Ingredients from "./islands/Ingredients.tsx";
+import * as $Notes from "./islands/Notes.tsx";
+import * as $Poolish from "./islands/Poolish.tsx";
+import * as $PoolishHeading from "./islands/PoolishHeading.tsx";
+import * as $Slider from "./islands/Slider.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_app.tsx": $0,
-    "./routes/index.tsx": $1,
+    "./routes/_app.tsx": $_app,
+    "./routes/index.tsx": $index,
   },
   islands: {
-    "./islands/FinalMix.tsx": $$0,
-    "./islands/Ingredients.tsx": $$1,
-    "./islands/Notes.tsx": $$2,
-    "./islands/Poolish.tsx": $$3,
-    "./islands/PoolishHeading.tsx": $$4,
-    "./islands/Slider.tsx": $$5,
+    "./islands/FinalMix.tsx": $FinalMix,
+    "./islands/Ingredients.tsx": $Ingredients,
+    "./islands/Notes.tsx": $Notes,
+    "./islands/Poolish.tsx": $Poolish,
+    "./islands/PoolishHeading.tsx": $PoolishHeading,
+    "./islands/Slider.tsx": $Slider,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;
