@@ -183,6 +183,16 @@ export default function Home() {
             </Ref>{" "}
             at Godt.no (Norwegian)
           </li>
+          <li id="ref-massimo-laveglia">
+            <Ref href="https://www.youtube.com/watch?v=frocQGzc53I">
+              Watch Massimo Laveglia on Youtube
+            </Ref>. Chef and co-owner of{" "}
+            <Ref href="https://maps.app.goo.gl/qzXpvBqbXrdq9e1t9">
+              L’Industrie Pizzeria in Brooklyn
+            </Ref>{" "}
+            shares his dough making process. Covers pizza, foccacia, bread and
+            more.
+          </li>
         </ol>
       </div>
 
