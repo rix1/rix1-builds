@@ -17,13 +17,42 @@ deno task start
 
 This will watch the project directory and restart as necessary.
 
+## Deploying
 
-## Deploying to production
+This app is deployed on the new [Deno Deploy](https://docs.deno.com/deploy/)
+platform. The Deno app is configured in `deno.json`:
 
-Using [`deployctl`](https://docs.deno.com/deploy/manual/deployctl) for Deno deploy, simply run
-
-```sh
-deno task deploy:prod # or deploy:preview
+```json
+{
+  "deploy": {
+    "org": "rix1",
+    "app": "rix1-pizza"
+  }
+}
 ```
 
-Since we're using Tailwind, we need to build files ahead of time. Usually you want to do that with Github Actions, but the monorepo-nature of rix1-builds complicates this. Luckily Deno Fresh will look for pre-built snapshots in `_fresh` when starting up, so we can easily build locally and just upload all assets with `deployctl`.
+The new deployment is live at:
+
+```text
+https://rix1-pizza.rix1.deno.net
+```
+
+While DNS is being moved from Deno Deploy Classic to the new Deploy app, use the
+new `deno.net` URL above to verify production.
+
+To deploy a preview build:
+
+```sh
+deno task deploy:preview
+```
+
+To deploy to production:
+
+```sh
+deno task deploy:prod
+```
+
+Since this app uses Tailwind, deployment tasks run `deno task build` first so
+Fresh can serve the pre-built `_fresh` assets. This app lives in the
+`rix1-builds` monorepo, so deployments currently use the local `deno deploy` CLI
+flow instead of Deno Deploy's GitHub integration.
