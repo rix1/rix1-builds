@@ -1,5 +1,10 @@
 import { ComponentChild } from "preact";
-import { flourAmount, pieSize, poolishBase } from "../lib/recipe.ts";
+import {
+  flourAmount,
+  pieDiameter,
+  pieSize,
+  poolishBase,
+} from "../lib/recipe.ts";
 import { cx } from "../lib/stringUtils.ts";
 import HelpText from "../components/HelpText.tsx";
 
@@ -52,7 +57,7 @@ const Notes = () => {
           For improved{" "}
           <HelpText label="gluten development">
             Resulting in better gas retention and better volume in the finished
-            loafs.
+            dough.
           </HelpText>{" "}
           and{" "}
           <HelpText label="extensibility">
@@ -61,14 +66,14 @@ const Notes = () => {
           </HelpText>, autolyse the dough<Sup href="#ref-ken-page-33-autolyse">
             1.2
           </Sup>. Do this by mixing flour and water and let them rest for 15-30
-          minutes before adding salt, yeast and the poolish.
+          minutes before adding salt and the poolish.
         </span>
         {skipAtolyse && (
           <Tip>
             Don't autolyse when half or more of the recipe's total flour is in
-            the pre-ferment.In these cases, the final mix have little water
-            compared to flour, so autlysing will only create big clumps that are
-            impossible to work out manually.
+            the pre-ferment. In these cases, the final mix has little water
+            compared to flour, so autolysing will only create big clumps that
+            are impossible to work out manually.
           </Tip>
         )}
       </li>
@@ -83,9 +88,9 @@ const Notes = () => {
         <Sup href="#ref-richard-bertinet-slap-and-fold">
           2.2
         </Sup>{" "}
-        to build strenght. When things get messy, "take the dog for a
+        to build strength. When things get messy, "take the dog for a
         walk"<Sup href="#ref-richard-bertinet-walking-the-dog">2.3</Sup>. Try to
-        do this until the dough let's go from your hands. Always keep the top on
+        do this until the dough lets go from your hands. Always keep the top on
         top. For optimal flavour, the final mix temperature should be between
         24°C and 27°C <Sup href="#ref-ken-page-28-temperature">1.1</Sup>.
       </li>
@@ -98,7 +103,7 @@ const Notes = () => {
         <Sup href="#ref-pull-dough-along-the-counter">4</Sup>{" "}
         on the counter to apply tension. After this, the dough shouldn't be too
         sticky anymore, and the surface will be super smooth. Higher hydration
-        doughts can benefit from three or four folds during bulk fermenting to
+        doughs can benefit from three or four folds during bulk fermenting to
         give them the appropriate strength<Sup href="#ref-ken-forkish-folding">
           1.3
         </Sup>, consider this the first bulk ferment fold.
@@ -107,8 +112,8 @@ const Notes = () => {
         <strong class="block">
           Bulk ferment until double in size (1-3hr)
         </strong>{"  "}
-        Lightly coat the the (big) smooth ball with olive oil and let it rest in
-        a container on the counter until it's doubled in size. Apply additional
+        Lightly coat the (big) smooth ball with olive oil and let it rest in a
+        container on the counter until it's doubled in size. Apply additional
         folds as you see the dough flatten out, to firm it up a bit. Just don't
         fold it during the last hour of bulk fermenting. The time needed for
         this is hard to judge as it depends on your ambient temperature. If it's
@@ -124,7 +129,7 @@ const Notes = () => {
         <strong class="block">Divide into balls</strong>{" "}
         After it's doubled in size, divide into{" "}
         {pieSize.value}g balls. Again, always "keep top on
-        top"<Sup href="#ref-richard-bertinet-two sides">2.4</Sup>: The smooth
+        top"<Sup href="#ref-richard-bertinet-two-sides">2.4</Sup>: The smooth
         surface should face up, the sticky bottom should face down. If you
         didn't fold in the previous step, the dough might be very soft and hard
         to handle. This is ok. Just fold each ball a few times to firm it up.
@@ -155,7 +160,7 @@ const Notes = () => {
       <li>
         <strong class="block">Bake!</strong>{" "}
         You're finally ready to form the balls into pies. Use semolina flour and
-        stretch them into roughly {Math.round(30 / 260 * pieSize.value)}cm pies.
+        stretch them into roughly {pieDiameter.value}cm pies.
         <Tip>
           Tip: If you're using a home oven, pre-bake the pie with sauce before
           adding topping and baking it a second time.

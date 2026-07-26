@@ -1,16 +1,10 @@
-import { computed } from "@preact/signals";
 import {
   flourAmount,
-  honeyAmount,
   poolishBase,
+  poolishTotal,
   saltAmount,
   waterAmount,
-  YEAST_GRAMS,
 } from "../lib/recipe.ts";
-
-const poolishTotal = computed(
-  () => poolishBase.value * 2 + YEAST_GRAMS + honeyAmount.value,
-);
 
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 

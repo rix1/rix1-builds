@@ -125,7 +125,7 @@ export default function Home() {
                   "Walking the dog"
                 </Ref>
               </li>
-              <li id="ref-richard-bertinet-two sides">
+              <li id="ref-richard-bertinet-two-sides">
                 <Ref href="https://youtu.be/bWN9mxR_iXI?t=682">
                   "Top on top" - The two sides of the dough
                 </Ref>
@@ -167,7 +167,7 @@ export default function Home() {
               <li>
                 <Ref href="https://mypizzacorner.com/pizza-dough-calculator/">
                   Pizza Dough Calculator
-                </Ref>. I unfortunately I came across this <i>after</i>{" "}
+                </Ref>. Unfortunately, I came across this <i>after</i>{" "}
                 building this site. Looks like a really good resource.
               </li>
               <li>
@@ -190,7 +190,7 @@ export default function Home() {
             <Ref href="https://maps.app.goo.gl/qzXpvBqbXrdq9e1t9">
               L’Industrie Pizzeria in Brooklyn
             </Ref>{" "}
-            shares his dough making process. Covers pizza, foccacia, bread and
+            shares his dough making process. Covers pizza, focaccia, bread and
             more.
           </li>
         </ol>

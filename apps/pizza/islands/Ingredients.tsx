@@ -5,10 +5,11 @@ import {
   honeyAmount,
   HYDRATION_OPTIONS,
   hydrationIndex,
+  isLargeBatch,
   SALT_PERCENTAGE,
   saltAmount,
   waterAmount,
-  YEAST_GRAMS,
+  yeastAmount,
 } from "../lib/recipe.ts";
 import { cx } from "../lib/stringUtils.ts";
 
@@ -95,8 +96,8 @@ const Ingredients = () => {
               </HelpText>
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 tabular-nums">
-              {decimalNumber.format(YEAST_GRAMS)}g{" "}
-              <span class="text-gray-500">(Fixed)</span>
+              {decimalNumber.format(yeastAmount.value)}g{" "}
+              <span class="text-gray-500">(all in poolish)</span>
             </dd>
           </div>
           <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -117,6 +118,13 @@ const Ingredients = () => {
           </div>
         </dl>
       </div>
+      {isLargeBatch.value && (
+        <p class="mt-3 text-xs italic text-gray-500">
+          Large batch: the poolish is capped, so it's a smaller share of your
+          total flour here. Judge the dough by feel, not the clock — give the
+          bulk ferment extra time rather than adding more yeast.
+        </p>
+      )}
     </div>
   );
 };
