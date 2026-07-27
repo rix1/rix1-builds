@@ -7,5 +7,7 @@
 
 # Fresh build directory
 _fresh/
+# Generated at build time by scripts/gen-version.ts
+lib/version.ts
 # npm dependencies
 node_modules/

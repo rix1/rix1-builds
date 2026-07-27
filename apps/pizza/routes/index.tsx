@@ -7,6 +7,7 @@ import Notes from "../islands/Notes.tsx";
 import Poolish from "../islands/Poolish.tsx";
 import Slider from "../islands/Slider.tsx";
 import PoolishHeading from "../islands/PoolishHeading.tsx";
+import { BUILT_AT, COMMIT_SHA, COMMIT_SHA_FULL } from "../lib/version.ts";
 
 type RefProps = {
   children: ComponentChild;
@@ -209,6 +210,17 @@ export default function Home() {
           in November 2022 by{" "}
           <a href="https://rix1.dev" class="text-underline">
             @rix1
+          </a>
+        </p>
+        <p class="mt-1 text-xs text-gray-400 tabular-nums" title={BUILT_AT}>
+          build{" "}
+          <a
+            href={`https://github.com/rix1/rix1-builds/commit/${COMMIT_SHA_FULL}`}
+            target="_blank"
+            rel="noreferrer noopener"
+            class="text-underline hover:text-gray-500"
+          >
+            {COMMIT_SHA}
           </a>
         </p>
       </footer>
